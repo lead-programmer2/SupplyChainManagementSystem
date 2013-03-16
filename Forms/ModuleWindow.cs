@@ -145,6 +145,10 @@ namespace SupplyChainManagementSystem
             Cache.SyncTable(SCMS.Connection, "models");
             Cache.SyncTable(SCMS.Connection, "measurements");
             Cache.SyncTable(SCMS.Connection, "stockledger");
+            Cache.SyncTable(SCMS.Connection, "customers");
+            Cache.SyncTable(SCMS.Connection, "suppliers");
+            Cache.SyncTable(SCMS.Connection, "locations");
+            Cache.SyncTable(SCMS.Connection, "users");
 
             DataTable _parts = Cache.GetCachedTable("parts");
             DataTable _partnames = Cache.GetCachedTable("partnames");
@@ -472,6 +476,15 @@ namespace SupplyChainManagementSystem
         {
             Module _module = ((MainWindow)MdiParent).SelectedModule;
             ((MainWindow)MdiParent).SelectModule(_module);
+
+            if (sender != null)
+            {
+                if (sender is PartInformationDialog)
+                {
+                    if (((PartInformationDialog)sender).WithUpdates) btnRefresh_Click(btnRefresh, new EventArgs());
+                }
+                else { }
+            }
         }
 
         private void trvwModules_AfterNodeSelect(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)

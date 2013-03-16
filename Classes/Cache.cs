@@ -108,6 +108,11 @@ namespace SupplyChainManagementSystem
             if (_cacheddataset != null)
             {
                 if (_cacheddataset.Tables.Contains(tablename)) _table = _cacheddataset.Tables[tablename];
+                else
+                {
+                    SyncTable(SCMS.Connection, tablename);
+                    if (_cacheddataset.Tables.Contains(tablename)) _table = _cacheddataset.Tables[tablename];
+                }
             }
 
             return _table;
@@ -184,8 +189,21 @@ namespace SupplyChainManagementSystem
                     _table = _cacheddataset.Tables[tablename];
 
                     DataTable _updated = null;
-                    _updated = _updated.LoadData(SCMS.Connection, "SELECT `OldValue`, `NewValue` FROM `updateditems` AS `u` WHERE (`TableName` LIKE '" + tablename.ToSqlValidString() + "')");
 
+                    if (_table.Columns.Contains("LastModified") ||
+                        _table.Columns.Contains("DateAndTime"))
+                    {
+                        DateTime _lastupdate = VisualBasic.CDate("1/1/1900");
+                        string _datetimefield = "DateAndTime";
+                        if (_table.Columns.Contains("LastModified")) _datetimefield = "LastModified";
+
+                        object _maxdate = _table.Compute("MAX([" + _datetimefield + "])", "");
+                        if (VisualBasic.IsDate(_maxdate)) _lastupdate = VisualBasic.CDate(_maxdate);
+
+                        _updated = _updated.LoadData(SCMS.Connection, "SELECT `OldValue`, `NewValue` FROM `updateditems` AS `u` WHERE (`TableName` LIKE '" + tablename.ToSqlValidString() + "') AND (`LastModified` >= '" + _lastupdate.ToSqlValidString(true) + "')");
+                    }
+                    else _updated = _updated.LoadData(SCMS.Connection, "SELECT `OldValue`, `NewValue` FROM `updateditems` AS `u` WHERE (`TableName` LIKE '" + tablename.ToSqlValidString() + "')");
+   
                     if (_updated != null)
                     {
                         string _pk = primarykey;
@@ -230,7 +248,7 @@ namespace SupplyChainManagementSystem
                         if (VisualBasic.IsDate(_maxdate)) _lastupdate = VisualBasic.CDate(_maxdate);
 
                         DataTable _updates = null;
-                        _updates = _updates.LoadData(connection, "SELECT * FROM `" + tablename + "` WHERE (`" + _datetimefield + "` > '" + _lastupdate.ToSqlValidString(true) + "')");
+                        _updates = _updates.LoadData(connection, "SELECT * FROM `" + tablename + "` WHERE (`" + _datetimefield + "` >= '" + _lastupdate.ToSqlValidString(true) + "')");
 
                         if (_updates != null)
                         {
@@ -259,7 +277,10 @@ namespace SupplyChainManagementSystem
                         }
 
                         DataTable _deleted = null;
-                        _deleted = _deleted.LoadData(connection, "SELECT * FROM `deleteditems` WHERE (`TableName` LIKE '" + tablename.ToSqlValidString() + "');");
+
+                        if (_table.Columns.Contains("LastModified") ||
+                            _table.Columns.Contains("DateAndTime")) _deleted = _deleted.LoadData(connection, "SELECT * FROM `deleteditems` WHERE (`TableName` LIKE '" + tablename.ToSqlValidString() + "') AND (`LastModified` >= '" + _lastupdate.ToSqlValidString(true) + "');");
+                        else _deleted = _deleted.LoadData(connection, "SELECT * FROM `deleteditems` WHERE (`TableName` LIKE '" + tablename.ToSqlValidString() + "');");
 
                         if (_deleted != null)
                         {

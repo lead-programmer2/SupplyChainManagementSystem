@@ -1,0 +1,51 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="stocktransactiontypes" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="stocktransactiontypes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:int" />
+                <xs:element name="TransactionType" type="xs:string" default="" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//stocktransactiontypes" />
+        <xs:field xpath="Id" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <stocktransactiontypes>
+    <Id>0</Id>
+    <TransactionType>Beginning</TransactionType>
+  </stocktransactiontypes>
+  <stocktransactiontypes>
+    <Id>1</Id>
+    <TransactionType>Purchase</TransactionType>
+  </stocktransactiontypes>
+  <stocktransactiontypes>
+    <Id>2</Id>
+    <TransactionType>Sales</TransactionType>
+  </stocktransactiontypes>
+  <stocktransactiontypes>
+    <Id>3</Id>
+    <TransactionType>Stock Adjustment - Additional</TransactionType>
+  </stocktransactiontypes>
+  <stocktransactiontypes>
+    <Id>4</Id>
+    <TransactionType>Stock Adjustment - Deduction</TransactionType>
+  </stocktransactiontypes>
+  <stocktransactiontypes>
+    <Id>5</Id>
+    <TransactionType>Purchase Order</TransactionType>
+  </stocktransactiontypes>
+  <stocktransactiontypes>
+    <Id>7</Id>
+    <TransactionType>Shipping Invoice</TransactionType>
+  </stocktransactiontypes>
+</NewDataSet>

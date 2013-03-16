@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2013-03-14 14:40:33
+Date: 2013-03-16 16:22:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -143,12 +143,16 @@ CREATE TABLE `brands` (
 INSERT INTO `brands` VALUES ('4RUNNER', '2013-03-04 08:09:29', '2013-03-04 08:09:29');
 INSERT INTO `brands` VALUES ('ALL', '2013-03-04 08:16:39', '2013-03-04 08:16:39');
 INSERT INTO `brands` VALUES ('CHEVROLET', '2013-03-04 08:13:39', '2013-03-04 08:13:39');
+INSERT INTO `brands` VALUES ('DAIHATSU', '2013-03-14 16:30:24', '2013-03-14 16:30:24');
 INSERT INTO `brands` VALUES ('DODGE', '2013-03-04 08:13:13', '2013-03-04 08:13:13');
+INSERT INTO `brands` VALUES ('FORCE', '2013-03-14 16:27:39', '2013-03-14 16:27:39');
+INSERT INTO `brands` VALUES ('FORD', '2013-03-16 10:07:54', '2013-03-16 10:07:54');
 INSERT INTO `brands` VALUES ('GMC', '2013-03-07 16:31:33', '2013-03-07 16:31:33');
 INSERT INTO `brands` VALUES ('HYUNDAI', '2013-03-07 16:34:12', '2013-03-07 16:34:12');
 INSERT INTO `brands` VALUES ('LEXUS', '2013-03-04 08:10:01', '2013-03-04 08:10:01');
 INSERT INTO `brands` VALUES ('MITSUBISHI', '2013-03-04 08:10:17', '2013-03-04 08:10:17');
 INSERT INTO `brands` VALUES ('NISSAN', '2013-03-04 08:10:50', '2013-03-04 08:10:50');
+INSERT INTO `brands` VALUES ('PIRELLI', '2013-03-16 09:17:35', '2013-03-16 09:17:35');
 INSERT INTO `brands` VALUES ('SUZUKI', '2013-03-04 08:11:03', '2013-03-04 08:11:03');
 INSERT INTO `brands` VALUES ('TOYOTA', '2013-03-04 08:11:19', '2013-03-04 08:11:19');
 INSERT INTO `brands` VALUES ('VOLVO', '2013-03-04 08:11:43', '2013-03-04 08:11:54');
@@ -507,14 +511,16 @@ CREATE TABLE `deleteditems` (
   `DetailId` bigint(20) NOT NULL auto_increment,
   `TableName` varchar(175) default '',
   `Value` varchar(255) default '',
+  `LastModified` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`DetailId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of deleteditems
 -- ----------------------------
-INSERT INTO `deleteditems` VALUES ('1', 'vehiclemodels', 'MODEL-00001');
-INSERT INTO `deleteditems` VALUES ('2', 'vehiclemodels', 'MODEL-00003');
+INSERT INTO `deleteditems` VALUES ('1', 'vehiclemodels', 'MODEL-00001', '2013-03-16 15:48:20');
+INSERT INTO `deleteditems` VALUES ('2', 'vehiclemodels', 'MODEL-00003', '2013-03-16 15:48:24');
+INSERT INTO `deleteditems` VALUES ('3', 'models', 'MODEL-00001', '2013-03-16 15:48:28');
 
 -- ----------------------------
 -- Table structure for `departments`
@@ -554,6 +560,8 @@ CREATE TABLE `keysettings` (
 -- Records of keysettings
 -- ----------------------------
 INSERT INTO `keysettings` VALUES ('locations', '5', '2013-03-03 17:01:39');
+INSERT INTO `keysettings` VALUES ('models', '8', '2013-03-16 10:08:07');
+INSERT INTO `keysettings` VALUES ('parts', '3', '2013-03-16 10:08:23');
 INSERT INTO `keysettings` VALUES ('scripts', '2', '2013-03-11 08:49:26');
 INSERT INTO `keysettings` VALUES ('vehiclemakes', '6', '2013-03-06 13:14:30');
 
@@ -618,6 +626,7 @@ INSERT INTO `measurements` VALUES ('Bag', '', '2013-03-06 10:04:07', '2013-03-06
 INSERT INTO `measurements` VALUES ('Bottle', '', '2013-03-06 10:04:12', '2013-03-06 10:05:01');
 INSERT INTO `measurements` VALUES ('Box', '', '2013-03-06 10:04:31', '2013-03-06 10:04:31');
 INSERT INTO `measurements` VALUES ('Bucket', '', '2013-03-06 10:04:37', '2013-03-06 10:04:37');
+INSERT INTO `measurements` VALUES ('Kg', 'Kilogram', '2013-03-14 16:46:10', '2013-03-14 16:46:10');
 INSERT INTO `measurements` VALUES ('Pc(s)', 'Pieces', '2013-03-06 10:05:57', '2013-03-06 10:05:57');
 
 -- ----------------------------
@@ -640,6 +649,8 @@ CREATE TABLE `models` (
 -- Records of models
 -- ----------------------------
 INSERT INTO `models` VALUES ('MODEL-00002', 'COROLLA', 'TOYOTA', '2013-03-06 11:44:08', '2013-03-06 11:44:08');
+INSERT INTO `models` VALUES ('MODEL-00008', 'EXPEDITION', 'FORD', '2013-03-16 10:08:07', '2013-03-16 10:08:07');
+INSERT INTO `models` VALUES ('MODEL-00007', 'FT', 'FORCE', '2013-03-14 16:43:35', '2013-03-14 16:43:35');
 INSERT INTO `models` VALUES ('MODEL-00004', 'HIACE', 'TOYOTA', '2013-03-06 11:51:52', '2013-03-06 11:54:19');
 INSERT INTO `models` VALUES ('MODEL-00005', 'HILUX', 'TOYOTA', '2013-03-06 13:06:48', '2013-03-06 13:07:27');
 INSERT INTO `models` VALUES ('MODEL-00006', 'LAND CRUISER', 'TOYOTA', '2013-03-06 13:14:30', '2013-03-06 13:14:47');
@@ -685,8 +696,11 @@ CREATE TABLE `partnames` (
 -- ----------------------------
 -- Records of partnames
 -- ----------------------------
-INSERT INTO `partnames` VALUES ('Combination Wrench', 'Tools and Equipments', '2013-03-06 13:47:19', '2013-03-13 17:29:07');
+INSERT INTO `partnames` VALUES ('Bearing Clutch', 'Genuine Spare Parts', '2013-03-16 09:10:53', '2013-03-16 09:10:53');
+INSERT INTO `partnames` VALUES ('Combination Wrench', 'Tools and Equipments', '2013-03-06 13:47:19', '2013-03-16 15:58:08');
+INSERT INTO `partnames` VALUES ('Oil Seal', 'Genuine Spare Parts', '2013-03-14 16:24:58', '2013-03-14 16:24:58');
 INSERT INTO `partnames` VALUES ('Pinion', 'Genuine Spare Parts', '2013-03-06 13:48:32', '2013-03-06 13:48:32');
+INSERT INTO `partnames` VALUES ('Seal', 'Genuine Spare Parts', '2013-03-16 10:07:41', '2013-03-16 10:07:41');
 INSERT INTO `partnames` VALUES ('Tires', 'Tires', '2013-03-06 13:48:55', '2013-03-06 13:49:06');
 
 -- ----------------------------
@@ -739,7 +753,9 @@ CREATE TABLE `parts` (
 -- ----------------------------
 -- Records of parts
 -- ----------------------------
-INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00001', '75513', 'Combination Wrench', 'Combination Wrench 10mm', '', 'ALL', '', 'Pc(s)', '0', '0', '2', 'Taiwan', '1', '', '', '', '', '', '', '', '', '', '', '', '', ' ', 'CSPT-FZE', '1900-01-01 00:00:00', '2013-03-13 17:29:07');
+INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00001', '75513', 'Combination Wrench', 'Combination Wrench 10mm', '', 'ALL', '', 'Pc(s)', '0', '0', '2', 'Taiwan', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '1900-01-01 00:00:00', '2013-03-16 15:58:08');
+INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00002', '235-85-R16', 'Tires', 'Pirelli Scorpion Mud Tires', '', 'PIRELLI', '', 'Pc(s)', '0', '0', '2', 'Brazil', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '2013-03-16 09:29:27', '2013-03-16 09:30:46');
+INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00003', '7W7Z7052A', 'Seal', 'Seal', '', 'FORD', 'MODEL-00008', 'Pc(s)', '0', '0', '2', 'United States', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '2013-03-16 10:08:23', '2013-03-16 10:08:23');
 
 -- ----------------------------
 -- Table structure for `paymentterms`
@@ -890,6 +906,8 @@ CREATE TABLE `stockledger` (
   `PartCode` varchar(30) default '',
   `PurchaseDate` date default '1900-01-01',
   `Dated` date default '1900-01-01',
+  `ReferenceNo` varchar(30) default '',
+  `TransactionType` int(11) default '0',
   `LocationCode` varchar(30) default '',
   `SupplierCode` varchar(30) default '',
   `CustomerCode` varchar(30) default '',
@@ -907,6 +925,7 @@ CREATE TABLE `stockledger` (
   `TotalCostUSD` decimal(20,2) default '0.00',
   `TotalSalesPrice` decimal(20,2) default '0.00',
   `TotalSalesPriceUSD` decimal(20,2) default '0.00',
+  `Username` varchar(30) default '',
   `LastModified` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`DetailId`),
   KEY `slpartcode` (`PartCode`),
@@ -914,16 +933,18 @@ CREATE TABLE `stockledger` (
   KEY `sllocationcode` (`LocationCode`),
   KEY `slsuppliercode` USING BTREE (`SupplierCode`),
   KEY `slcustomercode` USING BTREE (`CustomerCode`),
+  KEY `slreferenceno` USING BTREE (`ReferenceNo`),
+  KEY `slusername` (`Username`),
   CONSTRAINT `slcurrency` FOREIGN KEY (`Currency`) REFERENCES `currencies` (`Currency`) ON UPDATE CASCADE,
-  CONSTRAINT `sllocationcode` FOREIGN KEY (`LocationCode`) REFERENCES `locations` (`LocationCode`) ON UPDATE CASCADE,
-  CONSTRAINT `slpartcode` FOREIGN KEY (`PartCode`) REFERENCES `parts` (`PartCode`) ON UPDATE CASCADE
+  CONSTRAINT `slpartcode` FOREIGN KEY (`PartCode`) REFERENCES `parts` (`PartCode`) ON UPDATE CASCADE,
+  CONSTRAINT `slusername` FOREIGN KEY (`Username`) REFERENCES `users` (`Username`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of stockledger
 -- ----------------------------
-INSERT INTO `stockledger` VALUES ('1', 'PART-CSPT-FZE-00001', '2013-03-13', '2013-03-13', 'CSPT-FZE-00001', '', '', '50', '0', '0', '0', '10.00', '10.00', 'USD', '100.0000', '0.00', '0.00', '500.00', '500.00', '0.00', '0.00', '2013-03-13 16:29:42');
-INSERT INTO `stockledger` VALUES ('2', 'PART-CSPT-FZE-00001', '2013-03-13', '2013-03-13', 'CSPT-FZE-00002', '', '', '30', '0', '0', '0', '10.00', '10.00', 'USD', '100.0000', '0.00', '0.00', '300.00', '300.00', '0.00', '0.00', '2013-03-13 17:30:48');
+INSERT INTO `stockledger` VALUES ('1', 'PART-CSPT-FZE-00001', '2013-03-13', '2013-03-13', 'Beginning', '0', 'CSPT-FZE-00001', '', '', '50', '0', '0', '0', '10.00', '10.00', 'USD', '100.0000', '0.00', '0.00', '500.00', '500.00', '0.00', '0.00', 'jsph', '2013-03-16 11:06:48');
+INSERT INTO `stockledger` VALUES ('2', 'PART-CSPT-FZE-00001', '2013-03-13', '2013-03-13', 'Beginning', '0', 'CSPT-FZE-00002', '', '', '30', '0', '0', '0', '10.00', '10.00', 'USD', '100.0000', '0.00', '0.00', '300.00', '300.00', '0.00', '0.00', 'jsph', '2013-03-16 11:06:50');
 
 -- ----------------------------
 -- Table structure for `suppliers`
@@ -989,25 +1010,28 @@ CREATE TABLE `updateditems` (
   `TableName` varchar(255) default '',
   `OldValue` varchar(255) default '',
   `NewValue` varchar(255) default '',
+  `LastModified` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`DetailId`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of updateditems
 -- ----------------------------
-INSERT INTO `updateditems` VALUES ('1', 'partnames', 'Tires', 'Tyres');
-INSERT INTO `updateditems` VALUES ('2', 'partnames', 'Tyres', 'Tires');
-INSERT INTO `updateditems` VALUES ('3', 'partnames', 'Combination Wrench 10mm', 'Combination Wrench');
-INSERT INTO `updateditems` VALUES ('4', 'partnames', 'Combination Wrench', 'Wrench');
-INSERT INTO `updateditems` VALUES ('5', 'partnames', 'Wrench', 'Combination Wrench');
-INSERT INTO `updateditems` VALUES ('6', 'partnames', 'Combination Wrench', 'Wrench');
-INSERT INTO `updateditems` VALUES ('7', 'partnames', 'Wrench', 'Combination Wrench');
-INSERT INTO `updateditems` VALUES ('8', 'partnames', 'Combination Wrench', 'Wrench');
-INSERT INTO `updateditems` VALUES ('9', 'partnames', 'Wrench', 'Combination Wrench');
-INSERT INTO `updateditems` VALUES ('10', 'partnames', 'Combination Wrench', 'Wrench');
-INSERT INTO `updateditems` VALUES ('11', 'partnames', 'Wrench', 'Combination Wrench');
-INSERT INTO `updateditems` VALUES ('12', 'partnames', 'Combination Wrench', 'Wrench');
-INSERT INTO `updateditems` VALUES ('13', 'partnames', 'Wrench', 'Combination Wrench');
+INSERT INTO `updateditems` VALUES ('1', 'partnames', 'Tires', 'Tyres', '2013-03-16 15:49:26');
+INSERT INTO `updateditems` VALUES ('2', 'partnames', 'Tyres', 'Tires', '2013-03-16 15:49:29');
+INSERT INTO `updateditems` VALUES ('3', 'partnames', 'Combination Wrench 10mm', 'Combination Wrench', '2013-03-16 15:49:33');
+INSERT INTO `updateditems` VALUES ('4', 'partnames', 'Combination Wrench', 'Wrench', '2013-03-16 15:49:36');
+INSERT INTO `updateditems` VALUES ('5', 'partnames', 'Wrench', 'Combination Wrench', '2013-03-16 15:49:39');
+INSERT INTO `updateditems` VALUES ('6', 'partnames', 'Combination Wrench', 'Wrench', '2013-03-16 15:49:41');
+INSERT INTO `updateditems` VALUES ('7', 'partnames', 'Wrench', 'Combination Wrench', '2013-03-16 15:49:45');
+INSERT INTO `updateditems` VALUES ('8', 'partnames', 'Combination Wrench', 'Wrench', '2013-03-16 15:49:47');
+INSERT INTO `updateditems` VALUES ('9', 'partnames', 'Wrench', 'Combination Wrench', '2013-03-16 15:49:50');
+INSERT INTO `updateditems` VALUES ('10', 'partnames', 'Combination Wrench', 'Wrench', '2013-03-16 15:49:55');
+INSERT INTO `updateditems` VALUES ('11', 'partnames', 'Wrench', 'Combination Wrench', '2013-03-16 15:49:58');
+INSERT INTO `updateditems` VALUES ('12', 'partnames', 'Combination Wrench', 'Wrench', '2013-03-16 15:50:00');
+INSERT INTO `updateditems` VALUES ('13', 'partnames', 'Wrench', 'Combination Wrench', '2013-03-16 15:50:04');
+INSERT INTO `updateditems` VALUES ('14', 'partnames', 'Combination Wrench', 'Wrench', '2013-03-16 15:57:48');
+INSERT INTO `updateditems` VALUES ('15', 'partnames', 'Wrench', 'Combination Wrench', '2013-03-16 15:58:08');
 
 -- ----------------------------
 -- Table structure for `usercompanies`
@@ -1068,7 +1092,7 @@ CREATE TABLE `userlogs` (
   KEY `logusername` (`Username`),
   CONSTRAINT `logcurrency` FOREIGN KEY (`Currency`) REFERENCES `currencies` (`Currency`) ON UPDATE CASCADE,
   CONSTRAINT `logusername` FOREIGN KEY (`Username`) REFERENCES `users` (`Username`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1365 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1468 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of userlogs
@@ -2437,6 +2461,109 @@ INSERT INTO `userlogs` VALUES ('1361', 'jsph', '2013-03-14 14:33:54', '15', '', 
 INSERT INTO `userlogs` VALUES ('1362', 'jsph', '2013-03-14 14:34:40', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
 INSERT INTO `userlogs` VALUES ('1363', 'jsph', '2013-03-14 14:35:24', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
 INSERT INTO `userlogs` VALUES ('1364', 'jsph', '2013-03-14 14:36:17', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1365', 'jsph', '2013-03-14 14:48:51', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1366', 'jsph', '2013-03-14 14:49:36', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1367', 'jsph', '2013-03-14 15:12:47', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1368', 'jsph', '2013-03-14 15:13:36', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1369', 'jsph', '2013-03-14 15:20:27', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1370', 'jsph', '2013-03-14 15:22:39', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1371', 'jsph', '2013-03-14 15:23:08', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1372', 'jsph', '2013-03-14 15:38:51', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1373', 'jsph', '2013-03-14 15:38:56', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1374', 'jsph', '2013-03-14 15:39:21', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1375', 'jsph', '2013-03-14 15:39:59', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1376', 'jsph', '2013-03-14 15:40:19', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1377', 'jsph', '2013-03-14 15:40:38', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1378', 'jsph', '2013-03-14 15:45:56', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1379', 'jsph', '2013-03-14 15:47:32', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1380', 'jsph', '2013-03-14 15:47:52', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1381', 'jsph', '2013-03-14 15:58:13', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1382', 'jsph', '2013-03-14 15:58:50', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1383', 'jsph', '2013-03-14 16:00:07', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1384', 'jsph', '2013-03-14 16:01:09', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1385', 'jsph', '2013-03-14 16:11:53', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1386', 'jsph', '2013-03-14 16:15:17', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1387', 'jsph', '2013-03-14 16:21:23', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1388', 'jsph', '2013-03-14 16:21:32', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1389', 'jsph', '2013-03-14 16:22:10', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1390', 'jsph', '2013-03-14 16:24:21', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1391', 'jsph', '2013-03-14 16:24:58', '0', '', 'Added a new part name : Oil Seal.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1392', 'jsph', '2013-03-14 16:25:14', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1393', 'jsph', '2013-03-14 16:26:57', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1394', 'jsph', '2013-03-14 16:27:39', '0', '', 'Added a new brand : FORCE.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1395', 'jsph', '2013-03-14 16:28:24', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1396', 'jsph', '2013-03-14 16:29:41', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1397', 'jsph', '2013-03-14 16:30:24', '0', '', 'Added a new brand : DAIHATSU.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1398', 'jsph', '2013-03-14 16:31:04', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1399', 'jsph', '2013-03-14 16:39:55', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1400', 'jsph', '2013-03-14 16:40:45', '0', '', 'Added a new model : FT.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1401', 'jsph', '2013-03-14 16:41:43', '2', '', 'Delete FORCE - FT from models list.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1402', 'jsph', '2013-03-14 16:43:35', '0', '', 'Added a new model : FT.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1403', 'jsph', '2013-03-14 16:43:54', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1404', 'jsph', '2013-03-14 16:45:27', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1405', 'jsph', '2013-03-14 16:46:10', '0', '', 'Added a new unit of measurement : Kg.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1406', 'jsph', '2013-03-14 16:49:06', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1407', 'jsph', '2013-03-16 07:16:05', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1408', 'jsph', '2013-03-16 07:16:30', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1409', 'jsph', '2013-03-16 07:26:46', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1410', 'jsph', '2013-03-16 07:27:01', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1411', 'jsph', '2013-03-16 08:10:54', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1412', 'jsph', '2013-03-16 08:12:00', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1413', 'jsph', '2013-03-16 08:22:17', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1414', 'jsph', '2013-03-16 08:22:30', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1415', 'jsph', '2013-03-16 08:23:39', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1416', 'jsph', '2013-03-16 08:24:22', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1417', 'jsph', '2013-03-16 08:25:47', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1418', 'jsph', '2013-03-16 08:27:01', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1419', 'jsph', '2013-03-16 09:09:51', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1420', 'jsph', '2013-03-16 09:10:53', '0', '', 'Added a new part name : Bearing Clutch.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1421', 'jsph', '2013-03-16 09:14:39', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1422', 'jsph', '2013-03-16 09:16:24', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1423', 'jsph', '2013-03-16 09:17:35', '0', '', 'Added a new brand : PIRELLI.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1424', 'jsph', '2013-03-16 09:20:14', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1425', 'jsph', '2013-03-16 09:21:11', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1426', 'jsph', '2013-03-16 09:22:57', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1427', 'jsph', '2013-03-16 09:23:49', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1428', 'jsph', '2013-03-16 09:29:27', '0', 'PART-CSPT-FZE-00002', 'Added a new part : 235-85-R16 - Tires.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1429', 'jsph', '2013-03-16 09:30:28', '1', 'PART-CSPT-FZE-00002', 'Updated part : 235-85-R16 - Tires.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1430', 'jsph', '2013-03-16 09:30:46', '1', 'PART-CSPT-FZE-00002', 'Updated part : 235-85-R16 - Tires.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1431', 'jsph', '2013-03-16 09:30:53', '1', 'PART-CSPT-FZE-00001', 'Updated part : 75513 - Combination Wrench.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1432', 'jsph', '2013-03-16 10:07:41', '0', '', 'Added a new part name : Seal.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1433', 'jsph', '2013-03-16 10:07:54', '0', '', 'Added a new brand : FORD.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1434', 'jsph', '2013-03-16 10:08:07', '0', '', 'Added a new model : EXPEDITION.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1435', 'jsph', '2013-03-16 10:08:23', '0', 'PART-CSPT-FZE-00003', 'Added a new part : 7W7Z7052A - Seal (Seal).', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1436', 'jsph', '2013-03-16 10:16:22', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1437', 'jsph', '2013-03-16 10:21:55', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1438', 'jsph', '2013-03-16 10:22:10', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1439', 'jsph', '2013-03-16 10:22:20', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1440', 'jsph', '2013-03-16 10:22:40', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1441', 'jsph', '2013-03-16 11:25:13', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1442', 'jsph', '2013-03-16 11:27:56', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1443', 'jsph', '2013-03-16 11:28:59', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1444', 'jsph', '2013-03-16 11:30:20', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1445', 'jsph', '2013-03-16 11:32:40', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1446', 'jsph', '2013-03-16 11:33:46', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1447', 'jsph', '2013-03-16 11:34:06', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1448', 'jsph', '2013-03-16 11:44:12', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1449', 'jsph', '2013-03-16 11:48:40', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1450', 'jsph', '2013-03-16 11:49:02', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1451', 'jsph', '2013-03-16 11:54:23', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1452', 'jsph', '2013-03-16 11:55:57', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1453', 'jsph', '2013-03-16 11:59:15', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1454', 'jsph', '2013-03-16 12:01:17', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1455', 'jsph', '2013-03-16 12:08:05', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1456', 'jsph', '2013-03-16 12:35:17', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1457', 'jsph', '2013-03-16 12:37:25', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1458', 'jsph', '2013-03-16 12:38:39', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1459', 'jsph', '2013-03-16 12:43:31', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1460', 'jsph', '2013-03-16 13:28:06', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1461', 'jsph', '2013-03-16 13:29:44', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1462', 'jsph', '2013-03-16 13:30:29', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1463', 'jsph', '2013-03-16 15:45:59', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1464', 'jsph', '2013-03-16 15:57:26', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1465', 'jsph', '2013-03-16 15:57:48', '1', '', 'Updated part name : Combination Wrench to Wrench.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1466', 'jsph', '2013-03-16 15:58:08', '1', '', 'Updated part name : Wrench to Combination Wrench.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1467', 'jsph', '2013-03-16 16:21:55', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
 
 -- ----------------------------
 -- Table structure for `users`

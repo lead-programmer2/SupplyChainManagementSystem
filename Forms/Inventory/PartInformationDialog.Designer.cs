@@ -181,6 +181,7 @@
             this.btnSaveAndClose.TabIndex = 10;
             this.btnSaveAndClose.Text = "Sa&ve and Close";
             this.btnSaveAndClose.UseVisualStyleBackColor = false;
+            this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
             // 
             // btnCancel
             // 
@@ -215,6 +216,7 @@
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // panel1
             // 
@@ -538,6 +540,7 @@
             this.cboPartName.Size = new System.Drawing.Size(210, 22);
             this.cboPartName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboPartName.TabIndex = 1;
+            this.cboPartName.SelectedValueChanged += new System.EventHandler(this.cboPartName_SelectedValueChanged);
             // 
             // lblAddPartName
             // 
@@ -980,6 +983,7 @@
             this.Name = "PartInformationDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Part Information";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PartInformationDialog_FormClosing);
             this.Load += new System.EventHandler(this.PartInformationDialog_Load);
             this.Shown += new System.EventHandler(this.PartInformationDialog_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.brToolbar)).EndInit();
