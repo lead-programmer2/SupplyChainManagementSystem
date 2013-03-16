@@ -1,0 +1,30 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="locallogs" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="locallogs">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="DetailId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:long" />
+                <xs:element name="Username" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="DateAndTime" type="xs:dateTime" default="2013-02-09T16:21:43.9657789+04:00" minOccurs="0" />
+                <xs:element name="Action" type="xs:int" default="0" minOccurs="0" />
+                <xs:element name="ReferenceNo" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Description" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Amount" type="xs:decimal" default="0" minOccurs="0" />
+                <xs:element name="Currency" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="AmountUSD" type="xs:decimal" default="0" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//locallogs" />
+        <xs:field xpath="DetailId" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+</NewDataSet>

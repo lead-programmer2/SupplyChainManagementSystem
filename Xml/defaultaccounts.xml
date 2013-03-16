@@ -1,0 +1,109 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="defaultaccounts" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="defaultaccounts">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="AccountCode" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:long" />
+                <xs:element name="AccountName" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="AccountCategory" type="xs:string" default="" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//defaultaccounts" />
+        <xs:field xpath="AccountCode" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <defaultaccounts>
+    <AccountCode>54005</AccountCode>
+    <AccountName>Cash at hand</AccountName>
+    <AccountCategory>Balance Sheet</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>54050</AccountCode>
+    <AccountName>Unallocated payments / cheques</AccountName>
+    <AccountCategory>Balance Sheet</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>55005</AccountCode>
+    <AccountName>Trade creditors</AccountName>
+    <AccountCategory>Balance Sheet</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>52005</AccountCode>
+    <AccountName>Trade debtors</AccountName>
+    <AccountCategory>Balance Sheet</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>55010</AccountCode>
+    <AccountName>Prepayments to supplier</AccountName>
+    <AccountCategory>Balance Sheet</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>52010</AccountCode>
+    <AccountName>Prepayments from customer</AccountName>
+    <AccountCategory>Balance Sheet</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>58005</AccountCode>
+    <AccountName>Result carried forward previous years</AccountName>
+    <AccountCategory>Balance Sheet</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>34625</AccountCode>
+    <AccountName>Exchange rate differences</AccountName>
+    <AccountCategory>Profit and Loss</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>51005</AccountCode>
+    <AccountName>Raw materials &amp; consumables - spare parts</AccountName>
+    <AccountCategory>Balance Sheet</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>52035</AccountCode>
+    <AccountName>Cash advances</AccountName>
+    <AccountCategory>Balance Sheet</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>31085</AccountCode>
+    <AccountName>Stock adjustments</AccountName>
+    <AccountCategory>Profit and Loss</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>31015</AccountCode>
+    <AccountName>Parts consumption</AccountName>
+    <AccountCategory>Profit and Loss</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>36020</AccountCode>
+    <AccountName>Bank interest received</AccountName>
+    <AccountCategory>Profit and Loss</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>34615</AccountCode>
+    <AccountName>Bank charges</AccountName>
+    <AccountCategory>Profit and Loss</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>55040</AccountCode>
+    <AccountName>Freight cost suspense</AccountName>
+    <AccountCategory>Balance Sheet</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>55045</AccountCode>
+    <AccountName>Customs cost suspense</AccountName>
+    <AccountCategory>Balance Sheet</AccountCategory>
+  </defaultaccounts>
+  <defaultaccounts>
+    <AccountCode>55050</AccountCode>
+    <AccountName>Insurance cost suspense</AccountName>
+    <AccountCategory>Balance Sheet</AccountCategory>
+  </defaultaccounts>
+</NewDataSet>

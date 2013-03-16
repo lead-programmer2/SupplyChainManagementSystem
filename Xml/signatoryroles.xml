@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="signatoryroles" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="signatoryroles">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:int" />
+                <xs:element name="Role" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="SignatorySection" type="xs:string" default="" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//signatoryroles" />
+        <xs:field xpath="Id" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <signatoryroles>
+    <Id>1</Id>
+    <Role>Checking Personnel</Role>
+    <SignatorySection>Checked By</SignatorySection>
+  </signatoryroles>
+  <signatoryroles>
+    <Id>2</Id>
+    <Role>Noting Personnel</Role>
+    <SignatorySection>Noted By</SignatorySection>
+  </signatoryroles>
+  <signatoryroles>
+    <Id>3</Id>
+    <Role>Approving Personnel</Role>
+    <SignatorySection>Approved By</SignatorySection>
+  </signatoryroles>
+</NewDataSet>

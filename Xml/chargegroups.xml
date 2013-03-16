@@ -1,0 +1,44 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="chargegroups" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="chargegroups">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:int" />
+                <xs:element name="Group" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="DefaultAccount" type="xs:long" default="0" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//chargegroups" />
+        <xs:field xpath="Id" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <chargegroups>
+    <Id>1</Id>
+    <Group>Document &amp; Handling</Group>
+    <DefaultAccount>55040</DefaultAccount>
+  </chargegroups>
+  <chargegroups>
+    <Id>2</Id>
+    <Group>Freight Cost</Group>
+    <DefaultAccount>55040</DefaultAccount>
+  </chargegroups>
+  <chargegroups>
+    <Id>3</Id>
+    <Group>Customs Duty</Group>
+    <DefaultAccount>55045</DefaultAccount>
+  </chargegroups>
+  <chargegroups>
+    <Id>4</Id>
+    <Group>Insurance Cost</Group>
+    <DefaultAccount>55050</DefaultAccount>
+  </chargegroups>
+</NewDataSet>

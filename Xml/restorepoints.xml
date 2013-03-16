@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="restorepoints" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="restorepoints">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="DetailId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:long" />
+                <xs:element name="DateAndTime" type="xs:dateTime" default="2013-02-13T10:37:12.2738293+04:00" minOccurs="0" />
+                <xs:element name="Filename" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Company" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Server" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Database" type="xs:string" default="" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//restorepoints" />
+        <xs:field xpath="DetailId" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+</NewDataSet>

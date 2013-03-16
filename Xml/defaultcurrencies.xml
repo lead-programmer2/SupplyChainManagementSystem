@@ -1,0 +1,91 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="defaultcurrencies" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="defaultcurrencies">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Currency" type="xs:string" />
+                <xs:element name="Description" type="xs:string" default="" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//defaultcurrencies" />
+        <xs:field xpath="Currency" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <defaultcurrencies>
+    <Currency>USD</Currency>
+    <Description>United States Dollar</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>AED</Currency>
+    <Description>Arab Emirates Dirhams</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>PHP</Currency>
+    <Description>Philippine Peso</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>JPY</Currency>
+    <Description>Japanese Yen</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>GBP</Currency>
+    <Description>British Pound</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>DKK</Currency>
+    <Description>Danish Krone</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>AFA</Currency>
+    <Description>Afghanistan Afghani</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>AUD</Currency>
+    <Description>Australian Dollar</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>OMR</Currency>
+    <Description>Omani Rial</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>EUR</Currency>
+    <Description>Euro</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>KWD</Currency>
+    <Description>Kuwaiti Dinar</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>NGN</Currency>
+    <Description>Nigerian Naira</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>ZAR</Currency>
+    <Description>South African Rand</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>PGK</Currency>
+    <Description>Papua New Guinean Kina</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>SOS</Currency>
+    <Description>Somali Shilling</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>PKR</Currency>
+    <Description>Pakistani Rupee</Description>
+  </defaultcurrencies>
+  <defaultcurrencies>
+    <Currency>UGX</Currency>
+    <Description>Ugandan Shilling</Description>
+  </defaultcurrencies>
+</NewDataSet>

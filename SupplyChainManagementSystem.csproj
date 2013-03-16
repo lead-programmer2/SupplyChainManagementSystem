@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0A21CA6D-7177-4701-89B5-58B5F7996C5E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SupplyChainManagementSystem</RootNamespace>
+    <AssemblyName>SupplyChainManagementSystem</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResGenToolArchitecture>Managed32Bit</ResGenToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>SCMS48.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="C1.Win.C1FlexGrid.2, Version=2.6.20122.694, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="DevComponents.DotNetBar2, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Development.Materia">
+      <HintPath>..\..\Current Projects\DLL Source Codes\Development.Materia\Development.Materia\bin\Release\Development.Materia.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Cache.cs" />
+    <Compile Include="Classes\CompanyInfo.cs" />
+    <Compile Include="Classes\DatabaseScriptInfo.cs" />
+    <Compile Include="Classes\GlobalSettings.cs" />
+    <Compile Include="Classes\MsgBoxEx.cs" />
+    <Compile Include="Classes\RestorePointInfo.cs" />
+    <Compile Include="Classes\SCMS.cs" />
+    <Compile Include="Classes\ServerConnectionInfo.cs" />
+    <Compile Include="Classes\SystemUserInfo.cs" />
+    <Compile Include="Classes\Validator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DataSourcedComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DataSourcedDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataSourcedDropDown.Designer.cs">
+      <DependentUpon>DataSourcedDropDown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ListViewGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PopUp.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PopUp.Designer.cs">
+      <DependentUpon>PopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\PartInformationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\PartInformationDialog.Designer.cs">
+      <DependentUpon>PartInformationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\AdditionalChargeInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\AdditionalChargeInfoDialog.Designer.cs">
+      <DependentUpon>AdditionalChargeInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\BankInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\BankInfoDialog.Designer.cs">
+      <DependentUpon>BankInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\BankMiscInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\BankMiscInfoDialog.Designer.cs">
+      <DependentUpon>BankMiscInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\CurrencyDenominationInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\CurrencyDenominationInfoDialog.Designer.cs">
+      <DependentUpon>CurrencyDenominationInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\CurrencyInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\CurrencyInfoDialog.Designer.cs">
+      <DependentUpon>CurrencyInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\CustomerGroupInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\CustomerGroupInfoDialog.Designer.cs">
+      <DependentUpon>CustomerGroupInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\DepartmentInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\DepartmentInfoDialog.Designer.cs">
+      <DependentUpon>DepartmentInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\LocationInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\LocationInfoDialog.Designer.cs">
+      <DependentUpon>LocationInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\MeasurementInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\MeasurementInfoDialog.Designer.cs">
+      <DependentUpon>MeasurementInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\PartCategoryInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\PartCategoryInfoDialog.Designer.cs">
+      <DependentUpon>PartCategoryInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\PartNameInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\PartNameInfoDialog.Designer.cs">
+      <DependentUpon>PartNameInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\PaymentTermInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\PaymentTermInfoDialog.Designer.cs">
+      <DependentUpon>PaymentTermInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\PickListDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\PickListDialog.Designer.cs">
+      <DependentUpon>PickListDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\PositionInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\PositionInfoDialog.Designer.cs">
+      <DependentUpon>PositionInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\ScriptInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\ScriptInfoDialog.Designer.cs">
+      <DependentUpon>ScriptInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\ScriptListDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\ScriptListDialog.Designer.cs">
+      <DependentUpon>ScriptListDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\SignatoryInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\SignatoryInfoDialog.Designer.cs">
+      <DependentUpon>SignatoryInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\UserInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\UserInfoDialog.Designer.cs">
+      <DependentUpon>UserInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\UserManagementDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\UserManagementDialog.Designer.cs">
+      <DependentUpon>UserManagementDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\BrandInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\BrandInfoDialog.Designer.cs">
+      <DependentUpon>BrandInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\List\ModelInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\List\ModelInfoDialog.Designer.cs">
+      <DependentUpon>ModelInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Utilities\ConnectionsAndCompaniesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Utilities\ConnectionsAndCompaniesDialog.Designer.cs">
+      <DependentUpon>ConnectionsAndCompaniesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Utilities\DatabaseBackupDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Utilities\DatabaseBackupDialog.Designer.cs">
+      <DependentUpon>DatabaseBackupDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Utilities\DatabaseCredentialDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Utilities\DatabaseCredentialDialog.Designer.cs">
+      <DependentUpon>DatabaseCredentialDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Utilities\DatabaseMaintenanceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Utilities\DatabaseMaintenanceDialog.Designer.cs">
+      <DependentUpon>DatabaseMaintenanceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Utilities\DatabaseRestoreDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Utilities\DatabaseRestoreDialog.Designer.cs">
+      <DependentUpon>DatabaseRestoreDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Utilities\GlobalSettingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Utilities\GlobalSettingDialog.Designer.cs">
+      <DependentUpon>GlobalSettingDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Utilities\InitializerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Utilities\InitializerDialog.Designer.cs">
+      <DependentUpon>InitializerDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoginDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginDialog.Designer.cs">
+      <DependentUpon>LoginDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Utilities\LogActivityViewerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Utilities\LogActivityViewerDialog.Designer.cs">
+      <DependentUpon>LogActivityViewerDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Utilities\RestorePointSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Utilities\RestorePointSelectionDialog.Designer.cs">
+      <DependentUpon>RestorePointSelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ModuleWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModuleWindow.Designer.cs">
+      <DependentUpon>ModuleWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\DataSourcedComboBox.resx">
+      <DependentUpon>DataSourcedComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataSourcedDropDown.resx">
+      <DependentUpon>DataSourcedDropDown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ListViewGrid.resx">
+      <DependentUpon>ListViewGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\PartInformationDialog.resx">
+      <DependentUpon>PartInformationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\AdditionalChargeInfoDialog.resx">
+      <DependentUpon>AdditionalChargeInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\BankInfoDialog.resx">
+      <DependentUpon>BankInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\BankMiscInfoDialog.resx">
+      <DependentUpon>BankMiscInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\CurrencyDenominationInfoDialog.resx">
+      <DependentUpon>CurrencyDenominationInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\CurrencyInfoDialog.resx">
+      <DependentUpon>CurrencyInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\CustomerGroupInfoDialog.resx">
+      <DependentUpon>CustomerGroupInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\DepartmentInfoDialog.resx">
+      <DependentUpon>DepartmentInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\LocationInfoDialog.resx">
+      <DependentUpon>LocationInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\MeasurementInfoDialog.resx">
+      <DependentUpon>MeasurementInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\PartCategoryInfoDialog.resx">
+      <DependentUpon>PartCategoryInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\PartNameInfoDialog.resx">
+      <DependentUpon>PartNameInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\PaymentTermInfoDialog.resx">
+      <DependentUpon>PaymentTermInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\PickListDialog.resx">
+      <DependentUpon>PickListDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\PositionInfoDialog.resx">
+      <DependentUpon>PositionInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\ScriptInfoDialog.resx">
+      <DependentUpon>ScriptInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\ScriptListDialog.resx">
+      <DependentUpon>ScriptListDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\SignatoryInfoDialog.resx">
+      <DependentUpon>SignatoryInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\UserInfoDialog.resx">
+      <DependentUpon>UserInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\UserManagementDialog.resx">
+      <DependentUpon>UserManagementDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\BrandInfoDialog.resx">
+      <DependentUpon>BrandInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\List\ModelInfoDialog.resx">
+      <DependentUpon>ModelInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModuleWindow.resx">
+      <DependentUpon>ModuleWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Utilities\ConnectionsAndCompaniesDialog.resx">
+      <DependentUpon>ConnectionsAndCompaniesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Utilities\DatabaseBackupDialog.resx">
+      <DependentUpon>DatabaseBackupDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Utilities\DatabaseCredentialDialog.resx">
+      <DependentUpon>DatabaseCredentialDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Utilities\DatabaseMaintenanceDialog.resx">
+      <DependentUpon>DatabaseMaintenanceDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Utilities\DatabaseRestoreDialog.resx">
+      <DependentUpon>DatabaseRestoreDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Utilities\GlobalSettingDialog.resx">
+      <DependentUpon>GlobalSettingDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Utilities\InitializerDialog.resx">
+      <DependentUpon>InitializerDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginDialog.resx">
+      <DependentUpon>LoginDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Utilities\LogActivityViewerDialog.resx">
+      <DependentUpon>LogActivityViewerDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Utilities\RestorePointSelectionDialog.resx">
+      <DependentUpon>RestorePointSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Cache\cache.temp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SCMSBackground.png" />
+    <None Include="Resources\gridtilewborder.png" />
+    <Content Include="Xml\nodes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\partsstatus.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\stocktypes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\terms.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\cspt bnw.png" />
+    <None Include="Resources\cspt colored.png" />
+    <None Include="Resources\SCMSFaded.png" />
+    <None Include="Resources\brick.png" />
+    <None Include="Resources\ArrowDown.png" />
+    <None Include="Resources\Windows 8 Loader 2.gif" />
+    <Content Include="Dll\C1.Win.C1FlexGrid.2.dll" />
+    <Content Include="Dll\C1.Win.C1FlexGrid.2.xml" />
+    <Content Include="Dll\DevComponents.DotNetBar2.dll" />
+    <Content Include="Dll\DevComponents.DotNetBar2.xml" />
+    <Content Include="Dll\Development.Materia.dll" />
+    <Content Include="Dll\Development.Materia.xml" />
+    <Content Include="SCMS48.ico" />
+    <Content Include="Xml\cachesettings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\chargegroups.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\defaultaccounts.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\defaultcurrencies.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\defaultdenominations.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\errorlogs.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\locallogs.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\modules.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\picklist.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\restorepoints.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\signatoryroles.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\systemactions.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\validator.ico" />
+    <Content Include="Xml\databaseconnections.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\defaultcompanies.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Xml\defaultusers.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Database\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,619 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="nodes" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="nodes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="NodeKey" type="xs:string" />
+                <xs:element name="Text" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="ParentKey" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Module" type="xs:int" default="0" minOccurs="0" />
+                <xs:element name="Ordering" type="xs:int" default="0" minOccurs="0" />
+                <xs:element name="SubModuleEnum" type="xs:int" default="0" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//nodes" />
+        <xs:field xpath="NodeKey" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <nodes>
+    <NodeKey>100</NodeKey>
+    <Text>Quotations</Text>
+    <ParentKey>SCMS</ParentKey>
+    <Module>9</Module>
+    <Ordering>1</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>1000</NodeKey>
+    <Text>Customer Quotations</Text>
+    <ParentKey>100</ParentKey>
+    <Module>9</Module>
+    <Ordering>2</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>1100</NodeKey>
+    <Text>Open</Text>
+    <ParentKey>1000</ParentKey>
+    <Module>9</Module>
+    <Ordering>3</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>1200</NodeKey>
+    <Text>Supplier Quotations</Text>
+    <ParentKey>100</ParentKey>
+    <Module>9</Module>
+    <Ordering>4</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>200</NodeKey>
+    <Text>Orders</Text>
+    <ParentKey>SCMS</ParentKey>
+    <Module>7</Module>
+    <Ordering>1</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>2000</NodeKey>
+    <Text>Sales Order</Text>
+    <ParentKey>200</ParentKey>
+    <Module>7</Module>
+    <Ordering>2</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>2100</NodeKey>
+    <Text>Open</Text>
+    <ParentKey>2000</ParentKey>
+    <Module>7</Module>
+    <Ordering>3</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>2200</NodeKey>
+    <Text>Purchase Order</Text>
+    <ParentKey>200</ParentKey>
+    <Module>7</Module>
+    <Ordering>4</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>2300</NodeKey>
+    <Text>Open</Text>
+    <ParentKey>2200</ParentKey>
+    <Module>7</Module>
+    <Ordering>5</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>300</NodeKey>
+    <Text>Shipments</Text>
+    <ParentKey>SCMS</ParentKey>
+    <Module>11</Module>
+    <Ordering>1</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>3000</NodeKey>
+    <Text>Shipping Invoice</Text>
+    <ParentKey>300</ParentKey>
+    <Module>11</Module>
+    <Ordering>2</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>3100</NodeKey>
+    <Text>Shipment Monitoring</Text>
+    <ParentKey>300</ParentKey>
+    <Module>11</Module>
+    <Ordering>3</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>3200</NodeKey>
+    <Text>Delivery Discrepancy</Text>
+    <ParentKey>300</ParentKey>
+    <Module>11</Module>
+    <Ordering>4</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>400</NodeKey>
+    <Text>Parts Inventory</Text>
+    <ParentKey>SCMS</ParentKey>
+    <Module>6</Module>
+    <Ordering>1</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>4000</NodeKey>
+    <Text>Parts</Text>
+    <ParentKey>400</ParentKey>
+    <Module>6</Module>
+    <Ordering>2</Ordering>
+    <SubModuleEnum>1</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>500</NodeKey>
+    <Text>Purchases</Text>
+    <ParentKey>SCMS</ParentKey>
+    <Module>8</Module>
+    <Ordering>1</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>5000</NodeKey>
+    <Text>Purchase Invoice</Text>
+    <ParentKey>500</ParentKey>
+    <Module>8</Module>
+    <Ordering>2</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>5100</NodeKey>
+    <Text>Outstanding</Text>
+    <ParentKey>5000</ParentKey>
+    <Module>8</Module>
+    <Ordering>3</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>5200</NodeKey>
+    <Text>Settled</Text>
+    <ParentKey>5000</ParentKey>
+    <Module>8</Module>
+    <Ordering>4</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>5300</NodeKey>
+    <Text>Freight Invoice</Text>
+    <ParentKey>500</ParentKey>
+    <Module>8</Module>
+    <Ordering>5</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>5400</NodeKey>
+    <Text>Debit Note</Text>
+    <ParentKey>500</ParentKey>
+    <Module>8</Module>
+    <Ordering>6</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>600</NodeKey>
+    <Text>Sales</Text>
+    <ParentKey>SCMS</ParentKey>
+    <Module>10</Module>
+    <Ordering>1</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>6000</NodeKey>
+    <Text>Sales Invoice</Text>
+    <ParentKey>600</ParentKey>
+    <Module>10</Module>
+    <Ordering>2</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>6100</NodeKey>
+    <Text>Outstanding</Text>
+    <ParentKey>6000</ParentKey>
+    <Module>10</Module>
+    <Ordering>3</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>6200</NodeKey>
+    <Text>Settled</Text>
+    <ParentKey>6000</ParentKey>
+    <Module>10</Module>
+    <Ordering>4</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>6300</NodeKey>
+    <Text>Proforma Invoice</Text>
+    <ParentKey>600</ParentKey>
+    <Module>10</Module>
+    <Ordering>5</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>6400</NodeKey>
+    <Text>Credit Note</Text>
+    <ParentKey>600</ParentKey>
+    <Module>10</Module>
+    <Ordering>6</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>700</NodeKey>
+    <Text>General Ledger</Text>
+    <ParentKey>SCMS</ParentKey>
+    <Module>4</Module>
+    <Ordering>1</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>7000</NodeKey>
+    <Text>Periods</Text>
+    <ParentKey>700</ParentKey>
+    <Module>4</Module>
+    <Ordering>2</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>7100</NodeKey>
+    <Text>Chart of Accounts</Text>
+    <ParentKey>700</ParentKey>
+    <Module>4</Module>
+    <Ordering>3</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>7200</NodeKey>
+    <Text>General Ledger</Text>
+    <ParentKey>700</ParentKey>
+    <Module>4</Module>
+    <Ordering>4</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>7300</NodeKey>
+    <Text>Budgets</Text>
+    <ParentKey>700</ParentKey>
+    <Module>4</Module>
+    <Ordering>5</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>7400</NodeKey>
+    <Text>Budget Allocation</Text>
+    <ParentKey>7300</ParentKey>
+    <Module>4</Module>
+    <Ordering>6</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>7401</NodeKey>
+    <Text>By Fiscal Year</Text>
+    <ParentKey>7400</ParentKey>
+    <Module>4</Module>
+    <Ordering>7</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>7402</NodeKey>
+    <Text>Actual with Estimates</Text>
+    <ParentKey>7400</ParentKey>
+    <Module>4</Module>
+    <Ordering>8</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>7500</NodeKey>
+    <Text>Budget vs. Actual</Text>
+    <ParentKey>7300</ParentKey>
+    <Module>4</Module>
+    <Ordering>9</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>7600</NodeKey>
+    <Text>Currencies</Text>
+    <ParentKey>700</ParentKey>
+    <Module>4</Module>
+    <Ordering>10</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>800</NodeKey>
+    <Text>Journal Entries</Text>
+    <ParentKey>SCMS</ParentKey>
+    <Module>5</Module>
+    <Ordering>1</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>8000</NodeKey>
+    <Text>Journal Voucher</Text>
+    <ParentKey>800</ParentKey>
+    <Module>5</Module>
+    <Ordering>2</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>900</NodeKey>
+    <Text>Customers</Text>
+    <ParentKey>SCMS</ParentKey>
+    <Module>3</Module>
+    <Ordering>1</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>9000</NodeKey>
+    <Text>Customer Information</Text>
+    <ParentKey>900</ParentKey>
+    <Module>3</Module>
+    <Ordering>2</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>9100</NodeKey>
+    <Text>Customer Invoice</Text>
+    <ParentKey>900</ParentKey>
+    <Module>3</Module>
+    <Ordering>3</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>9200</NodeKey>
+    <Text>Credit Note</Text>
+    <ParentKey>900</ParentKey>
+    <Module>3</Module>
+    <Ordering>4</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>9300</NodeKey>
+    <Text>Credit Note (General)</Text>
+    <ParentKey>900</ParentKey>
+    <Module>3</Module>
+    <Ordering>5</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>9400</NodeKey>
+    <Text>Customer Payment</Text>
+    <ParentKey>900</ParentKey>
+    <Module>3</Module>
+    <Ordering>6</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>9500</NodeKey>
+    <Text>Allocation of Prepayment</Text>
+    <ParentKey>900</ParentKey>
+    <Module>3</Module>
+    <Ordering>7</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>9600</NodeKey>
+    <Text>Customer Ledger</Text>
+    <ParentKey>900</ParentKey>
+    <Module>3</Module>
+    <Ordering>8</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>10000</NodeKey>
+    <Text>Suppliers</Text>
+    <ParentKey>SCMS</ParentKey>
+    <Module>12</Module>
+    <Ordering>1</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>10100</NodeKey>
+    <Text>Supplier Information</Text>
+    <ParentKey>10000</ParentKey>
+    <Module>12</Module>
+    <Ordering>2</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>10200</NodeKey>
+    <Text>Supplier Invoice</Text>
+    <ParentKey>10000</ParentKey>
+    <Module>12</Module>
+    <Ordering>3</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>10300</NodeKey>
+    <Text>Freight Provision</Text>
+    <ParentKey>10000</ParentKey>
+    <Module>12</Module>
+    <Ordering>4</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>10400</NodeKey>
+    <Text>Debit Note</Text>
+    <ParentKey>10000</ParentKey>
+    <Module>12</Module>
+    <Ordering>5</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>10500</NodeKey>
+    <Text>Debit Note (General)</Text>
+    <ParentKey>10000</ParentKey>
+    <Module>12</Module>
+    <Ordering>6</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>10600</NodeKey>
+    <Text>Supplier Payment</Text>
+    <ParentKey>10000</ParentKey>
+    <Module>12</Module>
+    <Ordering>7</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>10700</NodeKey>
+    <Text>Allocation of Prepayment</Text>
+    <ParentKey>10000</ParentKey>
+    <Module>12</Module>
+    <Ordering>8</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>10800</NodeKey>
+    <Text>Supplier Ledger</Text>
+    <ParentKey>10000</ParentKey>
+    <Module>12</Module>
+    <Ordering>9</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>11000</NodeKey>
+    <Text>Cash Position</Text>
+    <ParentKey>SCMS</ParentKey>
+    <Module>2</Module>
+    <Ordering>1</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>11100</NodeKey>
+    <Text>Daily Cash Position</Text>
+    <ParentKey>11000</ParentKey>
+    <Module>2</Module>
+    <Ordering>2</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>11200</NodeKey>
+    <Text>Vouchers</Text>
+    <ParentKey>11000</ParentKey>
+    <Module>2</Module>
+    <Ordering>3</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>11300</NodeKey>
+    <Text>Cash Acknowledgement Voucher</Text>
+    <ParentKey>11200</ParentKey>
+    <Module>2</Module>
+    <Ordering>4</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>11400</NodeKey>
+    <Text>Cash Disbursement Voucher</Text>
+    <ParentKey>11200</ParentKey>
+    <Module>2</Module>
+    <Ordering>5</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>11500</NodeKey>
+    <Text>Cash Advance Voucher</Text>
+    <ParentKey>11200</ParentKey>
+    <Module>2</Module>
+    <Ordering>6</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>11600</NodeKey>
+    <Text>Cash Advance Liquidation</Text>
+    <ParentKey>11000</ParentKey>
+    <Module>2</Module>
+    <Ordering>7</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>11700</NodeKey>
+    <Text>Daily Cash Movement</Text>
+    <ParentKey>11000</ParentKey>
+    <Module>2</Module>
+    <Ordering>8</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>12000</NodeKey>
+    <Text>Bank Transactions</Text>
+    <ParentKey>SCMS</ParentKey>
+    <Module>1</Module>
+    <Ordering>1</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>12100</NodeKey>
+    <Text>Bank Accounts</Text>
+    <ParentKey>12000</ParentKey>
+    <Module>1</Module>
+    <Ordering>2</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>12200</NodeKey>
+    <Text>Vouchers</Text>
+    <ParentKey>12000</ParentKey>
+    <Module>1</Module>
+    <Ordering>3</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>12300</NodeKey>
+    <Text>Bank Deposit</Text>
+    <ParentKey>12200</ParentKey>
+    <Module>1</Module>
+    <Ordering>4</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>12400</NodeKey>
+    <Text>Cheque Received</Text>
+    <ParentKey>12200</ParentKey>
+    <Module>1</Module>
+    <Ordering>5</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>12500</NodeKey>
+    <Text>Bank Withdrawal</Text>
+    <ParentKey>12200</ParentKey>
+    <Module>1</Module>
+    <Ordering>6</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>12600</NodeKey>
+    <Text>Cheque Issuance</Text>
+    <ParentKey>12200</ParentKey>
+    <Module>1</Module>
+    <Ordering>7</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>12700</NodeKey>
+    <Text>Fund Transfer</Text>
+    <ParentKey>12200</ParentKey>
+    <Module>1</Module>
+    <Ordering>8</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>12800</NodeKey>
+    <Text>Bank Reconciliation</Text>
+    <ParentKey>12000</ParentKey>
+    <Module>1</Module>
+    <Ordering>9</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+  <nodes>
+    <NodeKey>12900</NodeKey>
+    <Text>Bank Ledger</Text>
+    <ParentKey>12000</ParentKey>
+    <Module>1</Module>
+    <Ordering>10</Ordering>
+    <SubModuleEnum>0</SubModuleEnum>
+  </nodes>
+</NewDataSet>

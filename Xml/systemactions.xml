@@ -1,0 +1,124 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="systemactions" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="systemactions">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:int" />
+                <xs:element name="Name" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Description" type="xs:string" default="" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//systemactions" />
+        <xs:field xpath="Id" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <systemactions>
+    <Id>0</Id>
+    <Name>Add</Name>
+    <Description>Adds new record / transaction.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>1</Id>
+    <Name>Edit</Name>
+    <Description>Updates record / transaction.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>2</Id>
+    <Name>Delete</Name>
+    <Description>Deletes record / transaction.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>3</Id>
+    <Name>Preview Report</Name>
+    <Description>Previews available printable report.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>4</Id>
+    <Name>Print Report</Name>
+    <Description>Prints any avilable printable report.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>5</Id>
+    <Name>Exports Excel</Name>
+    <Description>Exports Microsoft Excel file from the application.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>6</Id>
+    <Name>Exports Pdf</Name>
+    <Description>Exports Portable Document (pdf) file from the application.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>7</Id>
+    <Name>Exports Xml</Name>
+    <Description>Exports Extensive Markup Language (xml) file from the application.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>8</Id>
+    <Name>Exports EDI</Name>
+    <Description>Exports system-defined file from the application.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>9</Id>
+    <Name>Imports Excel</Name>
+    <Description>Imports Microsoft Excel file into the application.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>10</Id>
+    <Name>Imports EDI</Name>
+    <Description>Imports system-defined file into the application.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>11</Id>
+    <Name>Imports Xml</Name>
+    <Description>Imports Extensive Markup Language (xml) file into the application.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>12</Id>
+    <Name>Backup Database</Name>
+    <Description>Perform database backup to local or network drive.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>13</Id>
+    <Name>Restore Database</Name>
+    <Description>Perform database restoration from a local or network drive.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>14</Id>
+    <Name>Maintain Database</Name>
+    <Description>Runs database maintenance.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>15</Id>
+    <Name>Log In</Name>
+    <Description>Signs into the application.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>16</Id>
+    <Name>Log Out</Name>
+    <Description>Signs off from the application.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>17</Id>
+    <Name>Finalize Transaction</Name>
+    <Description>Finalizes / closes any transaction.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>18</Id>
+    <Name>System Generated</Name>
+    <Description>Created by the system.</Description>
+  </systemactions>
+  <systemactions>
+    <Id>19</Id>
+    <Name>Execute Script</Name>
+    <Description>Executes a database script file.</Description>
+  </systemactions>
+</NewDataSet>

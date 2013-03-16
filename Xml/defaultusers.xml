@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="defaultusers" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="defaultusers">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Username" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Password" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="FirstName" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="MiddleName" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="LastName" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Department" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Position" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="ComputerName" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="UserAccount" type="xs:string" default="" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <defaultusers>
+    <Username>jsph</Username>
+    <Password>crossfire</Password>
+    <FirstName>Joseph Lambert</FirstName>
+    <MiddleName />
+    <LastName>Reyes</LastName>
+    <Department>Systems Development</Department>
+    <Position>Project Team Leader</Position>
+    <ComputerName>JLREYES</ComputerName>
+    <UserAccount>user</UserAccount>
+  </defaultusers>
+</NewDataSet>

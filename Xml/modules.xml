@@ -1,0 +1,115 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="modules" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="modules">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:int" />
+                <xs:element name="Text" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="ImageKey" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Group" type="xs:int" default="0" minOccurs="0" />
+                <xs:element name="Order" type="xs:int" default="0" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//modules" />
+        <xs:field xpath="Id" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <modules>
+    <Id>1</Id>
+    <Text>Bank
+Transactions</Text>
+    <ImageKey>Bank</ImageKey>
+    <Group>1</Group>
+    <Order>6</Order>
+  </modules>
+  <modules>
+    <Id>2</Id>
+    <Text>Cash
+Position</Text>
+    <ImageKey>CashPosition</ImageKey>
+    <Group>1</Group>
+    <Order>5</Order>
+  </modules>
+  <modules>
+    <Id>3</Id>
+    <Text>Customers</Text>
+    <ImageKey>Customers</ImageKey>
+    <Group>1</Group>
+    <Order>3</Order>
+  </modules>
+  <modules>
+    <Id>4</Id>
+    <Text>General
+Ledger</Text>
+    <ImageKey>GeneralLedger</ImageKey>
+    <Group>1</Group>
+    <Order>1</Order>
+  </modules>
+  <modules>
+    <Id>5</Id>
+    <Text>Journal
+Entries</Text>
+    <ImageKey>JournalEntries</ImageKey>
+    <Group>1</Group>
+    <Order>2</Order>
+  </modules>
+  <modules>
+    <Id>6</Id>
+    <Text>Parts
+Inventory</Text>
+    <ImageKey>Inventory</ImageKey>
+    <Group>2</Group>
+    <Order>5</Order>
+  </modules>
+  <modules>
+    <Id>7</Id>
+    <Text>Orders</Text>
+    <ImageKey>Orders</ImageKey>
+    <Group>2</Group>
+    <Order>2</Order>
+  </modules>
+  <modules>
+    <Id>8</Id>
+    <Text>Purchases</Text>
+    <ImageKey>Purchases</ImageKey>
+    <Group>2</Group>
+    <Order>3</Order>
+  </modules>
+  <modules>
+    <Id>9</Id>
+    <Text>Quotations</Text>
+    <ImageKey>Quotations</ImageKey>
+    <Group>2</Group>
+    <Order>1</Order>
+  </modules>
+  <modules>
+    <Id>10</Id>
+    <Text>Sales</Text>
+    <ImageKey>Sales</ImageKey>
+    <Group>2</Group>
+    <Order>4</Order>
+  </modules>
+  <modules>
+    <Id>11</Id>
+    <Text>Shipments</Text>
+    <ImageKey>Shipments</ImageKey>
+    <Group>2</Group>
+    <Order>6</Order>
+  </modules>
+  <modules>
+    <Id>12</Id>
+    <Text>Suppliers</Text>
+    <ImageKey>Suppliers</ImageKey>
+    <Group>1</Group>
+    <Order>4</Order>
+  </modules>
+</NewDataSet>

@@ -1,0 +1,63 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="defaultdenominations" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="defaultdenominations">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="DetailId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:int" />
+                <xs:element name="Denomination" type="xs:decimal" default="0" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//defaultdenominations" />
+        <xs:field xpath="DetailId" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <defaultdenominations>
+    <DetailId>1</DetailId>
+    <Denomination>0.25</Denomination>
+  </defaultdenominations>
+  <defaultdenominations>
+    <DetailId>2</DetailId>
+    <Denomination>0.5</Denomination>
+  </defaultdenominations>
+  <defaultdenominations>
+    <DetailId>3</DetailId>
+    <Denomination>1</Denomination>
+  </defaultdenominations>
+  <defaultdenominations>
+    <DetailId>4</DetailId>
+    <Denomination>5</Denomination>
+  </defaultdenominations>
+  <defaultdenominations>
+    <DetailId>5</DetailId>
+    <Denomination>10</Denomination>
+  </defaultdenominations>
+  <defaultdenominations>
+    <DetailId>6</DetailId>
+    <Denomination>20</Denomination>
+  </defaultdenominations>
+  <defaultdenominations>
+    <DetailId>7</DetailId>
+    <Denomination>50</Denomination>
+  </defaultdenominations>
+  <defaultdenominations>
+    <DetailId>8</DetailId>
+    <Denomination>100</Denomination>
+  </defaultdenominations>
+  <defaultdenominations>
+    <DetailId>9</DetailId>
+    <Denomination>500</Denomination>
+  </defaultdenominations>
+  <defaultdenominations>
+    <DetailId>10</DetailId>
+    <Denomination>1000</Denomination>
+  </defaultdenominations>
+</NewDataSet>

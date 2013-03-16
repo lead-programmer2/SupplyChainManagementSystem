@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="errorlogs" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="errorlogs">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:long" />
+                <xs:element name="ComputerName" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="DateAndTime" type="xs:dateTime" default="2013-02-07T11:08:09.9851579+04:00" minOccurs="0" />
+                <xs:element name="Window" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="ErrorMessage" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="StackTrace" type="xs:string" default="" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//errorlogs" />
+        <xs:field xpath="Id" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+</NewDataSet>

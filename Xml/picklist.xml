@@ -1,0 +1,104 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="picklist" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="picklist">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:int" />
+                <xs:element name="Name" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="ImageKey" type="xs:string" default="" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//picklist" />
+        <xs:field xpath="Id" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <picklist>
+    <Id>1</Id>
+    <Name>Currencies</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>2</Id>
+    <Name>Currency Denominations</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>3</Id>
+    <Name>Customer Groups</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>4</Id>
+    <Name>Departments</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>5</Id>
+    <Name>Locations</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>6</Id>
+    <Name>Brands</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>7</Id>
+    <Name>Measurements</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>8</Id>
+    <Name>Models</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>9</Id>
+    <Name>Parts Categories</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>10</Id>
+    <Name>Part Names</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>11</Id>
+    <Name>Payment Terms</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>12</Id>
+    <Name>Positions</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>13</Id>
+    <Name>Signatories</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>15</Id>
+    <Name>Additional Charges</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>16</Id>
+    <Name>Banking Companies</Name>
+    <ImageKey />
+  </picklist>
+  <picklist>
+    <Id>17</Id>
+    <Name>Bank Miscellaneous</Name>
+    <ImageKey />
+  </picklist>
+</NewDataSet>

@@ -1,0 +1,40 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="databaseconnections" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="databaseconnections">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Name" type="xs:string" />
+                <xs:element name="Server" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Database" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="UID" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Password" type="xs:string" default="" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PK" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//databaseconnections" />
+        <xs:field xpath="Name" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <databaseconnections>
+    <Name>CSPT-Live</Name>
+    <Server>localhost</Server>
+    <Database>scmsiv</Database>
+    <UID>root</UID>
+    <Password>fms2011</Password>
+  </databaseconnections>
+  <databaseconnections>
+    <Name>CSPT-Local</Name>
+    <Server>localhost</Server>
+    <Database>scmsiv</Database>
+    <UID>root</UID>
+    <Password>fms2011</Password>
+  </databaseconnections>
+</NewDataSet>
