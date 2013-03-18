@@ -45,7 +45,15 @@
     <TransactionType>Purchase Order</TransactionType>
   </stocktransactiontypes>
   <stocktransactiontypes>
-    <Id>7</Id>
+    <Id>6</Id>
     <TransactionType>Shipping Invoice</TransactionType>
+  </stocktransactiontypes>
+  <stocktransactiontypes>
+    <Id>7</Id>
+    <TransactionType>Debit Note</TransactionType>
+  </stocktransactiontypes>
+  <stocktransactiontypes>
+    <Id>8</Id>
+    <TransactionType>Credit Note</TransactionType>
   </stocktransactiontypes>
 </NewDataSet>

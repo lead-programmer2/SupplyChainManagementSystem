@@ -387,6 +387,7 @@ namespace SupplyChainManagementSystem
                                  from _sup in _s.DefaultIfEmpty(_suppliers.NewRow())
                                  from _cus in _c.DefaultIfEmpty(_customers.NewRow())
                                  orderby _ledger.Field<DateTime>("Dated"),
+                                         _ledger.Field<DateTime>("PurchaseDate"),
                                          _ledger.Field<int>("TransactionType"),
                                          _ledger.Field<string>("ReferenceNo")
                                  select new
@@ -398,6 +399,7 @@ namespace SupplyChainManagementSystem
                                      Supplier = _sup.Field<string>("SupplierName"),
                                      Customer = _cus.Field<string>("CustomerName"),
                                      Location = _loc.Field<string>("Location"),
+                                     PurchaseDate = _ledger.Field<DateTime>("PurchaseDate"),
                                      In = _ledger.Field<int>("In"),
                                      Out = _ledger.Field<int>("Out"),
                                      Incoming = _ledger.Field<int>("Incoming"),
@@ -415,6 +417,7 @@ namespace SupplyChainManagementSystem
                     _datasource.Columns.Add("TransactionType", typeof(string));
                     _datasource.Columns.Add("ReferenceName", typeof(string));
                     _datasource.Columns.Add("Location", typeof(string));
+                    _datasource.Columns.Add("StockDate", typeof(DateTime));
                     _datasource.Columns.Add("In", typeof(int));
                     _datasource.Columns.Add("Incoming", typeof(int));
                     _datasource.Columns.Add("Outgoing", typeof(int));
@@ -439,10 +442,10 @@ namespace SupplyChainManagementSystem
                             _datasource.Rows.Add(new object[] {
                                                  _row.DetailId, _row.Date, _row.ReferenceNo,
                                                  _row.TransactionType, (Materia.IsNullOrNothing(_row.Supplier)? "" : _row.Supplier) + (Materia.IsNullOrNothing(_row.Customer) ? "" : _row.Customer),
-                                                 _row.Location, _row.In, _row.Incoming, 
-                                                 _row.Outgoing, _row.Out, _ending,
-                                                 _row.UnitCost, _row.TotalCost, _balance,
-                                                 _row.UpdatedBy });
+                                                 _row.Location, _row.PurchaseDate, _row.In, 
+                                                 _row.Incoming, _row.Outgoing, _row.Out, 
+                                                 _ending, _row.UnitCost, _row.TotalCost, 
+                                                 _balance, _row.UpdatedBy });
                         }
 
                         _datasource.AcceptChanges();
@@ -458,6 +461,7 @@ namespace SupplyChainManagementSystem
                     _cols["ReferenceNo"].Caption = "Reference No.";
                     _cols["TransactionType"].Caption = "Transaction Type";
                     _cols["ReferenceName"].Caption = "Customer / Supplier";
+                    _cols["StockDate"].Caption = "Purchase Date";
                     _cols["UnitCost"].Caption = "Unit Cost (USD)";
                     _cols["TotalCost"].Caption = "Total Cost (USD)";
                     _cols["EndingCost"].Caption = "Balance (USD)";
@@ -1293,6 +1297,22 @@ namespace SupplyChainManagementSystem
         private void btnSaveAndClose_Click(object sender, EventArgs e)
         {
             if (btnSaveAndClose.Enabled) btnSave_Click(btnSaveAndClose, new EventArgs());
+        }
+
+        private void lblAdjustment_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (!lblAdjustment.Enabled) return;
+            if (!_isshown) return;
+
+            StockAdjustmentInfoDialog _dialog = new StockAdjustmentInfoDialog();
+            _dialog.ShowDialog();
+
+            if (_dialog.WithUpdates)
+            {
+            }
+
+            _dialog.Dispose(); _dialog = null;
+            Materia.RefreshAndManageCurrentProcess();
         }
 
     }

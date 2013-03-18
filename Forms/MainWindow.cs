@@ -566,6 +566,14 @@ namespace SupplyChainManagementSystem
             }
         }
 
+        private void mnuStockAdjustments_Click(object sender, EventArgs e)
+        {
+            if (!mnuStockAdjustments.Enabled) return;
+            StockAdjustmentListDialog _dialog = new StockAdjustmentListDialog();
+            _dialog.ShowDialog(); _dialog.Dispose(); _dialog = null;
+            Materia.RefreshAndManageCurrentProcess();
+        }
+
 
     }
 }

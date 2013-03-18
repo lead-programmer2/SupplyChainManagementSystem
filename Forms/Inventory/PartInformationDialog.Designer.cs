@@ -232,6 +232,7 @@
             // 
             // tbctrl
             // 
+            this.tbctrl.AutoCloseTabs = false;
             // 
             // 
             // 
@@ -248,17 +249,17 @@
             this.tbctrl.ControlBox.MenuBox,
             this.tbctrl.ControlBox.CloseBox});
             this.tbctrl.ControlBox.Visible = false;
+            this.tbctrl.Controls.Add(this.superTabControlPanel2);
             this.tbctrl.Controls.Add(this.superTabControlPanel1);
             this.tbctrl.Controls.Add(this.superTabControlPanel3);
             this.tbctrl.Controls.Add(this.superTabControlPanel6);
-            this.tbctrl.Controls.Add(this.superTabControlPanel2);
             this.tbctrl.Controls.Add(this.superTabControlPanel4);
             this.tbctrl.Controls.Add(this.superTabControlPanel5);
             this.tbctrl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbctrl.FixedTabSize = new System.Drawing.Size(150, 0);
             this.tbctrl.Location = new System.Drawing.Point(0, 0);
             this.tbctrl.Name = "tbctrl";
-            this.tbctrl.ReorderTabsEnabled = true;
+            this.tbctrl.ReorderTabsEnabled = false;
             this.tbctrl.SelectedTabFont = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
             this.tbctrl.SelectedTabIndex = 0;
             this.tbctrl.Size = new System.Drawing.Size(671, 357);
@@ -873,6 +874,7 @@
             this.lblAdjustment.TabStop = true;
             this.lblAdjustment.Text = "Adjust Quantity";
             this.lblAdjustment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAdjustment.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAdjustment_LinkClicked);
             // 
             // txtQty
             // 

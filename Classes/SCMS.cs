@@ -107,6 +107,22 @@ namespace SupplyChainManagementSystem
     }
 
     /// <summary>
+    /// Stock transaction type enumerations.
+    /// </summary>
+    public enum StockTransactionType
+    {
+        Beginning = 0,
+        CreditNote = 8,
+        DebitNote = 7,
+        Purchase = 1,
+        PurchaseOrder = 5,
+        Sales = 2,
+        ShippingInvoice = 6,
+        StockAdjustmentAdd = 3,
+        StockAdjustmentDeduct = 4
+    }
+
+    /// <summary>
     /// Application's sub modules.
     /// </summary>
     public enum SubModule
@@ -721,6 +737,58 @@ namespace SupplyChainManagementSystem
             }
         }
 
+        /// <summary>
+        /// Loads the list of locations into the specified control as a data source.
+        /// </summary>
+        /// <param name="control"></param>
+        public static void LoadLocations(this Control control)
+        {
+            if (control == null) return;
+            if (!(Materia.PropertyExists(control, "DataSource") &&
+                  Materia.PropertyExists(control, "DisplayMember") &&
+                  Materia.PropertyExists(control, "ValueMember"))) return;
+
+            DataTable _locations = Cache.GetCachedTable("locations");
+            if (_locations != null)
+            {
+                control.Enabled = false;
+                object _datasource = Materia.GetPropertyValue<object>(control, "DataSource");
+                if (_datasource != null)
+                {
+                    try { ((DataTable)_datasource).Dispose(); }
+                    catch { }
+                    finally
+                    {
+                        Materia.SetPropertyValue(control, "DataSource", null);
+                        Materia.RefreshAndManageCurrentProcess();
+                    }
+                }
+
+                DataTable _newdatasource = _locations.Replicate();
+                _newdatasource.DefaultView.RowFilter = "[Company] LIKE '" + SCMS.CurrentCompany.Company.ToSqlValidString(true) + "'";
+                _newdatasource.DefaultView.Sort = "[Location]";
+
+                Materia.SetPropertyValue(control, "DataSource", _newdatasource);
+                Materia.SetPropertyValue(control, "DisplayMember", "Location");
+                Materia.SetPropertyValue(control, "ValueMember", "LocationCode");
+
+                if (Materia.PropertyExists(control, "AutoCompleteMode") &&
+                    Materia.PropertyExists(control, "AutoCompleteSource"))
+                {
+                    Materia.SetPropertyValue(control, "AutoCompleteMode", AutoCompleteMode.SuggestAppend);
+                    Materia.SetPropertyValue(control, "AutoCompleteSource", AutoCompleteSource.ListItems);
+                }
+
+                if (Materia.PropertyExists(control, "SelectedIndex"))
+                {
+                    try { Materia.SetPropertyValue(control, "SelectedIndex", -1); }
+                    catch { }
+                }
+
+                control.Enabled = true;
+            }
+        }
+
         public static void LoadMeasurements(this Control control)
         {
             if (control == null) return;
@@ -846,6 +914,55 @@ namespace SupplyChainManagementSystem
                 Materia.SetPropertyValue(control, "DataSource", _newdatasource);
                 Materia.SetPropertyValue(control, "DisplayMember", "PartName");
                 Materia.SetPropertyValue(control, "ValueMember", "PartName");
+
+                if (Materia.PropertyExists(control, "AutoCompleteMode") &&
+                    Materia.PropertyExists(control, "AutoCompleteSource"))
+                {
+                    Materia.SetPropertyValue(control, "AutoCompleteMode", AutoCompleteMode.SuggestAppend);
+                    Materia.SetPropertyValue(control, "AutoCompleteSource", AutoCompleteSource.ListItems);
+                }
+
+                if (Materia.PropertyExists(control, "SelectedIndex"))
+                {
+                    try { Materia.SetPropertyValue(control, "SelectedIndex", -1); }
+                    catch { }
+                }
+
+                control.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Loads the list of parts into the specified control as a data source.
+        /// </summary>
+        /// <param name="control"></param>
+        public static void LoadParts(this Control control)
+        {
+            if (control == null) return;
+            DataTable _parts = Cache.GetCachedTable("parts");
+
+            if (_parts != null)
+            {
+                control.Enabled = false;
+                object _datasource = Materia.GetPropertyValue<object>(control, "DataSource");
+                if (_datasource != null)
+                {
+                    try { ((DataTable)_datasource).Dispose(); }
+                    catch { }
+                    finally
+                    {
+                        Materia.SetPropertyValue(control, "DataSource", null);
+                        Materia.RefreshAndManageCurrentProcess();
+                    }
+                }
+
+                DataTable _newdatasource = _parts.Replicate();
+                _newdatasource.DefaultView.Sort = "[PartNo]";
+                _newdatasource.DefaultView.RowFilter = "[Company] LIKE '" + SCMS.CurrentCompany.Company.ToSqlValidString(true) + "'";
+
+                Materia.SetPropertyValue(control, "DataSource", _newdatasource);
+                Materia.SetPropertyValue(control, "DisplayMember", "PartNo");
+                Materia.SetPropertyValue(control, "ValueMember", "PartCode");
 
                 if (Materia.PropertyExists(control, "AutoCompleteMode") &&
                     Materia.PropertyExists(control, "AutoCompleteSource"))
@@ -1073,6 +1190,39 @@ namespace SupplyChainManagementSystem
                 grid.ExtendLastCol = false; grid.Cols[0].Width = 0;
 
                 while (!grid.Redraw) grid.EndUpdate();
+            }
+        }
+
+        /// <summary>
+        /// Serialized each of the specified DataTable object's column default values.
+        /// </summary>
+        /// <param name="table"></param>
+        public static void SerializeColumns(this DataTable table)
+        {
+            if (table == null) return;
+            DataColumnCollection _cols = table.Columns;
+
+            for (int i = 0; i <= (_cols.Count - 1); i++)
+            {
+                if (!_cols[i].Unique)
+                {
+                    if (_cols[i].DataType == typeof(string) ||
+                        _cols[i].DataType == typeof(String)) _cols[i].DefaultValue = "";
+                    else if (_cols[i].DataType == typeof(DateTime)) _cols[i].DefaultValue = DateTime.Now;
+                    else if (_cols[i].DataType == typeof(decimal) ||
+                             _cols[i].DataType == typeof(double) ||
+                             _cols[i].DataType == typeof(Single) ||
+                             _cols[i].DataType == typeof(float) ||
+                             _cols[i].DataType == typeof(int) ||
+                             _cols[i].DataType == typeof(long) ||
+                             _cols[i].DataType == typeof(short) ||
+                             _cols[i].DataType == typeof(byte) ||
+                             _cols[i].DataType == typeof(Int16) ||
+                             _cols[i].DataType == typeof(Int32) ||
+                             _cols[i].DataType == typeof(Int64) ||
+                             _cols[i].DataType == typeof(Byte)) _cols[i].DefaultValue = 0;
+                    else { }
+                }
             }
         }
 

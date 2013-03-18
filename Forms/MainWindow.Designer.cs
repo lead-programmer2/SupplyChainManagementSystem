@@ -63,8 +63,8 @@
             this.mnuPaymentTerms = new DevComponents.DotNetBar.ButtonItem();
             this.mnuSignatories = new DevComponents.DotNetBar.ButtonItem();
             this.mnuOperationsPicklist = new DevComponents.DotNetBar.ButtonItem();
-            this.mnuLocations = new DevComponents.DotNetBar.ButtonItem();
             this.mnuBrands = new DevComponents.DotNetBar.ButtonItem();
+            this.mnuLocations = new DevComponents.DotNetBar.ButtonItem();
             this.mnuMeasurements = new DevComponents.DotNetBar.ButtonItem();
             this.mnuModels = new DevComponents.DotNetBar.ButtonItem();
             this.mnuPartNames = new DevComponents.DotNetBar.ButtonItem();
@@ -88,6 +88,7 @@
             this.btnModule = new DevComponents.DotNetBar.ButtonItem();
             this._moduleimages = new System.Windows.Forms.ImageList(this.components);
             this.rbnctrl = new DevComponents.DotNetBar.RibbonControl();
+            this.mnuStockAdjustments = new DevComponents.DotNetBar.ButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.brStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.brMenu)).BeginInit();
             this.panelEx1.SuspendLayout();
@@ -398,17 +399,17 @@
             this.mnuPartsCategory});
             this.mnuOperationsPicklist.Text = "&Operations";
             // 
-            // mnuLocations
-            // 
-            this.mnuLocations.Image = ((System.Drawing.Image)(resources.GetObject("mnuLocations.Image")));
-            this.mnuLocations.Name = "mnuLocations";
-            this.mnuLocations.Text = "&Locations";
-            // 
             // mnuBrands
             // 
             this.mnuBrands.Image = ((System.Drawing.Image)(resources.GetObject("mnuBrands.Image")));
             this.mnuBrands.Name = "mnuBrands";
             this.mnuBrands.Text = "&Brands";
+            // 
+            // mnuLocations
+            // 
+            this.mnuLocations.Image = ((System.Drawing.Image)(resources.GetObject("mnuLocations.Image")));
+            this.mnuLocations.Name = "mnuLocations";
+            this.mnuLocations.Text = "&Locations";
             // 
             // mnuMeasurements
             // 
@@ -440,6 +441,7 @@
             this.mnuTools.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.mnuDatabaseTools,
             this.mnuScripts,
+            this.mnuStockAdjustments,
             this.mnuLogActivityViewer});
             this.mnuTools.Text = "&Tools";
             // 
@@ -656,6 +658,14 @@
             this.rbnctrl.TabIndex = 8;
             this.rbnctrl.Text = "ribbonControl1";
             // 
+            // mnuStockAdjustments
+            // 
+            this.mnuStockAdjustments.BeginGroup = true;
+            this.mnuStockAdjustments.Image = ((System.Drawing.Image)(resources.GetObject("mnuStockAdjustments.Image")));
+            this.mnuStockAdjustments.Name = "mnuStockAdjustments";
+            this.mnuStockAdjustments.Text = "Stock &Adjustments";
+            this.mnuStockAdjustments.Click += new System.EventHandler(this.mnuStockAdjustments_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -746,6 +756,7 @@
         private DevComponents.DotNetBar.ButtonItem mnuScriptList;
         private DevComponents.DotNetBar.ButtonItem mnuExecuteScripts;
         private DevComponents.DotNetBar.RibbonControl rbnctrl;
+        private DevComponents.DotNetBar.ButtonItem mnuStockAdjustments;
 
     }
 }

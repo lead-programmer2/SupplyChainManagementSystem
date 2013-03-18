@@ -612,7 +612,7 @@ namespace SupplyChainManagementSystem
                             {
                                 string _text = "";
                                 if (!Materia.IsNullOrNothing(rw[DisplayMember]))  _text = rw[DisplayMember].ToString();
-                                if (!_customsource.Contains(_text))  _customsource.Add(_text);
+                                if (!_customsource.Contains(_text)) _customsource.Add(_text);
                             }
 
                             _tablesorted.Dispose();  _table.Dispose();

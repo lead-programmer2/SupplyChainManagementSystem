@@ -92,6 +92,18 @@
     <Compile Include="Forms\Inventory\PartInformationDialog.Designer.cs">
       <DependentUpon>PartInformationDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\StockAdjustmentInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\StockAdjustmentInfoDialog.Designer.cs">
+      <DependentUpon>StockAdjustmentInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\StockAdjustmentListDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\StockAdjustmentListDialog.Designer.cs">
+      <DependentUpon>StockAdjustmentListDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\List\AdditionalChargeInfoDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -278,6 +290,12 @@
     <Compile Include="Forms\Utilities\LogActivityViewerDialog.Designer.cs">
       <DependentUpon>LogActivityViewerDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Utilities\LongTextInputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Utilities\LongTextInputDialog.Designer.cs">
+      <DependentUpon>LongTextInputDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Utilities\RestorePointSelectionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -303,6 +321,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\PartInformationDialog.resx">
       <DependentUpon>PartInformationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\StockAdjustmentInfoDialog.resx">
+      <DependentUpon>StockAdjustmentInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\StockAdjustmentListDialog.resx">
+      <DependentUpon>StockAdjustmentListDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\List\AdditionalChargeInfoDialog.resx">
       <DependentUpon>AdditionalChargeInfoDialog.cs</DependentUpon>
@@ -399,6 +423,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Utilities\LogActivityViewerDialog.resx">
       <DependentUpon>LogActivityViewerDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Utilities\LongTextInputDialog.resx">
+      <DependentUpon>LongTextInputDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Utilities\RestorePointSelectionDialog.resx">
       <DependentUpon>RestorePointSelectionDialog.cs</DependentUpon>

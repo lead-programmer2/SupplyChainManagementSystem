@@ -110,7 +110,10 @@ namespace SupplyChainManagementSystem
                 if (_cacheddataset.Tables.Contains(tablename)) _table = _cacheddataset.Tables[tablename];
                 else
                 {
-                    SyncTable(SCMS.Connection, tablename);
+                    if (tablename == "locations") SyncTable(SCMS.Connection, tablename, "LocationCode");
+                    else if (tablename == "models") SyncTable(SCMS.Connection, tablename, "ModelCode");
+                    else SyncTable(SCMS.Connection, tablename);
+
                     if (_cacheddataset.Tables.Contains(tablename)) _table = _cacheddataset.Tables[tablename];
                 }
             }
@@ -428,7 +431,12 @@ namespace SupplyChainManagementSystem
         {
             if (_cacheddataset != null)
             {
-                try { _cacheddataset.WriteXml(CachePath, XmlWriteMode.WriteSchema); }
+                
+                try 
+                {
+                    _cacheddataset.AcceptChanges();
+                    _cacheddataset.WriteXml(CachePath, XmlWriteMode.WriteSchema); 
+                }
                 catch (Exception ex) { SCMS.LogError("Cache", ex); }
             }
         }
