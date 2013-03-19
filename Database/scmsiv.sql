@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2013-03-18 17:30:09
+Date: 2013-03-19 16:53:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -513,7 +513,7 @@ CREATE TABLE `deleteditems` (
   `Value` varchar(255) default '',
   `LastModified` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`DetailId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of deleteditems
@@ -522,6 +522,7 @@ INSERT INTO `deleteditems` VALUES ('1', 'vehiclemodels', 'MODEL-00001', '2013-03
 INSERT INTO `deleteditems` VALUES ('2', 'vehiclemodels', 'MODEL-00003', '2013-03-16 15:48:24');
 INSERT INTO `deleteditems` VALUES ('3', 'models', 'MODEL-00001', '2013-03-16 15:48:28');
 INSERT INTO `deleteditems` VALUES ('6', 'stockadjustments', 'ADJ-CSPT-FZE-00007', '2013-03-18 17:25:06');
+INSERT INTO `deleteditems` VALUES ('7', 'stockadjustments', 'ADJ-CSPT-FZE-00010', '2013-03-19 08:44:46');
 
 -- ----------------------------
 -- Table structure for `departments`
@@ -562,9 +563,9 @@ CREATE TABLE `keysettings` (
 -- ----------------------------
 INSERT INTO `keysettings` VALUES ('locations', '5', '2013-03-03 17:01:39');
 INSERT INTO `keysettings` VALUES ('models', '8', '2013-03-16 10:08:07');
-INSERT INTO `keysettings` VALUES ('parts', '3', '2013-03-16 10:08:23');
+INSERT INTO `keysettings` VALUES ('parts', '6', '2013-03-19 16:45:48');
 INSERT INTO `keysettings` VALUES ('scripts', '2', '2013-03-11 08:49:26');
-INSERT INTO `keysettings` VALUES ('stockadjustments', '7', '2013-03-18 17:25:00');
+INSERT INTO `keysettings` VALUES ('stockadjustments', '12', '2013-03-19 09:09:31');
 INSERT INTO `keysettings` VALUES ('vehiclemakes', '6', '2013-03-06 13:14:30');
 
 -- ----------------------------
@@ -758,6 +759,9 @@ CREATE TABLE `parts` (
 INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00001', '75513', 'Combination Wrench', 'Combination Wrench 10mm', '', 'ALL', '', 'Pc(s)', '0', '0', '2', 'Taiwan', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '1900-01-01 00:00:00', '2013-03-16 15:58:08');
 INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00002', '235-85-R16', 'Tires', 'Pirelli Scorpion Mud Tires', '', 'PIRELLI', '', 'Pc(s)', '0', '0', '2', 'Brazil', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '2013-03-16 09:29:27', '2013-03-16 09:30:46');
 INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00003', '7W7Z7052A', 'Seal', 'Seal', '', 'FORD', 'MODEL-00008', 'Pc(s)', '0', '0', '2', 'United States', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '2013-03-16 10:08:23', '2013-03-16 10:08:23');
+INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00004', '7W7Z7052B', 'Seal', 'Seal', 'PART-CSPT-FZE-00003', 'ALL', '', 'Pc(s)', '0', '0', '2', 'Brazil', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '2013-03-19 11:57:27', '2013-03-19 16:27:08');
+INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00005', '7W7Z7052C', 'Seal', 'Seal', 'PART-CSPT-FZE-00003', 'FORD', 'MODEL-00008', 'Pc(s)', '0', '0', '2', 'Japan', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '2013-03-19 12:34:05', '2013-03-19 15:54:35');
+INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00006', '7W7Z7052D', 'Seal', 'Seal', 'PART-CSPT-FZE-00003', 'FORD', 'MODEL-00008', 'Pc(s)', '0', '0', '2', 'Brazil', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '2013-03-19 16:45:48', '2013-03-19 16:45:48');
 
 -- ----------------------------
 -- Table structure for `paymentterms`
@@ -921,7 +925,7 @@ CREATE TABLE `stockadjustmentdetails` (
   CONSTRAINT `adjdlocationcode` FOREIGN KEY (`LocationCode`) REFERENCES `locations` (`LocationCode`) ON UPDATE CASCADE,
   CONSTRAINT `adjdpartcode` FOREIGN KEY (`PartCode`) REFERENCES `parts` (`PartCode`) ON UPDATE CASCADE,
   CONSTRAINT `adjdreferenceno` FOREIGN KEY (`ReferenceNo`) REFERENCES `stockadjustments` (`ReferenceNo`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of stockadjustmentdetails
@@ -936,6 +940,11 @@ INSERT INTO `stockadjustmentdetails` VALUES ('11', 'ADJ-CSPT-FZE-00004', 'PART-C
 INSERT INTO `stockadjustmentdetails` VALUES ('12', 'ADJ-CSPT-FZE-00004', 'PART-CSPT-FZE-00001', 'CSPT-FZE-00001', '2013-03-17', '1', '20', '10.12', 'flooding some samples.', '2013-03-18 16:21:34');
 INSERT INTO `stockadjustmentdetails` VALUES ('13', 'ADJ-CSPT-FZE-00005', 'PART-CSPT-FZE-00001', 'CSPT-FZE-00001', '2013-03-18', '1', '30', '10.00', 'sample for voiding', '2013-03-18 16:29:32');
 INSERT INTO `stockadjustmentdetails` VALUES ('14', 'ADJ-CSPT-FZE-00006', 'PART-CSPT-FZE-00003', 'CSPT-FZE-00003', '2013-03-17', '1', '13', '4.56', 'sample', '2013-03-18 16:45:25');
+INSERT INTO `stockadjustmentdetails` VALUES ('16', 'ADJ-CSPT-FZE-00008', 'PART-CSPT-FZE-00002', 'CSPT-FZE-00003', '2013-03-18', '-1', '18', '143.00', 'sample for parts update', '2013-03-19 08:30:45');
+INSERT INTO `stockadjustmentdetails` VALUES ('17', 'ADJ-CSPT-FZE-00009', 'PART-CSPT-FZE-00002', 'CSPT-FZE-00003', '2013-03-18', '-1', '2', '143.00', 'sample again', '2013-03-19 08:39:23');
+INSERT INTO `stockadjustmentdetails` VALUES ('19', 'ADJ-CSPT-FZE-00011', 'PART-CSPT-FZE-00002', 'CSPT-FZE-00003', '2013-03-18', '-1', '10', '143.00', 'sample again & sample again', '2013-03-19 08:47:06');
+INSERT INTO `stockadjustmentdetails` VALUES ('20', 'ADJ-CSPT-FZE-00012', 'PART-CSPT-FZE-00003', 'CSPT-FZE-00005', '2013-03-18', '1', '35', '4.08', 'sample', '2013-03-19 09:09:31');
+INSERT INTO `stockadjustmentdetails` VALUES ('21', 'ADJ-CSPT-FZE-00012', 'PART-CSPT-FZE-00003', 'CSPT-FZE-00001', '2013-03-17', '1', '10', '4.10', 'sample', '2013-03-19 09:09:31');
 
 -- ----------------------------
 -- Table structure for `stockadjustments`
@@ -980,6 +989,10 @@ INSERT INTO `stockadjustments` VALUES ('ADJ-CSPT-FZE-00003', '2013-03-18', '3rd 
 INSERT INTO `stockadjustments` VALUES ('ADJ-CSPT-FZE-00004', '2013-03-18', '4th sample', 'jsph', '1', '1', '0', '2013-03-18 16:21:27', '2013-03-18', '1900-01-01', '2013-03-18', 'jsph', '', 'jsph', '', '', '', 'CSPT-FZE', '2013-03-18 16:22:13');
 INSERT INTO `stockadjustments` VALUES ('ADJ-CSPT-FZE-00005', '2013-03-18', '5th sample', 'jsph', '1', '0', '1', '2013-03-18 16:29:31', '1900-01-01', '2013-03-18', '2013-03-18', '', 'jsph', 'jsph', '', '', '', 'CSPT-FZE', '2013-03-18 16:29:46');
 INSERT INTO `stockadjustments` VALUES ('ADJ-CSPT-FZE-00006', '2013-03-18', '6th sample', 'jsph', '1', '0', '1', '2013-03-18 16:45:25', '1900-01-01', '2013-03-18', '2013-03-18', '', 'jsph', 'jsph', '', '', '', 'CSPT-FZE', '2013-03-18 16:45:47');
+INSERT INTO `stockadjustments` VALUES ('ADJ-CSPT-FZE-00008', '2013-03-19', '8th sample', 'jsph', '1', '1', '0', '2013-03-19 08:30:45', '2013-03-19', '1900-01-01', '2013-03-19', 'jsph', '', 'jsph', '', '', '', 'CSPT-FZE', '2013-03-19 08:30:54');
+INSERT INTO `stockadjustments` VALUES ('ADJ-CSPT-FZE-00009', '2013-03-19', '9th sample', 'jsph', '1', '1', '0', '2013-03-19 08:39:23', '2013-03-19', '1900-01-01', '2013-03-19', 'jsph', '', 'jsph', '', '', '', 'CSPT-FZE', '2013-03-19 08:39:36');
+INSERT INTO `stockadjustments` VALUES ('ADJ-CSPT-FZE-00011', '2013-03-19', '11th sample', 'jsph', '1', '1', '0', '2013-03-19 08:46:53', '2013-03-19', '1900-01-01', '2013-03-19', 'jsph', '', 'jsph', '', '', '', 'CSPT-FZE', '2013-03-19 08:47:41');
+INSERT INTO `stockadjustments` VALUES ('ADJ-CSPT-FZE-00012', '2013-03-19', 'sample again', 'jsph', '1', '1', '0', '2013-03-19 09:09:31', '2013-03-19', '1900-01-01', '2013-03-19', 'jsph', '', 'jsph', '', '', '', 'CSPT-FZE', '2013-03-19 09:09:49');
 
 -- ----------------------------
 -- Table structure for `stockledger`
@@ -1022,7 +1035,7 @@ CREATE TABLE `stockledger` (
   CONSTRAINT `slcurrency` FOREIGN KEY (`Currency`) REFERENCES `currencies` (`Currency`) ON UPDATE CASCADE,
   CONSTRAINT `slpartcode` FOREIGN KEY (`PartCode`) REFERENCES `parts` (`PartCode`) ON UPDATE CASCADE,
   CONSTRAINT `slusername` FOREIGN KEY (`Username`) REFERENCES `users` (`Username`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of stockledger
@@ -1037,6 +1050,11 @@ INSERT INTO `stockledger` VALUES ('7', 'PART-CSPT-FZE-00001', '2013-03-13', '201
 INSERT INTO `stockledger` VALUES ('8', 'PART-CSPT-FZE-00001', '2013-03-13', '2013-03-18', 'ADJ-CSPT-FZE-00003', '3', 'CSPT-FZE-00005', '', '', '20', '0', '0', '0', '10.00', '10.00', 'USD', '100.0000', '0.00', '0.00', '200.00', '200.00', '0.00', '0.00', 'jsph', '2013-03-18 15:40:33');
 INSERT INTO `stockledger` VALUES ('9', 'PART-CSPT-FZE-00001', '2013-03-17', '2013-03-18', 'ADJ-CSPT-FZE-00004', '3', 'CSPT-FZE-00003', '', '', '30', '0', '0', '0', '10.12', '10.12', 'USD', '100.0000', '0.00', '0.00', '303.60', '303.60', '0.00', '0.00', 'jsph', '2013-03-18 16:22:13');
 INSERT INTO `stockledger` VALUES ('10', 'PART-CSPT-FZE-00001', '2013-03-17', '2013-03-18', 'ADJ-CSPT-FZE-00004', '3', 'CSPT-FZE-00001', '', '', '20', '0', '0', '0', '10.12', '10.12', 'USD', '100.0000', '0.00', '0.00', '202.40', '202.40', '0.00', '0.00', 'jsph', '2013-03-18 16:22:13');
+INSERT INTO `stockledger` VALUES ('11', 'PART-CSPT-FZE-00002', '2013-03-18', '2013-03-19', 'ADJ-CSPT-FZE-00008', '4', 'CSPT-FZE-00003', '', '', '0', '18', '0', '0', '143.00', '143.00', 'USD', '100.0000', '0.00', '0.00', '-2574.00', '-2574.00', '0.00', '0.00', 'jsph', '2013-03-19 08:30:54');
+INSERT INTO `stockledger` VALUES ('12', 'PART-CSPT-FZE-00002', '2013-03-18', '2013-03-19', 'ADJ-CSPT-FZE-00009', '4', 'CSPT-FZE-00003', '', '', '0', '2', '0', '0', '143.00', '143.00', 'USD', '100.0000', '0.00', '0.00', '-286.00', '-286.00', '0.00', '0.00', 'jsph', '2013-03-19 08:39:36');
+INSERT INTO `stockledger` VALUES ('13', 'PART-CSPT-FZE-00002', '2013-03-18', '2013-03-19', 'ADJ-CSPT-FZE-00011', '4', 'CSPT-FZE-00003', '', '', '0', '10', '0', '0', '143.00', '143.00', 'USD', '100.0000', '0.00', '0.00', '-1430.00', '-1430.00', '0.00', '0.00', 'jsph', '2013-03-19 08:47:41');
+INSERT INTO `stockledger` VALUES ('14', 'PART-CSPT-FZE-00003', '2013-03-18', '2013-03-19', 'ADJ-CSPT-FZE-00012', '3', 'CSPT-FZE-00005', '', '', '35', '0', '0', '0', '4.08', '4.08', 'USD', '100.0000', '0.00', '0.00', '142.80', '142.80', '0.00', '0.00', 'jsph', '2013-03-19 09:09:49');
+INSERT INTO `stockledger` VALUES ('15', 'PART-CSPT-FZE-00003', '2013-03-17', '2013-03-19', 'ADJ-CSPT-FZE-00012', '3', 'CSPT-FZE-00001', '', '', '10', '0', '0', '0', '4.10', '4.10', 'USD', '100.0000', '0.00', '0.00', '41.00', '41.00', '0.00', '0.00', 'jsph', '2013-03-19 09:09:49');
 
 -- ----------------------------
 -- Table structure for `suppliers`
@@ -1184,7 +1202,7 @@ CREATE TABLE `userlogs` (
   KEY `logusername` (`Username`),
   CONSTRAINT `logcurrency` FOREIGN KEY (`Currency`) REFERENCES `currencies` (`Currency`) ON UPDATE CASCADE,
   CONSTRAINT `logusername` FOREIGN KEY (`Username`) REFERENCES `users` (`Username`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1594 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1693 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of userlogs
@@ -2782,6 +2800,105 @@ INSERT INTO `userlogs` VALUES ('1590', 'jsph', '2013-03-18 17:25:01', '1', 'ADJ-
 INSERT INTO `userlogs` VALUES ('1591', 'jsph', '2013-03-18 17:25:06', '2', 'ADJ-CSPT-FZE-00007', 'Deletes stock adjustment : ADJ-CSPT-FZE-00007.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
 INSERT INTO `userlogs` VALUES ('1592', 'jsph', '2013-03-18 17:26:24', '5', '', 'Exported user logs into : C:\\Users\\user\\Desktop\\userlogs.xls.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
 INSERT INTO `userlogs` VALUES ('1593', 'jsph', '2013-03-18 17:27:05', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1594', 'jsph', '2013-03-18 17:33:08', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1595', 'jsph', '2013-03-18 17:34:29', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1596', 'jsph', '2013-03-18 17:35:40', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1597', 'jsph', '2013-03-18 17:36:09', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1598', 'jsph', '2013-03-19 07:44:02', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1599', 'jsph', '2013-03-19 07:47:10', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1600', 'jsph', '2013-03-19 07:48:55', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1601', 'jsph', '2013-03-19 08:29:18', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1602', 'jsph', '2013-03-19 08:30:46', '0', 'ADJ-CSPT-FZE-00008', 'Added a new stock adjustment : ADJ-CSPT-FZE-00008.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1603', 'jsph', '2013-03-19 08:30:50', '1', 'ADJ-CSPT-FZE-00008', 'Approved stock adjustment : ADJ-CSPT-FZE-00008.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1604', 'jsph', '2013-03-19 08:30:54', '17', 'ADJ-CSPT-FZE-00008', 'Closed stock adjustment : ADJ-CSPT-FZE-00008.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1605', 'jsph', '2013-03-19 08:31:14', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1606', 'jsph', '2013-03-19 08:32:47', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1607', 'jsph', '2013-03-19 08:34:44', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1608', 'jsph', '2013-03-19 08:38:23', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1609', 'jsph', '2013-03-19 08:39:23', '0', 'ADJ-CSPT-FZE-00009', 'Added a new stock adjustment : ADJ-CSPT-FZE-00009.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1610', 'jsph', '2013-03-19 08:39:32', '1', 'ADJ-CSPT-FZE-00009', 'Approved stock adjustment : ADJ-CSPT-FZE-00009.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1611', 'jsph', '2013-03-19 08:39:36', '17', 'ADJ-CSPT-FZE-00009', 'Closed stock adjustment : ADJ-CSPT-FZE-00009.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1612', 'jsph', '2013-03-19 08:39:49', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1613', 'jsph', '2013-03-19 08:39:55', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1614', 'jsph', '2013-03-19 08:40:34', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1615', 'jsph', '2013-03-19 08:43:29', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1616', 'jsph', '2013-03-19 08:44:09', '0', 'ADJ-CSPT-FZE-00010', 'Added a new stock adjustment : ADJ-CSPT-FZE-00010.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1617', 'jsph', '2013-03-19 08:44:46', '2', 'ADJ-CSPT-FZE-00010', 'Deletes stock adjustment : ADJ-CSPT-FZE-00010.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1618', 'jsph', '2013-03-19 08:46:53', '0', 'ADJ-CSPT-FZE-00011', 'Added a new stock adjustment : ADJ-CSPT-FZE-00011.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1619', 'jsph', '2013-03-19 08:47:06', '1', 'ADJ-CSPT-FZE-00011', 'Added a new stock adjustment : ADJ-CSPT-FZE-00011.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1620', 'jsph', '2013-03-19 08:47:31', '1', 'ADJ-CSPT-FZE-00011', 'Approved stock adjustment : ADJ-CSPT-FZE-00011.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1621', 'jsph', '2013-03-19 08:47:42', '17', 'ADJ-CSPT-FZE-00011', 'Closed stock adjustment : ADJ-CSPT-FZE-00011.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1622', 'jsph', '2013-03-19 08:51:11', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1623', 'jsph', '2013-03-19 09:09:31', '0', 'ADJ-CSPT-FZE-00012', 'Added a new stock adjustment : ADJ-CSPT-FZE-00012.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1624', 'jsph', '2013-03-19 09:09:43', '1', 'ADJ-CSPT-FZE-00012', 'Approved stock adjustment : ADJ-CSPT-FZE-00012.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1625', 'jsph', '2013-03-19 09:09:49', '17', 'ADJ-CSPT-FZE-00012', 'Closed stock adjustment : ADJ-CSPT-FZE-00012.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1626', 'jsph', '2013-03-19 09:21:33', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1627', 'jsph', '2013-03-19 09:25:05', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1628', 'jsph', '2013-03-19 09:54:39', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1629', 'jsph', '2013-03-19 09:55:17', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1630', 'jsph', '2013-03-19 09:59:31', '14', '', 'Optimized Table', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1631', 'jsph', '2013-03-19 10:00:06', '14', '', 'Repaired Table', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1632', 'jsph', '2013-03-19 10:05:53', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1633', 'jsph', '2013-03-19 10:29:35', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1634', 'jsph', '2013-03-19 10:29:50', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1635', 'jsph', '2013-03-19 10:30:14', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1636', 'jsph', '2013-03-19 10:30:40', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1637', 'jsph', '2013-03-19 10:31:19', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1638', 'jsph', '2013-03-19 10:37:20', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1639', 'jsph', '2013-03-19 10:44:39', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1640', 'jsph', '2013-03-19 10:45:06', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1641', 'jsph', '2013-03-19 10:46:01', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1642', 'jsph', '2013-03-19 10:46:28', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1643', 'jsph', '2013-03-19 10:47:33', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1644', 'jsph', '2013-03-19 10:47:56', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1645', 'jsph', '2013-03-19 10:48:45', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1646', 'jsph', '2013-03-19 10:50:09', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1647', 'jsph', '2013-03-19 10:54:28', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1648', 'jsph', '2013-03-19 11:17:06', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1649', 'jsph', '2013-03-19 11:47:21', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1650', 'jsph', '2013-03-19 11:57:27', '0', 'PART-CSPT-FZE-00004', 'Added a new part : 7W7Z7052B - Seal (Seal).', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1651', 'jsph', '2013-03-19 12:34:06', '0', 'PART-CSPT-FZE-00005', 'Added a new part : 7W7Z7052C - Seal (Seal).', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1652', 'jsph', '2013-03-19 12:35:13', '1', 'PART-CSPT-FZE-00005', 'Updated part : 7W7Z7052C - Seal (Seal).', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1653', 'jsph', '2013-03-19 12:41:10', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1654', 'jsph', '2013-03-19 13:22:08', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1655', 'jsph', '2013-03-19 13:25:37', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1656', 'jsph', '2013-03-19 13:26:08', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1657', 'jsph', '2013-03-19 13:30:34', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1658', 'jsph', '2013-03-19 13:42:21', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1659', 'jsph', '2013-03-19 13:42:53', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1660', 'jsph', '2013-03-19 14:14:40', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1661', 'jsph', '2013-03-19 15:03:41', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1662', 'jsph', '2013-03-19 15:16:38', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1663', 'jsph', '2013-03-19 15:17:27', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1664', 'jsph', '2013-03-19 15:19:40', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1665', 'jsph', '2013-03-19 15:20:15', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1666', 'jsph', '2013-03-19 15:46:29', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1667', 'jsph', '2013-03-19 15:50:18', '1', 'PART-CSPT-FZE-00003', 'Un-set 7W7Z7052B - Seal as supersession of 7W7Z7052A - Seal.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1668', 'jsph', '2013-03-19 15:52:58', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1669', 'jsph', '2013-03-19 15:53:12', '1', 'PART-CSPT-FZE-00003', 'Added 7W7Z7052B - Seal as supersession of 7W7Z7052A - Seal.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1670', 'jsph', '2013-03-19 15:54:18', '1', 'PART-CSPT-FZE-00003', 'Un-set 7W7Z7052C - Seal as supersession of 7W7Z7052A - Seal.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1671', 'jsph', '2013-03-19 15:54:35', '1', 'PART-CSPT-FZE-00003', 'Added 7W7Z7052C - Seal as supersession of 7W7Z7052A - Seal.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1672', 'jsph', '2013-03-19 15:55:18', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1673', 'jsph', '2013-03-19 15:56:39', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1674', 'jsph', '2013-03-19 15:57:07', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1675', 'jsph', '2013-03-19 15:57:47', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1676', 'jsph', '2013-03-19 15:59:45', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1677', 'jsph', '2013-03-19 16:09:44', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1678', 'jsph', '2013-03-19 16:10:12', '1', 'PART-CSPT-FZE-00003', 'Un-set 7W7Z7052B - Seal as supersession of 7W7Z7052A - Seal.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1679', 'jsph', '2013-03-19 16:15:02', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1680', 'jsph', '2013-03-19 16:15:58', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1681', 'jsph', '2013-03-19 16:19:19', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1682', 'jsph', '2013-03-19 16:21:11', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1683', 'jsph', '2013-03-19 16:26:22', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1684', 'jsph', '2013-03-19 16:27:09', '1', 'PART-CSPT-FZE-00003', 'Added 7W7Z7052B - Seal as supersession of 7W7Z7052A - Seal.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1685', 'jsph', '2013-03-19 16:31:41', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1686', 'jsph', '2013-03-19 16:40:13', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1687', 'jsph', '2013-03-19 16:40:55', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1688', 'jsph', '2013-03-19 16:44:47', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1689', 'jsph', '2013-03-19 16:45:49', '0', 'PART-CSPT-FZE-00006', 'Added a new part : 7W7Z7052D - Seal (Seal).', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1690', 'jsph', '2013-03-19 16:49:04', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1691', 'jsph', '2013-03-19 16:49:10', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1692', 'jsph', '2013-03-19 16:50:53', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
 
 -- ----------------------------
 -- Table structure for `users`
