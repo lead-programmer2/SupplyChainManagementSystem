@@ -1176,6 +1176,7 @@ namespace SupplyChainManagementSystem
                     {
                         _style.Font = new Font("Segoe UI", 8, FontStyle.Bold);
                         _style.BackColor = Color.White;
+                        _style.ForeColor = Color.Black;
                     }
                 }
 

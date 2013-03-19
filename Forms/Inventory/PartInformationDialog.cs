@@ -28,11 +28,35 @@ namespace SupplyChainManagementSystem
         /// <summary>
         /// Creates a new instance of PartInformationDialog. 
         /// </summary>
+        /// <param name="supersededpart"></param>
+        public PartInformationDialog(PartInfo supersededpart)
+        {
+            InitializeComponent();
+
+            _superseded = supersededpart;
+        }
+
+        /// <summary>
+        /// Creates a new instance of PartInformationDialog. 
+        /// </summary>
+        /// <param name="code"></param>
         public PartInformationDialog(string code)
         {
             InitializeComponent();
 
             _partcode = code; _isnew = false;
+        }
+
+        /// <summary>
+        /// Creates a new instance of PartInformationDialog. 
+        /// </summary>
+        /// <param name="code"></param>
+        public PartInformationDialog(string code, PartInfo supersededpart)
+        {
+            InitializeComponent();
+
+            _partcode = code; _isnew = false;
+            _superseded = supersededpart;
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -58,16 +82,16 @@ namespace SupplyChainManagementSystem
             get { return _partcode; }
         }
 
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string _supersession = "";
+        private PartInfo _superseded = null;
 
         /// <summary>
-        /// Gets or sets the part supersession code for the current updated part.
+        /// Gets the current instantiated superseded part assigned to the current displayed part information.
         /// </summary>
-        public string Supersession
+        public PartInfo Superseded
         {
-            get { return _supersession; }
-            set { _supersession = value; }
+            get { return _superseded; }
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -96,6 +120,32 @@ namespace SupplyChainManagementSystem
         private bool _updated = false;
 
         #endregion
+
+        private void _dialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (this == null) return;
+            if (sender == null) return;
+            if (!(sender is PartInformationDialog)) return;
+            PartInformationDialog _dialog = (PartInformationDialog)sender;
+            if (_dialog.Superseded == null) return;
+            if (!_dialog.WithUpdates) return;
+            else _withupdates = true;
+
+            if (_dialog.Superseded.PartCode == _partcode)
+            {
+                PartInformationDialog _parentdialog = this;
+
+                _parentdialog.WindowState = FormWindowState.Maximized;
+                _parentdialog.MinimizeBox = false; _parentdialog.MaximizeBox = false;
+                _parentdialog.ControlBox = false; _parentdialog.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+                _parentdialog.Dock = DockStyle.Fill; _parentdialog.TopMost = true;
+                _parentdialog.Show(); _parentdialog.Activate();
+                _parentdialog.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+                _parentdialog.WindowState = FormWindowState.Normal;
+                _parentdialog.WindowState = FormWindowState.Maximized;
+                _parentdialog.LoadPartInformation(_partcode);
+            }
+        }
 
         private void AttachEditorHandler()
         {
@@ -186,25 +236,41 @@ namespace SupplyChainManagementSystem
                              from _loc in _l.DefaultIfEmpty(_locations.NewRow())
                              group _ledger by new
                              {
-                                 Location = _loc.Field<string>("Location")
+                                 Location = _loc.Field<string>("Location"),
+                                 PurchaseDate = _ledger.Field<DateTime>("PurchaseDate"),
+                                 UnitCost = _ledger.Field<decimal>("UnitCostUSD")
                              } into _group
+                             orderby  _group.Key.Location, _group.Key.PurchaseDate, _group.Key.UnitCost
                              select new
                              {
                                  Location = _group.Key.Location,
+                                 PurchaseDate = _group.Key.PurchaseDate,
+                                 UnitCost = _group.Key.UnitCost,
                                  Quantity = _group.Sum(_ledger => (_ledger.Field<int>("In") - _ledger.Field<int>("Out")))
                              };
 
                 DataTable _datasource = new DataTable();
                 _datasource.TableName = "stockledger";
-                DataColumn _pk = _datasource.Columns.Add("Location", typeof(string));
+                DataColumn _pk = _datasource.Columns.Add("DetailId", typeof(long)); 
+                _datasource.Columns.Add("Location", typeof(string));
+                _datasource.Columns.Add("PurchaseDate", typeof(string));
+                _datasource.Columns.Add("UnitCost", typeof(decimal));
                 _datasource.Columns.Add("Quantity", typeof(int));
+                _datasource.Columns.Add("TotalCost", typeof(decimal));
                 _datasource.Columns.Add("Remarks", typeof(string));
+
                 _datasource.Constraints.Add("PK", _pk, true);
+                _pk.AutoIncrement = true; _pk.AutoIncrementSeed = 1;
+                _pk.AutoIncrementStep = 1;
 
                 try
                 {
-                    foreach (var _row in _query) _datasource.Rows.Add(new object[] {
-                                                                      _row.Location, _row.Quantity, "" });
+                    foreach (var _row in _query)
+                    {
+                        if (_row.Quantity > 0) _datasource.Rows.Add(new object[] {
+                                                                      null, _row.Location, VisualBasic.Format(_row.PurchaseDate, "dd-MMM-yyyy"),
+                                                                      _row.UnitCost, _row.Quantity, _row.Quantity * _row.UnitCost, "" });
+                    }
 
                     _datasource.AcceptChanges();
                 }
@@ -212,9 +278,27 @@ namespace SupplyChainManagementSystem
 
                 grdLocations.ClearRowsAndColumns();
                 grdLocations.DataSource = _datasource;
-                ColumnCollection _cols = grdLocations.Cols;
+                grdLocations.AllowDragging = AllowDraggingEnum.None;
+                grdLocations.AllowSorting = AllowSortingEnum.None;
 
+                ColumnCollection _cols = grdLocations.Cols;
                 _cols["Remarks"].Caption = "";
+                _cols["PurchaseDate"].Caption = "Purchase Date";
+                _cols["UnitCost"].Caption = "Unit Cost (USD)";
+                _cols["TotalCost"].Caption = "Total Cost (USD)";
+                _cols["DetailId"].Visible = false;
+                _cols["Location"].Visible = false;
+
+                grdLocations.Tree.Column = _cols["PurchaseDate"].Index;
+                grdLocations.Tree.Style = TreeStyleFlags.CompleteLeaf;
+
+                grdLocations.Subtotal(AggregateEnum.Sum, 0, _cols.Fixed - 1, _cols.Fixed - 1, _cols["Quantity"].Index, "Total");
+                grdLocations.Subtotal(AggregateEnum.Sum, 1, _cols["Location"].Index, _cols["Location"].Index, _cols["Quantity"].Index, "{0}");
+
+                grdLocations.Subtotal(AggregateEnum.Sum, 0, _cols.Fixed - 1, _cols.Fixed - 1, _cols["TotalCost"].Index, "Total");
+                grdLocations.Subtotal(AggregateEnum.Sum, 1, _cols["Location"].Index, _cols["Location"].Index, _cols["TotalCost"].Index, "{0}");
+
+                grdLocations.FormatColumns();
                 grdLocations.AutoSizeCols(); grdLocations.ExtendLastCol = true;
 
                 for (int i = _cols.Fixed; i <= (_cols.Count - 1); i++)
@@ -512,6 +596,113 @@ namespace SupplyChainManagementSystem
             }
         }
 
+        private void InitializeSupersessions()
+        {
+            btnAddAlternative.Enabled = false; btnDeleteSupersession.Enabled = false;
+            btnViewSupersession.Enabled = false;
+
+            if (grdAlternative.Redraw) grdAlternative.BeginUpdate();
+
+            DataTable _parts = Cache.GetCachedTable("parts");
+            DataTable _stockledger = Cache.GetCachedTable("stockledger");
+            DataTable _models = Cache.GetCachedTable("models");
+            string _path = Application.StartupPath + "\\Xml\\partsstatus.xml";
+            DataTable _status = SCMS.XmlToTable(_path);
+
+            if (_parts != null &&
+                _stockledger != null &&
+                _models != null &&
+                _status != null)
+            {
+                
+                var _query = from _part in _parts.AsEnumerable()
+                             join _stats in _status.AsEnumerable() on _part.Field<Int16>("Active") equals _stats.Field<int>("Id")
+                             join _ledger in _stockledger.AsEnumerable() on _part.Field<string>("PartCode") equals _ledger.Field<string>("PartCode") into _sl
+                             join _model in _models.AsEnumerable() on _part.Field<string>("ModelCode") equals _model.Field<string>("ModelCode") into _mdl
+                             where _part.Field<string>("SuperPartCode") == _partcode
+                             from _ledger in _sl.DefaultIfEmpty(_stockledger.NewRow())
+                             from _model in _mdl.DefaultIfEmpty(_models.NewRow())
+                             group _ledger by new
+                             {
+                                 PartCode = _part.Field<string>("PartCode"),
+                                 PartNo = _part.Field<string>("PartNo"),
+                                 PartName = _part.Field<string>("PartName"),
+                                 Description = _part.Field<string>("Description"),
+                                 Brand = _part.Field<string>("Brand"),
+                                 Model = _model.Field<string>("Model"),
+                                 Status = _stats.Field<string>("Status"),
+                                 Notes = _part.Field<string>("Notes")
+                             } into _group
+                             orderby _group.Key.PartNo
+                             select new
+                             {
+                                 PartCode = _group.Key.PartCode,
+                                 PartNo = _group.Key.PartNo,
+                                 PartName = _group.Key.PartName,
+                                 Description = _group.Key.Description,
+                                 Brand = _group.Key.Brand,
+                                 Model = _group.Key.Model,
+                                 Status = _group.Key.Status,
+                                 Quantity = _group.Sum(_ledger => (_ledger.Field<int>("In") - _ledger.Field<int>("Out"))),
+                                 Incoming = _group.Sum(_ledger => _ledger.Field<int>("Incoming")),
+                                 Outgoing = _group.Sum(_ledger => _ledger.Field<int>("Outgoing")),
+                                 Ending = _group.Sum(_ledger => (_ledger.Field<int>("In") - _ledger.Field<int>("Out") + _ledger.Field<int>("Incoming") - _ledger.Field<int>("Outgoing"))),
+                                 Notes = _group.Key.Notes
+                             };
+
+                DataTable _datasource = new DataTable();
+                _datasource.TableName = "parts";
+                DataColumnCollection _cols = _datasource.Columns;
+
+                DataColumn _pk = _cols.Add("PartCode", typeof(string));
+                _cols.Add("PartNo", typeof(string));
+                _cols.Add("PartName", typeof(string));
+                _cols.Add("Description", typeof(string));
+                _cols.Add("Brand", typeof(string));
+                _cols.Add("Model", typeof(string));
+                _cols.Add("Status", typeof(string));
+                _cols.Add("Quantity", typeof(int));
+                _cols.Add("Incoming", typeof(int));
+                _cols.Add("Outgoing", typeof(int));
+                _cols.Add("Ending", typeof(int));
+                _cols.Add("Notes", typeof(string));
+                _datasource.Constraints.Add("PK", _pk, true);
+
+                try 
+                {
+                    foreach (var _row in _query) _datasource.Rows.Add(new object[] {
+                                                                      _row.PartCode, _row.PartNo, _row.PartName,
+                                                                      _row.Description, _row.Brand, _row.Model,
+                                                                      _row.Status, _row.Quantity, _row.Incoming, 
+                                                                      _row.Outgoing, _row.Ending, _row.Notes });
+
+                    _datasource.AcceptChanges();
+                }
+                catch { }
+
+                grdAlternative.ClearRowsAndColumns();
+                grdAlternative.DataSource = _datasource;
+
+                ColumnCollection _grdcols = grdAlternative.Cols;
+                _grdcols["PartCode"].Visible = false;
+                _grdcols["PartNo"].Caption = "Part No.";
+                _grdcols["PartName"].Caption = "Part Name";
+
+                grdAlternative.AutoSizeCols(); grdAlternative.ExtendLastCol = true;
+
+                for (int i = _grdcols.Fixed; i <= (_grdcols.Count - 1); i++)
+                {
+                    if (_grdcols[i].Width < 80) _grdcols[i].Width = 80;
+                }
+
+                while (!grdAlternative.Redraw) grdAlternative.EndUpdate();
+
+                btnAddAlternative.Enabled = true;
+                btnViewSupersession.Enabled = (_datasource.Rows.Count > 0);
+                btnDeleteSupersession.Enabled = (_datasource.Rows.Count > 0);
+            }
+        }
+
         private void InitializeUDFs()
         {
             if (!grdMisc.Redraw) grdMisc.BeginUpdate();
@@ -618,14 +809,18 @@ namespace SupplyChainManagementSystem
                     _partcode = code; _isnew = false;
                     _updated = false; _isshown = false;
 
+                    DataTable _superpart = _parts.Replicate();
+
                     Text = Text.Replace(" *", "").Replace("*", "");
 
                     DataRow _row = _rows[0];
 
                     var _query = from _part in _parts.AsEnumerable()
                                  join _name in _partnames.AsEnumerable() on _part.Field<string>("PartName") equals _name.Field<string>("PartName")
+                                 join _super in _superpart.AsEnumerable() on _part.Field<string>("SuperPartCode") equals _super.Field<string>("PartCode") into _s
                                  join _stockledger in _ledger.AsEnumerable() on _part.Field<string>("PartCode") equals _stockledger.Field<string>("PartCode") into _sl
                                  where _part.Field<string>("PartCode") == code
+                                 from _super in _s.DefaultIfEmpty(_superpart.NewRow())
                                  from _stockledger in _sl.DefaultIfEmpty(_ledger.NewRow())
                                  group _stockledger by new
                                  {
@@ -633,6 +828,8 @@ namespace SupplyChainManagementSystem
                                      PartNo = _part.Field<string>("PartNo"),
                                      PartName = _part.Field<string>("PartName"),
                                      Description = _part.Field<string>("Description"),
+                                     SuperPartCode = _part.Field<string>("SuperPartCode"),
+                                     SuperPartNo = _super.Field<string>("PartNo"),
                                      Brand = _part.Field<string>("Brand"),
                                      ModelCode = _part.Field<string>("ModelCode"),
                                      Unit = _part.Field<string>("Unit"),
@@ -650,6 +847,8 @@ namespace SupplyChainManagementSystem
                                      PartNo = _group.Key.PartNo,
                                      PartName = _group.Key.PartName,
                                      Description = _group.Key.Description,
+                                     SuperPartCode = _group.Key.SuperPartCode,
+                                     SuperPartNo = _group.Key.SuperPartNo,
                                      Brand = _group.Key.Brand,
                                      ModelCode = _group.Key.ModelCode,
                                      Unit = _group.Key.Unit,
@@ -672,6 +871,24 @@ namespace SupplyChainManagementSystem
                         {
                             if (!Materia.IsNullOrNothing(_result.Category)) txtCategory.Text = _result.Category;
                             else txtCategory.Text = "";
+
+                            if (!Materia.IsNullOrNothing(_result.SuperPartNo))
+                            {
+                                if (!string.IsNullOrEmpty(_result.SuperPartNo.RLTrim()))
+                                {
+                                    lblSupersededPartNo.Show();
+                                    txtSupersededPartNo.Text = _result.SuperPartNo; txtSupersededPartNo.Show();
+                                    tbAlternative.Visible = false; btnAddAlternative.Enabled = false;
+                                    btnDeleteSupersession.Enabled = false; btnViewSupersession.Enabled = false;
+                                }
+                                else
+                                { 
+                                    lblSupersededPartNo.Hide(); txtSupersededPartNo.Hide();
+                                    tbAlternative.Visible = true;
+                                }
+                            }
+                            else
+                            { lblSupersededPartNo.Hide(); txtSupersededPartNo.Hide(); }
 
                             if (!Materia.IsNullOrNothing(_result.Description)) txtDescription.Text = _result.Description;
                             else txtDescription.Text = "";
@@ -739,12 +956,18 @@ namespace SupplyChainManagementSystem
                     catch
                     { }
 
+                    if (_superpart != null)
+                    { 
+                        _superpart.Dispose(); _superpart = null;
+                        Materia.RefreshAndManageCurrentProcess();
+                    }
+
                     InitializeUDFs(); InitializeLocations(); InitializeStockLedger();
+                    InitializeSupersessions();
 
                     tbctrl.SelectedTab = tbGeneral;
-                    tbAlternative.Visible = true;
-                    tbLocations.Visible = true;
-                    tbLedger.Visible = true;
+                    tbLocations.Visible = true; tbLedger.Visible = true;
+                    if (SCMS.Validators.Contains(this)) SCMS.Validators[this].Highlighter.UpdateHighlights();
 
                     lblAdjustment.Show(); lblAdjustment.Enabled = true;
                     lblViewIncoming.Show(); lblViewIncoming.Enabled = true;
@@ -784,15 +1007,27 @@ namespace SupplyChainManagementSystem
 
             grdAlternative.InitializeAppearance(); grdLedger.InitializeAppearance();
             grdLocations.InitializeAppearance(); grdMisc.InitializeAppearance();
+            grdLocations.Styles[CellStyleEnum.Normal].Border.Style = BorderStyleEnum.None;
 
-            grdMisc.AttachMouseHoverPointer();
+            grdAlternative.AttachMouseHoverPointer(); grdMisc.AttachMouseHoverPointer();
 
             cboCountry.LoadCountries(); cboBrand.LoadBrands();
             cboPartName.LoadPartNames(); cboUom.LoadMeasurements();
             InitializeSearches(); InitializeModels(); 
             InitializePartStatus(); InitializeStockTypes();
 
-            txtCategory.ReadOnly = true;
+            txtCategory.ReadOnly = true; txtSupersededPartNo.ReadOnly = true;
+
+            if (_superseded == null)
+            {
+                txtSupersededPartNo.Hide(); lblSupersededPartNo.Hide();
+                lblAddPartName.Show(); lblAddPartName.Enabled = true;
+            }
+            else
+            {
+                txtSupersededPartNo.Show(); lblSupersededPartNo.Show();
+                lblAddPartName.Hide(); lblAddPartName.Enabled = false;
+            }
 
             txtEnding.ReadOnly = true; txtEnding.Text = "0";
             txtEnding.TextAlign = HorizontalAlignment.Right;
@@ -818,7 +1053,34 @@ namespace SupplyChainManagementSystem
             cboType.SetAsRequired(); cboUom.SetAsRequired();
 
             if (!_isnew) LoadPartInformation(_partcode);
-            else ClearInformation();
+            else
+            {
+                ClearInformation();
+
+                if (_superseded != null)
+                {
+                    _isshown = false;
+ 
+                    txtSupersededPartNo.Text = _superseded.PartNo;
+
+                    if (cboPartName.DataSource != null)
+                    {
+                        try { cboPartName.SelectedValue = _superseded.PartName; }
+                        catch { }
+                    }
+                    
+                    cboPartName.Enabled = false;
+                    txtCategory.Text = _superseded.Category;
+
+                    if (cboUom.DataSource != null)
+                    {
+                        try { cboUom.SelectedValue = _superseded.Unit; }
+                        catch { }
+                    }
+                    
+                    _updated = false;
+                }
+            }
         }
 
         private void PartInformationDialog_Shown(object sender, EventArgs e)
@@ -1090,7 +1352,10 @@ namespace SupplyChainManagementSystem
                     _values[_cols["PartNo"].Ordinal] = txtPartNo.Text;
                     _values[_cols["PartName"].Ordinal] = cboPartName.SelectedValue.ToString();
                     _values[_cols["Description"].Ordinal] = txtDescription.Text;
-                    _values[_cols["SuperPartCode"].Ordinal] = Supersession;
+                    
+                    if (_superseded != null) _values[_cols["SuperPartCode"].Ordinal] = _superseded.PartCode;
+                    else _values[_cols["SuperPartCode"].Ordinal] = "";
+                    
                     _values[_cols["Brand"].Ordinal] = cboBrand.SelectedValue.ToString();
                     
                     if (cboModel.SelectedIndex >= 0) _values[_cols["ModelCode"].Ordinal] = cboModel.SelectedValue.ToString();
@@ -1140,7 +1405,6 @@ namespace SupplyChainManagementSystem
                         _existing[0]["PartNo"] = txtPartNo.Text;
                         _existing[0]["PartName"] = cboPartName.SelectedValue.ToString();
                         _existing[0]["Description"] = txtDescription.Text;
-                        _existing[0]["SuperPartCode"] = Supersession;
                         _existing[0]["Brand"] = cboBrand.SelectedValue.ToString();
 
                         if (cboModel.SelectedIndex >= 0) _existing[0]["ModelCode"] = cboModel.SelectedValue.ToString();
@@ -1304,16 +1568,248 @@ namespace SupplyChainManagementSystem
             if (!lblAdjustment.Enabled) return;
             if (!_isshown) return;
 
-            StockAdjustmentInfoDialog _dialog = new StockAdjustmentInfoDialog();
+            StockAdjustmentInfoDialog _dialog = new StockAdjustmentInfoDialog(new PartInfo(_partcode));
             _dialog.ShowDialog();
 
-            if (_dialog.WithUpdates)
+            if (_dialog.IsFinalized)
             {
+                LoadPartInformation(_partcode);
+                if (SCMS.Validators.Contains(this)) SCMS.Validators[this].Highlighter.UpdateHighlights();
+                _withupdates = true;
             }
 
             _dialog.Dispose(); _dialog = null;
             Materia.RefreshAndManageCurrentProcess();
         }
 
+        private void btnAddAlternative_Click(object sender, EventArgs e)
+        {
+            if (!btnAddAlternative.Enabled) return;
+
+            PartSupersessionSelectionDialog _selectiondialog = new PartSupersessionSelectionDialog(new PartInfo(_partcode));
+           
+            if (_selectiondialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            { 
+                _selectiondialog.Dispose(); _selectiondialog = null;
+                Materia.RefreshAndManageCurrentProcess(); return;
+            }
+
+            PartInfo _supersession = _selectiondialog.SelectedPartInfo;
+            _selectiondialog.Dispose(); _selectiondialog = null;
+            Materia.RefreshAndManageCurrentProcess();
+
+            if (_supersession == null)
+            {
+                if (MdiParent != null)
+                {
+                    if (MdiParent is MainWindow)
+                    {
+                        int _childforms = (MdiParent.MdiChildren.Length - 1);
+
+                        for (int i = _childforms; i <= 0; i--)
+                        {
+                            Form _form = MdiParent.MdiChildren[i];
+                            if (_form is PartInformationDialog)
+                            {
+                                PartInformationDialog _currentform = (PartInformationDialog)_form;
+                                if (_currentform.Superseded != null)
+                                {
+                                    _currentform.FormClosed -= new FormClosedEventHandler(_dialog_FormClosed);
+                                    _currentform.Close(); _currentform.Dispose(); _currentform = null;
+                                    Materia.RefreshAndManageCurrentProcess(); _childforms -= 1;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                PartInformationDialog _dialog = new PartInformationDialog(new PartInfo(_partcode));
+                _dialog.FormClosed -= new FormClosedEventHandler(_dialog_FormClosed);
+                _dialog.FormClosed += new FormClosedEventHandler(_dialog_FormClosed);
+
+                _dialog.MdiParent = MdiParent; _dialog.WindowState = FormWindowState.Maximized;
+                _dialog.MinimizeBox = false; _dialog.MaximizeBox = false;
+                _dialog.ControlBox = false; _dialog.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+                _dialog.Dock = DockStyle.Fill; _dialog.TopMost = true;
+                _dialog.Show(); _dialog.Activate();
+                _dialog.Size = this.Size;
+                _dialog.WindowState = FormWindowState.Normal;
+                _dialog.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                string _query = "UPDATE `parts` SET\n" +
+                                "`SuperPartCode` = '" + _partcode.ToSqlValidString() + "'\n" +
+                                "WHERE\n" +
+                                "(`PartCode` LIKE '" + _supersession.PartCode.ToSqlValidString() +"');";
+
+                Cursor = Cursors.WaitCursor;
+                IAsyncResult _execresult = Que.BeginExecution(SCMS.Connection, _query);
+
+                while (!_execresult.IsCompleted &&
+                       !_cancelled)
+                { Thread.Sleep(1); Application.DoEvents(); }
+
+                if (_cancelled)
+                {
+                    if (!_execresult.IsCompleted)
+                    {
+                        try { _execresult = null; }
+                        catch { }
+                    }
+
+                    Materia.RefreshAndManageCurrentProcess(); return;
+                }
+                else 
+                {
+                    QueResult _result = Que.EndExecution(_execresult);
+
+                    if (string.IsNullOrEmpty(_result.Error.RLTrim()))
+                    {
+                        PartInfo _currentpart = new PartInfo(_partcode);
+
+                        IAsyncResult _logresult = SCMS.CurrentSystemUser.LogActionAsync(UserAction.Edit, "Added " + _supersession.PartNo + " - " + _supersession.PartName + " as supersession of " + _currentpart.PartNo + " - " + _currentpart.PartName + ".", _partcode);
+                        _logresult.WaitToFinish();
+
+                        DataTable _parts = Cache.GetCachedTable("parts");
+                        DataRow[] _rows = _parts.Select("[PartCode] LIKE '" + _supersession.PartCode.ToSqlValidString(true) + "'");
+                        if (_rows.Length > 0)
+                        {
+                            _rows[0]["SuperPartCode"] = _partcode;
+                            Cache.Save(); 
+                        }
+
+                        InitializeSupersessions();
+                    }
+                    else
+                    {
+                        SCMS.LogError(this.GetType().Name, new Exception(_result.Error));
+                        MsgBoxEx.Alert("Failed to set supersession for the selected part.", "Add Part Supersession");
+                    }
+
+                    _result.Dispose(); Cursor = Cursors.Default;
+                }
+            }
+        }
+
+        private void btnDeleteSupersession_Click(object sender, EventArgs e)
+        {
+            if (!btnDeleteSupersession.Enabled) return;
+            if (!grdAlternative.Redraw) return;
+            if (grdAlternative.DataSource == null) return;
+            if (grdAlternative.RowSel < grdAlternative.Rows.Fixed) return;
+
+            PartInfo _supersession = new PartInfo(grdAlternative[grdAlternative.RowSel, "PartCode"].ToString());
+
+            if (MsgBoxEx.Ask("Un-set <font color=\"blue\">" + _supersession.PartNo + " - " + _supersession.PartName + "</font> as a supersession for the current part?", "Remove Part Supersession") != System.Windows.Forms.DialogResult.Yes) return;
+
+            string _query = "UPDATE `parts` SET\n" +
+                            "`SuperPartCode` = ''\n" +
+                            "WHERE\n" +
+                            "(`PartCode` LIKE '" + _supersession.PartCode.ToSqlValidString() + "');";
+
+            Cursor = Cursors.WaitCursor;
+            IAsyncResult _execresult = Que.BeginExecution(SCMS.Connection, _query);
+
+            while (!_execresult.IsCompleted &&
+                   !_cancelled)
+            { Thread.Sleep(1); Application.DoEvents(); }
+
+            if (_cancelled)
+            {
+                if (!_execresult.IsCompleted)
+                {
+                    try { _execresult = null; }
+                    catch { }
+                }
+
+                Materia.RefreshAndManageCurrentProcess(); return;
+            }
+            else
+            {
+                QueResult _result = Que.EndExecution(_execresult);
+
+                if (string.IsNullOrEmpty(_result.Error.RLTrim()))
+                {
+                    PartInfo _currentpart = new PartInfo(_partcode);
+
+                    IAsyncResult _logresult = SCMS.CurrentSystemUser.LogActionAsync(UserAction.Edit, "Un-set " + _supersession.PartNo + " - " + _supersession.PartName + " as supersession of " + _currentpart.PartNo + " - " + _currentpart.PartName + ".", _partcode);
+                    _logresult.WaitToFinish();
+
+                    DataTable _parts = Cache.GetCachedTable("parts");
+                    DataRow[] _rows = _parts.Select("[PartCode] LIKE '" + _supersession.PartCode.ToSqlValidString(true) + "'");
+                    if (_rows.Length > 0)
+                    {
+                        _rows[0]["SuperPartCode"] = "";
+                        Cache.Save();
+                    }
+
+                    InitializeSupersessions();
+                }
+                else
+                {
+                    SCMS.LogError(this.GetType().Name, new Exception(_result.Error));
+                    MsgBoxEx.Alert("Failed to un-set supersession for the selected part.", "Add Part Supersession");
+                }
+
+                _result.Dispose(); Cursor = Cursors.Default;
+            }
+        }
+
+        private void btnViewSupersession_Click(object sender, EventArgs e)
+        {
+            if (!btnViewSupersession.Enabled) return;
+            if (!grdAlternative.Redraw) return;
+            if (grdAlternative.DataSource == null) return;
+            if (grdAlternative.RowSel < grdAlternative.Rows.Fixed) return;
+
+            if (MdiParent != null)
+            {
+                if (MdiParent is MainWindow)
+                {
+                    int _childforms = (MdiParent.MdiChildren.Length - 1);
+
+                    for (int i = _childforms; i <= 0; i--)
+                    {
+                        Form _form = MdiParent.MdiChildren[i];
+                        if (_form is PartInformationDialog)
+                        {
+                            PartInformationDialog _currentform = (PartInformationDialog)_form;
+                            if (_currentform.Superseded != null)
+                            {
+                                _currentform.FormClosed -= new FormClosedEventHandler(_dialog_FormClosed);
+                                _currentform.Close(); _currentform.Dispose(); _currentform = null;
+                                Materia.RefreshAndManageCurrentProcess(); _childforms -= 1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            string _selpartcode = grdAlternative[grdAlternative.RowSel, "PartCode"].ToString();
+            PartInformationDialog _dialog = new PartInformationDialog(_selpartcode, new PartInfo(_partcode));
+            _dialog.FormClosed -= new FormClosedEventHandler(_dialog_FormClosed);
+            _dialog.FormClosed += new FormClosedEventHandler(_dialog_FormClosed);
+
+            _dialog.MdiParent = MdiParent; _dialog.WindowState = FormWindowState.Maximized;
+            _dialog.MinimizeBox = false; _dialog.MaximizeBox = false;
+            _dialog.ControlBox = false; _dialog.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            _dialog.Dock = DockStyle.Fill; _dialog.TopMost = true;
+            _dialog.Show(); _dialog.Activate();
+            _dialog.Size = this.Size;
+            _dialog.WindowState = FormWindowState.Normal;
+            _dialog.WindowState = FormWindowState.Maximized;
+        }
+
+        private void grdAlternative_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (!grdAlternative.Redraw) return;
+            if (grdAlternative.DataSource == null) return;
+            int _row = grdAlternative.GetMouseOveredRow(e.X, e.Y);
+            if (_row < grdAlternative.Rows.Fixed) return;
+
+            grdAlternative.Row = _row; grdAlternative.RowSel = _row;
+            btnViewSupersession_Click(btnViewSupersession, new EventArgs());
+        }
     }
 }

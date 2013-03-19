@@ -114,6 +114,13 @@ namespace SupplyChainManagementSystem
         {
             DataTable _datasource = null;
 
+            Cache.SyncTable(SCMS.Connection, "stockadjustments");
+            Cache.SyncTable(SCMS.Connection, "stockadjustmentdetails");
+            Cache.SyncTable(SCMS.Connection, "users");
+            Cache.SyncTable(SCMS.Connection, "parts");
+            Cache.SyncTable(SCMS.Connection, "measurements");
+            Cache.SyncTable(SCMS.Connection, "stockledger");
+
             DataTable _adjustments = Cache.GetCachedTable("stockadjustments");
             DataTable _users = Cache.GetCachedTable("users");
 

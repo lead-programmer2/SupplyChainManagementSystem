@@ -567,7 +567,8 @@ namespace SupplyChainManagementSystem
                     {
                         if (_form is PartInformationDialog)
                         {
-                            _dialog = _form; break;
+                            if (((PartInformationDialog)_form).Superseded == null)
+                            { _dialog = _form; break; }
                         }
                     }
 
@@ -637,10 +638,7 @@ namespace SupplyChainManagementSystem
 
                 if (!Materia.IsNullOrNothing(_reference))
                 {
-                    if (_dialog is PartInformationDialog)
-                    {
-                        if (((PartInformationDialog)_dialog).PartCode != _reference.ToString()) ((PartInformationDialog)_dialog).LoadPartInformation(_reference.ToString());
-                    }
+                    if (_dialog is PartInformationDialog) ((PartInformationDialog)_dialog).LoadPartInformation(_reference.ToString());
                     else { }
                 }
             }

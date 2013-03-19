@@ -39,7 +39,32 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tbctrl = new DevComponents.DotNetBar.SuperTabControl();
+            this.superTabControlPanel3 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.btnDeleteSupersession = new System.Windows.Forms.Button();
+            this.btnViewSupersession = new System.Windows.Forms.Button();
+            this.btnAddAlternative = new System.Windows.Forms.Button();
+            this.grdAlternative = new C1.Win.C1FlexGrid.C1FlexGrid();
+            this.tbAlternative = new DevComponents.DotNetBar.SuperTabItem();
+            this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.txtReorderQty = new DevComponents.Editors.IntegerInput();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtReorderPoint = new DevComponents.Editors.IntegerInput();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtEnding = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblViewOutgoing = new System.Windows.Forms.LinkLabel();
+            this.txtOutgoing = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lblViewIncoming = new System.Windows.Forms.LinkLabel();
+            this.txtIncoming = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lblAdjustment = new System.Windows.Forms.LinkLabel();
+            this.txtQty = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbInventory = new DevComponents.DotNetBar.SuperTabItem();
             this.superTabControlPanel1 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.txtSupersededPartNo = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblSupersededPartNo = new System.Windows.Forms.Label();
             this.cboType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.label10 = new System.Windows.Forms.Label();
             this.cboStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -65,54 +90,33 @@
             this.txtPartNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.label1 = new System.Windows.Forms.Label();
             this.tbGeneral = new DevComponents.DotNetBar.SuperTabItem();
-            this.superTabControlPanel3 = new DevComponents.DotNetBar.SuperTabControlPanel();
-            this.btnAddAlternative = new System.Windows.Forms.Button();
-            this.grdAlternative = new C1.Win.C1FlexGrid.C1FlexGrid();
-            this.tbAlternative = new DevComponents.DotNetBar.SuperTabItem();
-            this.superTabControlPanel6 = new DevComponents.DotNetBar.SuperTabControlPanel();
-            this.txtNotes = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.grdMisc = new C1.Win.C1FlexGrid.C1FlexGrid();
-            this.tbMiscellaneous = new DevComponents.DotNetBar.SuperTabItem();
-            this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
-            this.txtReorderQty = new DevComponents.Editors.IntegerInput();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtReorderPoint = new DevComponents.Editors.IntegerInput();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtEnding = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.label14 = new System.Windows.Forms.Label();
-            this.lblViewOutgoing = new System.Windows.Forms.LinkLabel();
-            this.txtOutgoing = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.label13 = new System.Windows.Forms.Label();
-            this.lblViewIncoming = new System.Windows.Forms.LinkLabel();
-            this.txtIncoming = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lblAdjustment = new System.Windows.Forms.LinkLabel();
-            this.txtQty = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbInventory = new DevComponents.DotNetBar.SuperTabItem();
             this.superTabControlPanel4 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.grdLocations = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.tbLocations = new DevComponents.DotNetBar.SuperTabItem();
             this.superTabControlPanel5 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.grdLedger = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.tbLedger = new DevComponents.DotNetBar.SuperTabItem();
+            this.superTabControlPanel6 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.txtNotes = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.grdMisc = new C1.Win.C1FlexGrid.C1FlexGrid();
+            this.tbMiscellaneous = new DevComponents.DotNetBar.SuperTabItem();
             ((System.ComponentModel.ISupportInitialize)(this.brToolbar)).BeginInit();
             this.brToolbar.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbctrl)).BeginInit();
             this.tbctrl.SuspendLayout();
-            this.superTabControlPanel1.SuspendLayout();
             this.superTabControlPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdAlternative)).BeginInit();
-            this.superTabControlPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdMisc)).BeginInit();
             this.superTabControlPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtReorderQty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReorderPoint)).BeginInit();
+            this.superTabControlPanel1.SuspendLayout();
             this.superTabControlPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdLocations)).BeginInit();
             this.superTabControlPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdLedger)).BeginInit();
+            this.superTabControlPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdMisc)).BeginInit();
             this.SuspendLayout();
             // 
             // brToolbar
@@ -144,7 +148,7 @@
             this.txtSearch.Location = new System.Drawing.Point(545, 2);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(149, 22);
-            this.txtSearch.TabIndex = 13;
+            this.txtSearch.TabIndex = 33;
             this.txtSearch.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty;
             this.txtSearch.WatermarkText = "<i>Search</i>";
             // 
@@ -178,7 +182,7 @@
             this.btnSaveAndClose.Location = new System.Drawing.Point(381, 407);
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(107, 22);
-            this.btnSaveAndClose.TabIndex = 10;
+            this.btnSaveAndClose.TabIndex = 15;
             this.btnSaveAndClose.Text = "Sa&ve and Close";
             this.btnSaveAndClose.UseVisualStyleBackColor = false;
             this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
@@ -196,7 +200,7 @@
             this.btnCancel.Location = new System.Drawing.Point(588, 407);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(84, 22);
-            this.btnCancel.TabIndex = 12;
+            this.btnCancel.TabIndex = 17;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -213,7 +217,7 @@
             this.btnSave.Location = new System.Drawing.Point(496, 407);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(84, 22);
-            this.btnSave.TabIndex = 11;
+            this.btnSave.TabIndex = 16;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -249,12 +253,12 @@
             this.tbctrl.ControlBox.MenuBox,
             this.tbctrl.ControlBox.CloseBox});
             this.tbctrl.ControlBox.Visible = false;
-            this.tbctrl.Controls.Add(this.superTabControlPanel2);
-            this.tbctrl.Controls.Add(this.superTabControlPanel1);
             this.tbctrl.Controls.Add(this.superTabControlPanel3);
-            this.tbctrl.Controls.Add(this.superTabControlPanel6);
+            this.tbctrl.Controls.Add(this.superTabControlPanel1);
+            this.tbctrl.Controls.Add(this.superTabControlPanel2);
             this.tbctrl.Controls.Add(this.superTabControlPanel4);
             this.tbctrl.Controls.Add(this.superTabControlPanel5);
+            this.tbctrl.Controls.Add(this.superTabControlPanel6);
             this.tbctrl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbctrl.FixedTabSize = new System.Drawing.Size(150, 0);
             this.tbctrl.Location = new System.Drawing.Point(0, 0);
@@ -277,329 +281,10 @@
             this.tbctrl.Text = "superTabControl1";
             this.tbctrl.SelectedTabChanged += new System.EventHandler<DevComponents.DotNetBar.SuperTabStripSelectedTabChangedEventArgs>(this.tbctrl_SelectedTabChanged);
             // 
-            // superTabControlPanel1
-            // 
-            this.superTabControlPanel1.AutoScroll = true;
-            this.superTabControlPanel1.Controls.Add(this.cboType);
-            this.superTabControlPanel1.Controls.Add(this.label10);
-            this.superTabControlPanel1.Controls.Add(this.cboStatus);
-            this.superTabControlPanel1.Controls.Add(this.label9);
-            this.superTabControlPanel1.Controls.Add(this.cboCountry);
-            this.superTabControlPanel1.Controls.Add(this.label8);
-            this.superTabControlPanel1.Controls.Add(this.txtCategory);
-            this.superTabControlPanel1.Controls.Add(this.label7);
-            this.superTabControlPanel1.Controls.Add(this.lblAddUom);
-            this.superTabControlPanel1.Controls.Add(this.cboUom);
-            this.superTabControlPanel1.Controls.Add(this.label6);
-            this.superTabControlPanel1.Controls.Add(this.lblAddModel);
-            this.superTabControlPanel1.Controls.Add(this.cboModel);
-            this.superTabControlPanel1.Controls.Add(this.label5);
-            this.superTabControlPanel1.Controls.Add(this.lblAddBrand);
-            this.superTabControlPanel1.Controls.Add(this.cboBrand);
-            this.superTabControlPanel1.Controls.Add(this.label4);
-            this.superTabControlPanel1.Controls.Add(this.txtDescription);
-            this.superTabControlPanel1.Controls.Add(this.label3);
-            this.superTabControlPanel1.Controls.Add(this.cboPartName);
-            this.superTabControlPanel1.Controls.Add(this.lblAddPartName);
-            this.superTabControlPanel1.Controls.Add(this.label2);
-            this.superTabControlPanel1.Controls.Add(this.txtPartNo);
-            this.superTabControlPanel1.Controls.Add(this.label1);
-            this.superTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.superTabControlPanel1.Location = new System.Drawing.Point(152, 0);
-            this.superTabControlPanel1.Name = "superTabControlPanel1";
-            this.superTabControlPanel1.Size = new System.Drawing.Size(519, 357);
-            this.superTabControlPanel1.TabIndex = 1;
-            this.superTabControlPanel1.TabItem = this.tbGeneral;
-            // 
-            // cboType
-            // 
-            this.cboType.DisplayMember = "Text";
-            this.cboType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboType.FormattingEnabled = true;
-            this.cboType.ItemHeight = 16;
-            this.cboType.Location = new System.Drawing.Point(277, 309);
-            this.cboType.Name = "cboType";
-            this.cboType.Size = new System.Drawing.Size(210, 22);
-            this.cboType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboType.TabIndex = 9;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.DimGray;
-            this.label10.Location = new System.Drawing.Point(274, 293);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(30, 13);
-            this.label10.TabIndex = 47;
-            this.label10.Text = "Type";
-            // 
-            // cboStatus
-            // 
-            this.cboStatus.DisplayMember = "Text";
-            this.cboStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboStatus.FormattingEnabled = true;
-            this.cboStatus.ItemHeight = 16;
-            this.cboStatus.Location = new System.Drawing.Point(29, 309);
-            this.cboStatus.Name = "cboStatus";
-            this.cboStatus.Size = new System.Drawing.Size(210, 22);
-            this.cboStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboStatus.TabIndex = 8;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.Color.DimGray;
-            this.label9.Location = new System.Drawing.Point(26, 293);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 13);
-            this.label9.TabIndex = 45;
-            this.label9.Text = "Status";
-            // 
-            // cboCountry
-            // 
-            this.cboCountry.DisplayMember = "Text";
-            this.cboCountry.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboCountry.FormattingEnabled = true;
-            this.cboCountry.ItemHeight = 16;
-            this.cboCountry.Location = new System.Drawing.Point(277, 258);
-            this.cboCountry.Name = "cboCountry";
-            this.cboCountry.Size = new System.Drawing.Size(210, 22);
-            this.cboCountry.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboCountry.TabIndex = 7;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.DimGray;
-            this.label8.Location = new System.Drawing.Point(274, 242);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(98, 13);
-            this.label8.TabIndex = 43;
-            this.label8.Text = "Country of Origin";
-            // 
-            // txtCategory
-            // 
-            // 
-            // 
-            // 
-            this.txtCategory.Border.Class = "TextBoxBorder";
-            this.txtCategory.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtCategory.Location = new System.Drawing.Point(277, 93);
-            this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Size = new System.Drawing.Size(210, 22);
-            this.txtCategory.TabIndex = 2;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.DimGray;
-            this.label7.Location = new System.Drawing.Point(274, 77);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 13);
-            this.label7.TabIndex = 41;
-            this.label7.Text = "Category";
-            // 
-            // lblAddUom
-            // 
-            this.lblAddUom.AutoSize = true;
-            this.lblAddUom.BackColor = System.Drawing.Color.Transparent;
-            this.lblAddUom.LinkColor = System.Drawing.Color.SteelBlue;
-            this.lblAddUom.Location = new System.Drawing.Point(101, 242);
-            this.lblAddUom.Name = "lblAddUom";
-            this.lblAddUom.Size = new System.Drawing.Size(138, 13);
-            this.lblAddUom.TabIndex = 40;
-            this.lblAddUom.TabStop = true;
-            this.lblAddUom.Text = "Add unit of measurement";
-            this.lblAddUom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblAddUom.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAddUom_LinkClicked);
-            // 
-            // cboUom
-            // 
-            this.cboUom.DisplayMember = "Text";
-            this.cboUom.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboUom.FormattingEnabled = true;
-            this.cboUom.ItemHeight = 16;
-            this.cboUom.Location = new System.Drawing.Point(29, 258);
-            this.cboUom.Name = "cboUom";
-            this.cboUom.Size = new System.Drawing.Size(210, 22);
-            this.cboUom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboUom.TabIndex = 6;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.DimGray;
-            this.label6.Location = new System.Drawing.Point(26, 242);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 13);
-            this.label6.TabIndex = 38;
-            this.label6.Text = "Unit";
-            // 
-            // lblAddModel
-            // 
-            this.lblAddModel.AutoSize = true;
-            this.lblAddModel.BackColor = System.Drawing.Color.Transparent;
-            this.lblAddModel.LinkColor = System.Drawing.Color.SteelBlue;
-            this.lblAddModel.Location = new System.Drawing.Point(420, 186);
-            this.lblAddModel.Name = "lblAddModel";
-            this.lblAddModel.Size = new System.Drawing.Size(63, 13);
-            this.lblAddModel.TabIndex = 37;
-            this.lblAddModel.TabStop = true;
-            this.lblAddModel.Text = "Add model";
-            this.lblAddModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblAddModel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAddModel_LinkClicked);
-            // 
-            // cboModel
-            // 
-            this.cboModel.DisplayMember = "Text";
-            this.cboModel.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboModel.FormattingEnabled = true;
-            this.cboModel.ItemHeight = 16;
-            this.cboModel.Location = new System.Drawing.Point(277, 202);
-            this.cboModel.Name = "cboModel";
-            this.cboModel.Size = new System.Drawing.Size(210, 22);
-            this.cboModel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboModel.TabIndex = 5;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.DimGray;
-            this.label5.Location = new System.Drawing.Point(274, 186);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 13);
-            this.label5.TabIndex = 35;
-            this.label5.Text = "Model";
-            // 
-            // lblAddBrand
-            // 
-            this.lblAddBrand.AutoSize = true;
-            this.lblAddBrand.BackColor = System.Drawing.Color.Transparent;
-            this.lblAddBrand.LinkColor = System.Drawing.Color.SteelBlue;
-            this.lblAddBrand.Location = new System.Drawing.Point(177, 186);
-            this.lblAddBrand.Name = "lblAddBrand";
-            this.lblAddBrand.Size = new System.Drawing.Size(62, 13);
-            this.lblAddBrand.TabIndex = 34;
-            this.lblAddBrand.TabStop = true;
-            this.lblAddBrand.Text = "Add brand";
-            this.lblAddBrand.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblAddBrand.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAddBrand_LinkClicked);
-            // 
-            // cboBrand
-            // 
-            this.cboBrand.DisplayMember = "Text";
-            this.cboBrand.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboBrand.FormattingEnabled = true;
-            this.cboBrand.ItemHeight = 16;
-            this.cboBrand.Location = new System.Drawing.Point(29, 202);
-            this.cboBrand.Name = "cboBrand";
-            this.cboBrand.Size = new System.Drawing.Size(210, 22);
-            this.cboBrand.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboBrand.TabIndex = 4;
-            this.cboBrand.SelectedValueChanged += new System.EventHandler(this.cboBrand_SelectedValueChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.DimGray;
-            this.label4.Location = new System.Drawing.Point(26, 186);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 13);
-            this.label4.TabIndex = 32;
-            this.label4.Text = "Brand";
-            // 
-            // txtDescription
-            // 
-            // 
-            // 
-            // 
-            this.txtDescription.Border.Class = "TextBoxBorder";
-            this.txtDescription.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtDescription.Location = new System.Drawing.Point(29, 147);
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(458, 22);
-            this.txtDescription.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.DimGray;
-            this.label3.Location = new System.Drawing.Point(26, 131);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 13);
-            this.label3.TabIndex = 30;
-            this.label3.Text = "Description";
-            // 
-            // cboPartName
-            // 
-            this.cboPartName.DisplayMember = "Text";
-            this.cboPartName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboPartName.FormattingEnabled = true;
-            this.cboPartName.ItemHeight = 16;
-            this.cboPartName.Location = new System.Drawing.Point(29, 93);
-            this.cboPartName.Name = "cboPartName";
-            this.cboPartName.Size = new System.Drawing.Size(210, 22);
-            this.cboPartName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboPartName.TabIndex = 1;
-            this.cboPartName.SelectedValueChanged += new System.EventHandler(this.cboPartName_SelectedValueChanged);
-            // 
-            // lblAddPartName
-            // 
-            this.lblAddPartName.AutoSize = true;
-            this.lblAddPartName.BackColor = System.Drawing.Color.Transparent;
-            this.lblAddPartName.LinkColor = System.Drawing.Color.SteelBlue;
-            this.lblAddPartName.Location = new System.Drawing.Point(156, 77);
-            this.lblAddPartName.Name = "lblAddPartName";
-            this.lblAddPartName.Size = new System.Drawing.Size(83, 13);
-            this.lblAddPartName.TabIndex = 28;
-            this.lblAddPartName.TabStop = true;
-            this.lblAddPartName.Text = "Add part name";
-            this.lblAddPartName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblAddPartName.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAddPartName_LinkClicked);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(26, 77);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 13);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "Part Name";
-            // 
-            // txtPartNo
-            // 
-            // 
-            // 
-            // 
-            this.txtPartNo.Border.Class = "TextBoxBorder";
-            this.txtPartNo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtPartNo.Location = new System.Drawing.Point(29, 41);
-            this.txtPartNo.Name = "txtPartNo";
-            this.txtPartNo.Size = new System.Drawing.Size(139, 22);
-            this.txtPartNo.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.DimGray;
-            this.label1.Location = new System.Drawing.Point(26, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 13);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Part No.";
-            // 
-            // tbGeneral
-            // 
-            this.tbGeneral.AttachedControl = this.superTabControlPanel1;
-            this.tbGeneral.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tbGeneral.GlobalItem = false;
-            this.tbGeneral.Image = ((System.Drawing.Image)(resources.GetObject("tbGeneral.Image")));
-            this.tbGeneral.Name = "tbGeneral";
-            this.tbGeneral.Text = "General Information";
-            // 
             // superTabControlPanel3
             // 
+            this.superTabControlPanel3.Controls.Add(this.btnDeleteSupersession);
+            this.superTabControlPanel3.Controls.Add(this.btnViewSupersession);
             this.superTabControlPanel3.Controls.Add(this.btnAddAlternative);
             this.superTabControlPanel3.Controls.Add(this.grdAlternative);
             this.superTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -608,6 +293,40 @@
             this.superTabControlPanel3.Size = new System.Drawing.Size(519, 357);
             this.superTabControlPanel3.TabIndex = 0;
             this.superTabControlPanel3.TabItem = this.tbAlternative;
+            // 
+            // btnDeleteSupersession
+            // 
+            this.btnDeleteSupersession.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeleteSupersession.BackColor = System.Drawing.Color.Brown;
+            this.btnDeleteSupersession.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeleteSupersession.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnDeleteSupersession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteSupersession.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteSupersession.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnDeleteSupersession.Location = new System.Drawing.Point(253, 323);
+            this.btnDeleteSupersession.Name = "btnDeleteSupersession";
+            this.btnDeleteSupersession.Size = new System.Drawing.Size(140, 22);
+            this.btnDeleteSupersession.TabIndex = 30;
+            this.btnDeleteSupersession.Text = "&Remove Supersession";
+            this.btnDeleteSupersession.UseVisualStyleBackColor = false;
+            this.btnDeleteSupersession.Click += new System.EventHandler(this.btnDeleteSupersession_Click);
+            // 
+            // btnViewSupersession
+            // 
+            this.btnViewSupersession.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnViewSupersession.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnViewSupersession.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnViewSupersession.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.btnViewSupersession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewSupersession.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewSupersession.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnViewSupersession.Location = new System.Drawing.Point(147, 323);
+            this.btnViewSupersession.Name = "btnViewSupersession";
+            this.btnViewSupersession.Size = new System.Drawing.Size(98, 22);
+            this.btnViewSupersession.TabIndex = 29;
+            this.btnViewSupersession.Text = "&View Details";
+            this.btnViewSupersession.UseVisualStyleBackColor = false;
+            this.btnViewSupersession.Click += new System.EventHandler(this.btnViewSupersession_Click);
             // 
             // btnAddAlternative
             // 
@@ -620,10 +339,11 @@
             this.btnAddAlternative.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btnAddAlternative.Location = new System.Drawing.Point(11, 323);
             this.btnAddAlternative.Name = "btnAddAlternative";
-            this.btnAddAlternative.Size = new System.Drawing.Size(143, 22);
-            this.btnAddAlternative.TabIndex = 11;
+            this.btnAddAlternative.Size = new System.Drawing.Size(127, 22);
+            this.btnAddAlternative.TabIndex = 28;
             this.btnAddAlternative.Text = "&Add Supersession";
             this.btnAddAlternative.UseVisualStyleBackColor = false;
+            this.btnAddAlternative.Click += new System.EventHandler(this.btnAddAlternative_Click);
             // 
             // grdAlternative
             // 
@@ -636,7 +356,8 @@
             this.grdAlternative.Rows.DefaultSize = 21;
             this.grdAlternative.Size = new System.Drawing.Size(513, 307);
             this.grdAlternative.StyleInfo = resources.GetString("grdAlternative.StyleInfo");
-            this.grdAlternative.TabIndex = 0;
+            this.grdAlternative.TabIndex = 27;
+            this.grdAlternative.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.grdAlternative_MouseDoubleClick);
             // 
             // tbAlternative
             // 
@@ -647,59 +368,9 @@
             this.tbAlternative.Name = "tbAlternative";
             this.tbAlternative.Text = "Parts Supersession";
             // 
-            // superTabControlPanel6
-            // 
-            this.superTabControlPanel6.Controls.Add(this.txtNotes);
-            this.superTabControlPanel6.Controls.Add(this.grdMisc);
-            this.superTabControlPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.superTabControlPanel6.Location = new System.Drawing.Point(152, 0);
-            this.superTabControlPanel6.Name = "superTabControlPanel6";
-            this.superTabControlPanel6.Size = new System.Drawing.Size(519, 357);
-            this.superTabControlPanel6.TabIndex = 0;
-            this.superTabControlPanel6.TabItem = this.tbMiscellaneous;
-            // 
-            // txtNotes
-            // 
-            this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
-            this.txtNotes.Border.Class = "TextBoxBorder";
-            this.txtNotes.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtNotes.Location = new System.Drawing.Point(3, 143);
-            this.txtNotes.Multiline = true;
-            this.txtNotes.Name = "txtNotes";
-            this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtNotes.Size = new System.Drawing.Size(513, 211);
-            this.txtNotes.TabIndex = 2;
-            this.txtNotes.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty;
-            this.txtNotes.WatermarkText = "<i>Notes</i>";
-            // 
-            // grdMisc
-            // 
-            this.grdMisc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdMisc.ColumnInfo = "10,1,0,0,0,105,Columns:";
-            this.grdMisc.Location = new System.Drawing.Point(3, 3);
-            this.grdMisc.Name = "grdMisc";
-            this.grdMisc.Rows.DefaultSize = 21;
-            this.grdMisc.Size = new System.Drawing.Size(513, 137);
-            this.grdMisc.StyleInfo = resources.GetString("grdMisc.StyleInfo");
-            this.grdMisc.TabIndex = 1;
-            // 
-            // tbMiscellaneous
-            // 
-            this.tbMiscellaneous.AttachedControl = this.superTabControlPanel6;
-            this.tbMiscellaneous.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tbMiscellaneous.GlobalItem = false;
-            this.tbMiscellaneous.Image = ((System.Drawing.Image)(resources.GetObject("tbMiscellaneous.Image")));
-            this.tbMiscellaneous.Name = "tbMiscellaneous";
-            this.tbMiscellaneous.Text = "Miscellaneous";
-            // 
             // superTabControlPanel2
             // 
+            this.superTabControlPanel2.AutoScroll = true;
             this.superTabControlPanel2.Controls.Add(this.txtReorderQty);
             this.superTabControlPanel2.Controls.Add(this.label16);
             this.superTabControlPanel2.Controls.Add(this.txtReorderPoint);
@@ -734,7 +405,7 @@
             this.txtReorderQty.Name = "txtReorderQty";
             this.txtReorderQty.ShowUpDown = true;
             this.txtReorderQty.Size = new System.Drawing.Size(104, 22);
-            this.txtReorderQty.TabIndex = 19;
+            this.txtReorderQty.TabIndex = 26;
             // 
             // label16
             // 
@@ -758,7 +429,7 @@
             this.txtReorderPoint.Name = "txtReorderPoint";
             this.txtReorderPoint.ShowUpDown = true;
             this.txtReorderPoint.Size = new System.Drawing.Size(104, 22);
-            this.txtReorderPoint.TabIndex = 18;
+            this.txtReorderPoint.TabIndex = 25;
             // 
             // label15
             // 
@@ -780,7 +451,7 @@
             this.txtEnding.Location = new System.Drawing.Point(34, 216);
             this.txtEnding.Name = "txtEnding";
             this.txtEnding.Size = new System.Drawing.Size(104, 22);
-            this.txtEnding.TabIndex = 17;
+            this.txtEnding.TabIndex = 24;
             // 
             // label14
             // 
@@ -800,7 +471,7 @@
             this.lblViewOutgoing.Location = new System.Drawing.Point(156, 164);
             this.lblViewOutgoing.Name = "lblViewOutgoing";
             this.lblViewOutgoing.Size = new System.Drawing.Size(116, 13);
-            this.lblViewOutgoing.TabIndex = 35;
+            this.lblViewOutgoing.TabIndex = 23;
             this.lblViewOutgoing.TabStop = true;
             this.lblViewOutgoing.Text = "View Outgoing Items";
             this.lblViewOutgoing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -815,7 +486,7 @@
             this.txtOutgoing.Location = new System.Drawing.Point(34, 159);
             this.txtOutgoing.Name = "txtOutgoing";
             this.txtOutgoing.Size = new System.Drawing.Size(104, 22);
-            this.txtOutgoing.TabIndex = 16;
+            this.txtOutgoing.TabIndex = 22;
             // 
             // label13
             // 
@@ -835,7 +506,7 @@
             this.lblViewIncoming.Location = new System.Drawing.Point(156, 107);
             this.lblViewIncoming.Name = "lblViewIncoming";
             this.lblViewIncoming.Size = new System.Drawing.Size(113, 13);
-            this.lblViewIncoming.TabIndex = 32;
+            this.lblViewIncoming.TabIndex = 21;
             this.lblViewIncoming.TabStop = true;
             this.lblViewIncoming.Text = "View Incoming Items";
             this.lblViewIncoming.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -850,7 +521,7 @@
             this.txtIncoming.Location = new System.Drawing.Point(34, 102);
             this.txtIncoming.Name = "txtIncoming";
             this.txtIncoming.Size = new System.Drawing.Size(104, 22);
-            this.txtIncoming.TabIndex = 15;
+            this.txtIncoming.TabIndex = 20;
             // 
             // label12
             // 
@@ -870,7 +541,7 @@
             this.lblAdjustment.Location = new System.Drawing.Point(157, 53);
             this.lblAdjustment.Name = "lblAdjustment";
             this.lblAdjustment.Size = new System.Drawing.Size(88, 13);
-            this.lblAdjustment.TabIndex = 29;
+            this.lblAdjustment.TabIndex = 19;
             this.lblAdjustment.TabStop = true;
             this.lblAdjustment.Text = "Adjust Quantity";
             this.lblAdjustment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -886,7 +557,7 @@
             this.txtQty.Location = new System.Drawing.Point(34, 48);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(104, 22);
-            this.txtQty.TabIndex = 14;
+            this.txtQty.TabIndex = 18;
             // 
             // label11
             // 
@@ -907,6 +578,351 @@
             this.tbInventory.Name = "tbInventory";
             this.tbInventory.Text = "Inventory";
             // 
+            // superTabControlPanel1
+            // 
+            this.superTabControlPanel1.AutoScroll = true;
+            this.superTabControlPanel1.Controls.Add(this.txtSupersededPartNo);
+            this.superTabControlPanel1.Controls.Add(this.lblSupersededPartNo);
+            this.superTabControlPanel1.Controls.Add(this.cboType);
+            this.superTabControlPanel1.Controls.Add(this.label10);
+            this.superTabControlPanel1.Controls.Add(this.cboStatus);
+            this.superTabControlPanel1.Controls.Add(this.label9);
+            this.superTabControlPanel1.Controls.Add(this.cboCountry);
+            this.superTabControlPanel1.Controls.Add(this.label8);
+            this.superTabControlPanel1.Controls.Add(this.txtCategory);
+            this.superTabControlPanel1.Controls.Add(this.label7);
+            this.superTabControlPanel1.Controls.Add(this.lblAddUom);
+            this.superTabControlPanel1.Controls.Add(this.cboUom);
+            this.superTabControlPanel1.Controls.Add(this.label6);
+            this.superTabControlPanel1.Controls.Add(this.lblAddModel);
+            this.superTabControlPanel1.Controls.Add(this.cboModel);
+            this.superTabControlPanel1.Controls.Add(this.label5);
+            this.superTabControlPanel1.Controls.Add(this.lblAddBrand);
+            this.superTabControlPanel1.Controls.Add(this.cboBrand);
+            this.superTabControlPanel1.Controls.Add(this.label4);
+            this.superTabControlPanel1.Controls.Add(this.txtDescription);
+            this.superTabControlPanel1.Controls.Add(this.label3);
+            this.superTabControlPanel1.Controls.Add(this.cboPartName);
+            this.superTabControlPanel1.Controls.Add(this.lblAddPartName);
+            this.superTabControlPanel1.Controls.Add(this.label2);
+            this.superTabControlPanel1.Controls.Add(this.txtPartNo);
+            this.superTabControlPanel1.Controls.Add(this.label1);
+            this.superTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.superTabControlPanel1.Location = new System.Drawing.Point(152, 0);
+            this.superTabControlPanel1.Name = "superTabControlPanel1";
+            this.superTabControlPanel1.Size = new System.Drawing.Size(519, 357);
+            this.superTabControlPanel1.TabIndex = 1;
+            this.superTabControlPanel1.TabItem = this.tbGeneral;
+            // 
+            // txtSupersededPartNo
+            // 
+            // 
+            // 
+            // 
+            this.txtSupersededPartNo.Border.Class = "TextBoxBorder";
+            this.txtSupersededPartNo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtSupersededPartNo.Location = new System.Drawing.Point(277, 41);
+            this.txtSupersededPartNo.Name = "txtSupersededPartNo";
+            this.txtSupersededPartNo.Size = new System.Drawing.Size(210, 22);
+            this.txtSupersededPartNo.TabIndex = 1;
+            // 
+            // lblSupersededPartNo
+            // 
+            this.lblSupersededPartNo.AutoSize = true;
+            this.lblSupersededPartNo.ForeColor = System.Drawing.Color.DimGray;
+            this.lblSupersededPartNo.Location = new System.Drawing.Point(274, 25);
+            this.lblSupersededPartNo.Name = "lblSupersededPartNo";
+            this.lblSupersededPartNo.Size = new System.Drawing.Size(112, 13);
+            this.lblSupersededPartNo.TabIndex = 49;
+            this.lblSupersededPartNo.Text = "Superseded Part No.";
+            // 
+            // cboType
+            // 
+            this.cboType.DisplayMember = "Text";
+            this.cboType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboType.FormattingEnabled = true;
+            this.cboType.ItemHeight = 16;
+            this.cboType.Location = new System.Drawing.Point(277, 309);
+            this.cboType.Name = "cboType";
+            this.cboType.Size = new System.Drawing.Size(210, 22);
+            this.cboType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboType.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.DimGray;
+            this.label10.Location = new System.Drawing.Point(274, 293);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 13);
+            this.label10.TabIndex = 47;
+            this.label10.Text = "Type";
+            // 
+            // cboStatus
+            // 
+            this.cboStatus.DisplayMember = "Text";
+            this.cboStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboStatus.FormattingEnabled = true;
+            this.cboStatus.ItemHeight = 16;
+            this.cboStatus.Location = new System.Drawing.Point(29, 309);
+            this.cboStatus.Name = "cboStatus";
+            this.cboStatus.Size = new System.Drawing.Size(210, 22);
+            this.cboStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboStatus.TabIndex = 13;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.DimGray;
+            this.label9.Location = new System.Drawing.Point(26, 293);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(39, 13);
+            this.label9.TabIndex = 45;
+            this.label9.Text = "Status";
+            // 
+            // cboCountry
+            // 
+            this.cboCountry.DisplayMember = "Text";
+            this.cboCountry.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboCountry.FormattingEnabled = true;
+            this.cboCountry.ItemHeight = 16;
+            this.cboCountry.Location = new System.Drawing.Point(277, 258);
+            this.cboCountry.Name = "cboCountry";
+            this.cboCountry.Size = new System.Drawing.Size(210, 22);
+            this.cboCountry.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboCountry.TabIndex = 12;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.DimGray;
+            this.label8.Location = new System.Drawing.Point(274, 242);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(98, 13);
+            this.label8.TabIndex = 43;
+            this.label8.Text = "Country of Origin";
+            // 
+            // txtCategory
+            // 
+            // 
+            // 
+            // 
+            this.txtCategory.Border.Class = "TextBoxBorder";
+            this.txtCategory.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtCategory.Location = new System.Drawing.Point(277, 93);
+            this.txtCategory.Name = "txtCategory";
+            this.txtCategory.Size = new System.Drawing.Size(210, 22);
+            this.txtCategory.TabIndex = 4;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.DimGray;
+            this.label7.Location = new System.Drawing.Point(274, 77);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 13);
+            this.label7.TabIndex = 41;
+            this.label7.Text = "Category";
+            // 
+            // lblAddUom
+            // 
+            this.lblAddUom.AutoSize = true;
+            this.lblAddUom.BackColor = System.Drawing.Color.Transparent;
+            this.lblAddUom.LinkColor = System.Drawing.Color.SteelBlue;
+            this.lblAddUom.Location = new System.Drawing.Point(101, 242);
+            this.lblAddUom.Name = "lblAddUom";
+            this.lblAddUom.Size = new System.Drawing.Size(138, 13);
+            this.lblAddUom.TabIndex = 11;
+            this.lblAddUom.TabStop = true;
+            this.lblAddUom.Text = "Add unit of measurement";
+            this.lblAddUom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAddUom.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAddUom_LinkClicked);
+            // 
+            // cboUom
+            // 
+            this.cboUom.DisplayMember = "Text";
+            this.cboUom.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboUom.FormattingEnabled = true;
+            this.cboUom.ItemHeight = 16;
+            this.cboUom.Location = new System.Drawing.Point(29, 258);
+            this.cboUom.Name = "cboUom";
+            this.cboUom.Size = new System.Drawing.Size(210, 22);
+            this.cboUom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboUom.TabIndex = 10;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.DimGray;
+            this.label6.Location = new System.Drawing.Point(26, 242);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 13);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "Unit";
+            // 
+            // lblAddModel
+            // 
+            this.lblAddModel.AutoSize = true;
+            this.lblAddModel.BackColor = System.Drawing.Color.Transparent;
+            this.lblAddModel.LinkColor = System.Drawing.Color.SteelBlue;
+            this.lblAddModel.Location = new System.Drawing.Point(420, 186);
+            this.lblAddModel.Name = "lblAddModel";
+            this.lblAddModel.Size = new System.Drawing.Size(63, 13);
+            this.lblAddModel.TabIndex = 9;
+            this.lblAddModel.TabStop = true;
+            this.lblAddModel.Text = "Add model";
+            this.lblAddModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAddModel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAddModel_LinkClicked);
+            // 
+            // cboModel
+            // 
+            this.cboModel.DisplayMember = "Text";
+            this.cboModel.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboModel.FormattingEnabled = true;
+            this.cboModel.ItemHeight = 16;
+            this.cboModel.Location = new System.Drawing.Point(277, 202);
+            this.cboModel.Name = "cboModel";
+            this.cboModel.Size = new System.Drawing.Size(210, 22);
+            this.cboModel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboModel.TabIndex = 8;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.DimGray;
+            this.label5.Location = new System.Drawing.Point(274, 186);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 13);
+            this.label5.TabIndex = 35;
+            this.label5.Text = "Model";
+            // 
+            // lblAddBrand
+            // 
+            this.lblAddBrand.AutoSize = true;
+            this.lblAddBrand.BackColor = System.Drawing.Color.Transparent;
+            this.lblAddBrand.LinkColor = System.Drawing.Color.SteelBlue;
+            this.lblAddBrand.Location = new System.Drawing.Point(177, 186);
+            this.lblAddBrand.Name = "lblAddBrand";
+            this.lblAddBrand.Size = new System.Drawing.Size(62, 13);
+            this.lblAddBrand.TabIndex = 7;
+            this.lblAddBrand.TabStop = true;
+            this.lblAddBrand.Text = "Add brand";
+            this.lblAddBrand.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAddBrand.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAddBrand_LinkClicked);
+            // 
+            // cboBrand
+            // 
+            this.cboBrand.DisplayMember = "Text";
+            this.cboBrand.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboBrand.FormattingEnabled = true;
+            this.cboBrand.ItemHeight = 16;
+            this.cboBrand.Location = new System.Drawing.Point(29, 202);
+            this.cboBrand.Name = "cboBrand";
+            this.cboBrand.Size = new System.Drawing.Size(210, 22);
+            this.cboBrand.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboBrand.TabIndex = 6;
+            this.cboBrand.SelectedValueChanged += new System.EventHandler(this.cboBrand_SelectedValueChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.DimGray;
+            this.label4.Location = new System.Drawing.Point(26, 186);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.TabIndex = 32;
+            this.label4.Text = "Brand";
+            // 
+            // txtDescription
+            // 
+            // 
+            // 
+            // 
+            this.txtDescription.Border.Class = "TextBoxBorder";
+            this.txtDescription.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtDescription.Location = new System.Drawing.Point(29, 147);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(458, 22);
+            this.txtDescription.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.DimGray;
+            this.label3.Location = new System.Drawing.Point(26, 131);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 13);
+            this.label3.TabIndex = 30;
+            this.label3.Text = "Description";
+            // 
+            // cboPartName
+            // 
+            this.cboPartName.DisplayMember = "Text";
+            this.cboPartName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboPartName.FormattingEnabled = true;
+            this.cboPartName.ItemHeight = 16;
+            this.cboPartName.Location = new System.Drawing.Point(29, 93);
+            this.cboPartName.Name = "cboPartName";
+            this.cboPartName.Size = new System.Drawing.Size(210, 22);
+            this.cboPartName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboPartName.TabIndex = 2;
+            this.cboPartName.SelectedValueChanged += new System.EventHandler(this.cboPartName_SelectedValueChanged);
+            // 
+            // lblAddPartName
+            // 
+            this.lblAddPartName.AutoSize = true;
+            this.lblAddPartName.BackColor = System.Drawing.Color.Transparent;
+            this.lblAddPartName.LinkColor = System.Drawing.Color.SteelBlue;
+            this.lblAddPartName.Location = new System.Drawing.Point(156, 77);
+            this.lblAddPartName.Name = "lblAddPartName";
+            this.lblAddPartName.Size = new System.Drawing.Size(83, 13);
+            this.lblAddPartName.TabIndex = 3;
+            this.lblAddPartName.TabStop = true;
+            this.lblAddPartName.Text = "Add part name";
+            this.lblAddPartName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAddPartName.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAddPartName_LinkClicked);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.DimGray;
+            this.label2.Location = new System.Drawing.Point(26, 77);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 13);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "Part Name";
+            // 
+            // txtPartNo
+            // 
+            // 
+            // 
+            // 
+            this.txtPartNo.Border.Class = "TextBoxBorder";
+            this.txtPartNo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtPartNo.Location = new System.Drawing.Point(29, 41);
+            this.txtPartNo.Name = "txtPartNo";
+            this.txtPartNo.Size = new System.Drawing.Size(210, 22);
+            this.txtPartNo.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.DimGray;
+            this.label1.Location = new System.Drawing.Point(26, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Part No.";
+            // 
+            // tbGeneral
+            // 
+            this.tbGeneral.AttachedControl = this.superTabControlPanel1;
+            this.tbGeneral.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tbGeneral.GlobalItem = false;
+            this.tbGeneral.Image = ((System.Drawing.Image)(resources.GetObject("tbGeneral.Image")));
+            this.tbGeneral.Name = "tbGeneral";
+            this.tbGeneral.Text = "General Information";
+            // 
             // superTabControlPanel4
             // 
             this.superTabControlPanel4.Controls.Add(this.grdLocations);
@@ -926,7 +942,7 @@
             this.grdLocations.Rows.DefaultSize = 21;
             this.grdLocations.Size = new System.Drawing.Size(519, 357);
             this.grdLocations.StyleInfo = resources.GetString("grdLocations.StyleInfo");
-            this.grdLocations.TabIndex = 1;
+            this.grdLocations.TabIndex = 29;
             // 
             // tbLocations
             // 
@@ -956,7 +972,7 @@
             this.grdLedger.Rows.DefaultSize = 21;
             this.grdLedger.Size = new System.Drawing.Size(519, 357);
             this.grdLedger.StyleInfo = resources.GetString("grdLedger.StyleInfo");
-            this.grdLedger.TabIndex = 2;
+            this.grdLedger.TabIndex = 30;
             // 
             // tbLedger
             // 
@@ -966,6 +982,57 @@
             this.tbLedger.Image = ((System.Drawing.Image)(resources.GetObject("tbLedger.Image")));
             this.tbLedger.Name = "tbLedger";
             this.tbLedger.Text = "Stock Ledger";
+            // 
+            // superTabControlPanel6
+            // 
+            this.superTabControlPanel6.Controls.Add(this.txtNotes);
+            this.superTabControlPanel6.Controls.Add(this.grdMisc);
+            this.superTabControlPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.superTabControlPanel6.Location = new System.Drawing.Point(152, 0);
+            this.superTabControlPanel6.Name = "superTabControlPanel6";
+            this.superTabControlPanel6.Size = new System.Drawing.Size(519, 357);
+            this.superTabControlPanel6.TabIndex = 0;
+            this.superTabControlPanel6.TabItem = this.tbMiscellaneous;
+            // 
+            // txtNotes
+            // 
+            this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.txtNotes.Border.Class = "TextBoxBorder";
+            this.txtNotes.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtNotes.Location = new System.Drawing.Point(3, 143);
+            this.txtNotes.Multiline = true;
+            this.txtNotes.Name = "txtNotes";
+            this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtNotes.Size = new System.Drawing.Size(513, 211);
+            this.txtNotes.TabIndex = 32;
+            this.txtNotes.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty;
+            this.txtNotes.WatermarkText = "<i>Notes</i>";
+            // 
+            // grdMisc
+            // 
+            this.grdMisc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdMisc.ColumnInfo = "10,1,0,0,0,105,Columns:";
+            this.grdMisc.Location = new System.Drawing.Point(3, 3);
+            this.grdMisc.Name = "grdMisc";
+            this.grdMisc.Rows.DefaultSize = 21;
+            this.grdMisc.Size = new System.Drawing.Size(513, 137);
+            this.grdMisc.StyleInfo = resources.GetString("grdMisc.StyleInfo");
+            this.grdMisc.TabIndex = 31;
+            // 
+            // tbMiscellaneous
+            // 
+            this.tbMiscellaneous.AttachedControl = this.superTabControlPanel6;
+            this.tbMiscellaneous.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tbMiscellaneous.GlobalItem = false;
+            this.tbMiscellaneous.Image = ((System.Drawing.Image)(resources.GetObject("tbMiscellaneous.Image")));
+            this.tbMiscellaneous.Name = "tbMiscellaneous";
+            this.tbMiscellaneous.Text = "Miscellaneous";
             // 
             // PartInformationDialog
             // 
@@ -993,20 +1060,20 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tbctrl)).EndInit();
             this.tbctrl.ResumeLayout(false);
-            this.superTabControlPanel1.ResumeLayout(false);
-            this.superTabControlPanel1.PerformLayout();
             this.superTabControlPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdAlternative)).EndInit();
-            this.superTabControlPanel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grdMisc)).EndInit();
             this.superTabControlPanel2.ResumeLayout(false);
             this.superTabControlPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtReorderQty)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReorderPoint)).EndInit();
+            this.superTabControlPanel1.ResumeLayout(false);
+            this.superTabControlPanel1.PerformLayout();
             this.superTabControlPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdLocations)).EndInit();
             this.superTabControlPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdLedger)).EndInit();
+            this.superTabControlPanel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdMisc)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1080,5 +1147,9 @@
         private DevComponents.DotNetBar.SuperTabItem tbMiscellaneous;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNotes;
         private C1.Win.C1FlexGrid.C1FlexGrid grdMisc;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtSupersededPartNo;
+        private System.Windows.Forms.Label lblSupersededPartNo;
+        private System.Windows.Forms.Button btnDeleteSupersession;
+        private System.Windows.Forms.Button btnViewSupersession;
     }
 }

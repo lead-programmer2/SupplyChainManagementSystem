@@ -61,6 +61,7 @@
     <Compile Include="Classes\DatabaseScriptInfo.cs" />
     <Compile Include="Classes\GlobalSettings.cs" />
     <Compile Include="Classes\MsgBoxEx.cs" />
+    <Compile Include="Classes\PartInfo.cs" />
     <Compile Include="Classes\RestorePointInfo.cs" />
     <Compile Include="Classes\SCMS.cs" />
     <Compile Include="Classes\ServerConnectionInfo.cs" />
@@ -91,6 +92,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\PartInformationDialog.Designer.cs">
       <DependentUpon>PartInformationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\PartSupersessionSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\PartSupersessionSelectionDialog.Designer.cs">
+      <DependentUpon>PartSupersessionSelectionDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\StockAdjustmentInfoDialog.cs">
       <SubType>Form</SubType>
@@ -321,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\PartInformationDialog.resx">
       <DependentUpon>PartInformationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\PartSupersessionSelectionDialog.resx">
+      <DependentUpon>PartSupersessionSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\StockAdjustmentInfoDialog.resx">
       <DependentUpon>StockAdjustmentInfoDialog.cs</DependentUpon>

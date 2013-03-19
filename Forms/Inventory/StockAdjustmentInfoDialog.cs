@@ -21,6 +21,9 @@ namespace SupplyChainManagementSystem
 {
     public partial class StockAdjustmentInfoDialog : Office2007Form
     {
+
+        #region Constructors
+
         /// <summary>
         /// Creates a new instance of StockAdjustmentInfoDialog.
         /// </summary>
@@ -32,12 +35,38 @@ namespace SupplyChainManagementSystem
         /// <summary>
         /// Creates a new instance of StockAdjustmentInfoDialog.
         /// </summary>
+        /// <param name="info"></param>
+        public StockAdjustmentInfoDialog(PartInfo info)
+        {
+            InitializeComponent();
+
+            _partinfo = info;
+        }
+
+        /// <summary>
+        /// Creates a new instance of StockAdjustmentInfoDialog.
+        /// </summary>
         /// <param name="refno"></param>
         public StockAdjustmentInfoDialog(string refno)
         {
             InitializeComponent();
 
             _referenceno = refno; _isnew = false;
+        }
+
+        #endregion
+
+        #region Properties
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private bool _isfinalized = false;
+
+        /// <summary>
+        /// Gets whether the current stock adjustment has been finalized and has taken effect into the inventory.
+        /// </summary>
+        public bool IsFinalized
+        {
+            get { return _isfinalized; }
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -62,6 +91,8 @@ namespace SupplyChainManagementSystem
             get { return _withupdates; }
         }
 
+        #endregion
+
         #region Variables
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -83,6 +114,9 @@ namespace SupplyChainManagementSystem
         private ComboBoxEx _locationseditor = new ComboBoxEx();
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private PartInfo _partinfo = null;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private DataSourcedComboBox _partseditor = new DataSourcedComboBox();
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -95,7 +129,9 @@ namespace SupplyChainManagementSystem
         private bool _updated = false;
 
         #endregion
-        
+
+        #region Methods
+
         private void AttachEditorHandler()
         {
             txtSummary.TextChanged += new EventHandler(Field_Edited);
@@ -295,6 +331,18 @@ namespace SupplyChainManagementSystem
 
                 try
                 {
+                    if (_partinfo != null)
+                    {
+                        object[] _newrow = new object[_cols.Count];
+                        _newrow[_cols["PartCode"].Ordinal] = _partinfo.PartCode;
+                        _newrow[_cols["PartNo"].Ordinal] = _partinfo.PartNo;
+                        _newrow[_cols["PartName"].Ordinal] = _partinfo.PartName;
+                        _newrow[_cols["Description"].Ordinal] = _partinfo.Description;
+                        _newrow[_cols["Unit"].Ordinal] = _partinfo.Unit;
+
+                        _datasource.Rows.Add(_newrow);
+                    }
+
                     foreach (var _row in _query)
                     {
                         if (!_headerloaded)
@@ -324,7 +372,8 @@ namespace SupplyChainManagementSystem
                         }
 
                         int _currentqty = GetPartQty(_row.PartCode, _row.LocationCode, _row.StockDate, _row.UnitCost);
-                        _currentqty -= (_row.Multiplier * _row.Qty);
+                        int _tempty = _currentqty - (_row.Multiplier * _row.Qty);
+                        if (_tempty >= 0) _currentqty -= (_row.Multiplier * _row.Qty);
                         
                         DataRow[] _rows = _datasource.Select("[PartCode] LIKE '" + _row.PartCode.ToSqlValidString(true) + "' AND\n" +
                                                              "[LocationCode] LIKE '" + _row.LocationCode.ToSqlValidString(true) + "' AND\n" +
@@ -372,6 +421,7 @@ namespace SupplyChainManagementSystem
                 }
                 else
                 {
+                    _isfinalized = true;
                     dtpDated.Enabled = false; txtSummary.ReadOnly = true;
                     grdDetails.AllowAddNew = false; grdDetails.AllowDelete = false;
                     grdDetails.AllowEditing = false; btnDelete.Enabled = false;
@@ -403,6 +453,11 @@ namespace SupplyChainManagementSystem
                 _partseditor.DisplayMember = "PartNo"; _partseditor.ValueMember = "PartCode";
                 DataTable _datasource = _parts.Replicate();
                 _partseditor.DataSource = _datasource;
+
+                ColumnCollection _cols = _partseditor.Cols;
+                _cols["PartNo"].Caption = "Part No.";
+                _cols["PartName"].Caption = "Part Name";
+
                 _partseditor.Enabled = true;
             }
 
@@ -483,6 +538,10 @@ namespace SupplyChainManagementSystem
                 }
             }
         }
+
+        #endregion
+
+        #region FormEvents
 
         private void StockAdjustmentInfoDialog_Disposed(object sender, EventArgs e)
         {
@@ -583,36 +642,9 @@ namespace SupplyChainManagementSystem
             }
         }
 
-        private void Field_Edited(object sender, EventArgs e)
-        {
-            if (sender == null) return;
-            if (!_isshown) return;
-            if (sender is ButtonItem)
-            {
-                if (!((ButtonItem)sender).Enabled) return;
-            }
+        #endregion
 
-            if (!_updated) _updated = true;
-            this.MarkAsEdited();
-        }
-
-        private void Field_Edited(object sender, RowColEventArgs e)
-        {
-            if (sender == null) return;
-            if (!_isshown) return;
-
-            Validator _validator = SCMS.Validators[this];
-            if (_validator != null) _validator.ErrorProvider.SetError((Control)sender, "");
-
-            if (!_updated) _updated = true;
-            this.MarkAsEdited();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            if (!_cancelled) _cancelled = true;
-            DialogResult = System.Windows.Forms.DialogResult.Cancel; Close();
-        }
+        #region GridEvents
 
         private void grdDetails_AfterEdit(object sender, RowColEventArgs e)
         {
@@ -764,6 +796,41 @@ namespace SupplyChainManagementSystem
                 grdDetails[e.Row, "TotalCost"] = _unitcost * (_multiplier * _qty);
                 ComputeTotal();
             }
+        }
+
+        #endregion
+
+        #region ControlEvents
+
+        private void Field_Edited(object sender, EventArgs e)
+        {
+            if (sender == null) return;
+            if (!_isshown) return;
+            if (sender is ButtonItem)
+            {
+                if (!((ButtonItem)sender).Enabled) return;
+            }
+
+            if (!_updated) _updated = true;
+            this.MarkAsEdited();
+        }
+
+        private void Field_Edited(object sender, RowColEventArgs e)
+        {
+            if (sender == null) return;
+            if (!_isshown) return;
+
+            Validator _validator = SCMS.Validators[this];
+            if (_validator != null) _validator.ErrorProvider.SetError((Control)sender, "");
+
+            if (!_updated) _updated = true;
+            this.MarkAsEdited();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (!_cancelled) _cancelled = true;
+            DialogResult = System.Windows.Forms.DialogResult.Cancel; Close();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -1258,18 +1325,47 @@ namespace SupplyChainManagementSystem
                                 else _log = "Updated stock adjustment : " + _referenceno + ".";
                             }
 
+                            Cursor = Cursors.WaitCursor;
                             _stockadjustments.AcceptChanges();
-                            _stockadjdetails.AcceptChanges();
-                            _datasource.AcceptChanges();
-                            if (_stockledger != null) _stockledger.AcceptChanges();
+
+                            if (!_isnew)
+                            {
+                                _stockadjdetails.AcceptChanges();
+                                _datasource.AcceptChanges();
+                            }
+                            
+                            if (_stockledger != null)
+                            {
+                                if (sender != null)
+                                {
+                                    if (sender is Button)
+                                    {
+                                        if (sender == btnFinalize)
+                                        {
+                                            _stockledger.RejectChanges();
+                                            IAsyncResult _syncresult = Cache.SyncTableAsync(SCMS.Connection, "stockledger");
+                                            _syncresult.WaitToFinish();
+                                        }
+                                    }
+                                }
+                            }
 
                             if (_isnew) 
-                            { _referenceno = _refno; _isnew = false; }
+                            { 
+                                _referenceno = _refno; _isnew = false;
+
+                                _stockadjdetails.RejectChanges();
+                                if (_partinfo != null)
+                                {
+                                    _partinfo = null; Materia.RefreshAndManageCurrentProcess();
+                                }
+                                IAsyncResult _detailresult = Cache.SyncTableAsync(SCMS.Connection, "stockadjustmentdetails");
+                                _detailresult.WaitToFinish(); InitializeInfo();
+                            }
                             
                             if (_updated) _updated = false;
                             if (!_withupdates) _withupdates = true;
                             Text = Text.Replace(" *", "").Replace("*", "");
-                            Cursor = Cursors.WaitCursor;
 
                             IAsyncResult _logresult = SCMS.CurrentSystemUser.LogActionAsync(_action, _log, _referenceno);
                             _logresult.WaitToFinish();
@@ -1300,6 +1396,7 @@ namespace SupplyChainManagementSystem
                                         dtpDated.Enabled = false; txtSummary.ReadOnly = true;
                                         grdDetails.AllowAddNew = false; grdDetails.AllowEditing = false;
                                         grdDetails.AllowDelete = false; btnDelete.Enabled = false;
+                                        _isfinalized = true;
                                     }
                                     else { }
 
@@ -1358,6 +1455,8 @@ namespace SupplyChainManagementSystem
             if (!_isshown) return;
             if (SCMS.Validators.Contains(this)) SCMS.Validators[this].Highlighter.UpdateHighlights();
         }
+
+        #endregion
 
     }
 }

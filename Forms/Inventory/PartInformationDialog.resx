@@ -117,45 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tbInventory.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAACqUlEQVQ4T6WTW0iUURDHv+yi
-        eUVfTFMoBaGC0qJSSCIjfEvC1DCDKFJCUZF2zbu2pXkNzQuE9pAvJYXY3V0vJWrZkrkKBrZqrVbrWmma
-        iAX9Op8fuRY+BA38YThn5secmTMSIP2PFpNlK6+7/jC9sIiMkjIySq+sLHEnx4jYB4tJsv0GFN9ulEm7
-        /kUlSqwV8MRWamgXrDYbidY1Qmv/VJs4a18t0SFiOoW6hbokaWCpglZbiQ/VFQyrE4WSGU5NZuR8CiNp
-        ikbVSQyfS6SuqoaM8mqyKmqoSIhXqpCfIAMmqsvpcVtNj5PECxcJvbsdek9H9B72vHS1oTY8jJbnemYX
-        vjM2YeHpsx40RaU/FYC9hFawHi/yoLGvH53wtauU86FTUaTkF2P6YKbx7n0uXi4hU1NAXn6hMsIWO4nx
-        szGYU+MZkwG9BizpiZhzVUxkp/BFFYe6oIjBISNPOrpRZ+VgOXJQaboM0K2TmLpWzpCPM62edrR52WP0
-        c2PEzxWTjwPv3SVu3n/EkHGE3lcGklVpqDJzycjVKBUsAvLPM7p9A+8CvDDt9OK9vwfT25w5GnsJTVoZ
-        psF++gz9DAy+5tPXGcyfp0jNzFZ6oBVNnFKdZmyPN+OBmzDv9WYuwJXjcRewrTTSNQcJj0y03KglTp1O
-        bFoOeVGR1idoRQ+mz4Qxsc+HyWBf5gI3EpNQwPrKN/R+g9314xy6N8OJMzn82OHCQvQBjKejrWNsEVOY
-        PxbMbOhW5kK3wP6N2FwdxDAPQfUmDjdNEnTnIyfPlfEzZDMLEUHoxOda+gc6J2lGhmiFWkU1ejE6p6oB
-        9jdYCG+yEHLrLZERSbwU5+3iuXKszlGaWb4L/n/vgMNFbbNvWSfbKrpxzWpsXmFH5BzrMi0th9XxWZYk
-        +yvaL2IEEayKdaDLAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="tbGeneral.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAACaElEQVQ4T12T3UvTYRzF9xeY
-        OQ0s8C4CyySE6IUJJqjDMlZJc7MxKgRRiurGHFZIWGaoNFdmmmblZri3Ky+CkMaczr2Ybq2N9WJImXVf
-        Xp2e8+wl2gNffnzP+Zzz2zM2hSLnFDY7LdubHL/ztXZsE8Mnd+q5LIB/UtE5V81OgxtGcwBjc1/hCm/C
-        FdqEWzy5U6dPLpPKFlDc1z6LCc86Bl+voeFBCLs73mLXlTmUdnqgMYelTp9cpiRbUCyaHUsbaJ2MoazL
-        i1KTF9aF78IH9lz3oPzGPPaLoU+OPD+FLODdTFNRXLbFcfD2Ag73LKKi24dp/4YsKL81jyNC49AnR545
-        WVCgs/95+GYdqt4Aqu4FUdUXxNE7Syi76cPeLh8O9filVn1feMInR545WaDUOdDh/ISa/hDqBsOoHQhD
-        dTcg387DslrhqYVHnxx55lJX0DvQak3ghGUFDWKOD63gWH8YNv8PWaDqC6He/E56HHLkmZMFRXondOMx
-        NI5EcOZxBKeGI1CLwEzwpyyoHliG5tGq9DjkyDMnC3boHVva0SiaJ+LQPY1BOxbDyeEonOFfskA9tIqz
-        o++lxyFHnrnUFU4/ma7s9qLFmsT55wkYnsXRKAKu5VRBvSX1RuNkXPrkyDMnC8Qp4X0M4x/QNvMZLbaP
-        2XDmizQwKHT65MgzlylQ5Fdeays2unHxRQJX3WsSvDCVhPFlUj7bxU6dPjny2R9S+nedR1Gps6Ou149L
-        9i8wzX5Dpxg+uVOnnw7n5RZwp1ih1Iy8KtTZtwqa7MgMd+r005x8b/YKOX/TErEfSMMMcLhT/++w4C9i
-        7DLDmSgLPAAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="grdAlternative.StyleInfo" xml:space="preserve">
     <value>Normal{Font:Segoe UI, 8.25pt;}	Alternate{}	Fixed{BackColor:Control;ForeColor:ControlText;Border:Flat,1,ControlDark,Both;BackgroundImageLayout:Hide;}	Highlight{BackColor:Highlight;ForeColor:HighlightText;}	Focus{}	Editor{}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	NewRow{ForeColor:GrayText;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	SelectedColumnHeader{}	SelectedRowHeader{}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	FilterEditor{}	FirstCustomStyle{}	</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="tbAlternative.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -177,21 +142,39 @@
         qzUm8IQpCYERPt47ovsiEmL9v3MvcuE9iP4GymoyqBcC6DEAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="grdMisc.StyleInfo" xml:space="preserve">
-    <value>Normal{Font:Segoe UI, 8.25pt;}	Alternate{}	Fixed{BackColor:Control;ForeColor:ControlText;Border:Flat,1,ControlDark,Both;BackgroundImageLayout:Hide;}	Highlight{BackColor:Highlight;ForeColor:HighlightText;}	Focus{}	Editor{}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	NewRow{ForeColor:GrayText;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	SelectedColumnHeader{}	SelectedRowHeader{}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	FilterEditor{}	FirstCustomStyle{}	</value>
-  </data>
-  <data name="tbMiscellaneous.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tbGeneral.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABq0lEQVQ4T42TSS9DYRSGv5BQ
-        tKohhgUSafgBfoWE/2ImRWtI2AtRw8IGTSR0Ug1iWImFuWnFRhOVSFRvibAgeZ3z3V4dXNKTPrnJd27f
-        +5zTW1FuD3hrxoOoHt/+l9qJIPjexqldkYngLy9dJLBwnsAiXfVYulSwfJ1EHYXUT+5kB1SNBeC5fYNl
-        4hDGYZ8uJjo327dQNRpAromwOAI4fviEweaF8+xZMk82bJQLm+aaCBMlcxUOeLBypaBibP9PEzY0j/hR
-        SSY8Ou9ElA2rAaLfg9mTR5TYfJg7jRNPcP5JXO6KQ9IBPW4ZVEAm6+EXNE2H0DwTQksOfMa9jZtXaZIO
-        6N5UTXrd2Lt7R9tqFO1rUXS4suEz7h1EP+RihXEkNYIW0LUhg/KpUhpf/gryyX3qCKJTDYiEwwhHIrpw
-        j8sw5Icw9bqOLI5tFNHyZEDKIBaL4T72oAv3fgKEEFai1ayZpJaZVBJIKIou3JMBNjLg97qB0EwKB1UT
-        fH3Sh+BrJnTGPa4SHkH7Y2gmJru6k3yKXqR0QKYJNzi9mBT14B7fw9b04F8ld5In1m9ZkKbqNrwXPQAA
-        AABJRU5ErkJggg==
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAACaElEQVQ4T12T3UvTYRzF9xeY
+        OQ0s8C4CyySE6IUJJqjDMlZJc7MxKgRRiurGHFZIWGaoNFdmmmblZri3Ky+CkMaczr2Ybq2N9WJImXVf
+        Xp2e8+wl2gNffnzP+Zzz2zM2hSLnFDY7LdubHL/ztXZsE8Mnd+q5LIB/UtE5V81OgxtGcwBjc1/hCm/C
+        FdqEWzy5U6dPLpPKFlDc1z6LCc86Bl+voeFBCLs73mLXlTmUdnqgMYelTp9cpiRbUCyaHUsbaJ2MoazL
+        i1KTF9aF78IH9lz3oPzGPPaLoU+OPD+FLODdTFNRXLbFcfD2Ag73LKKi24dp/4YsKL81jyNC49AnR545
+        WVCgs/95+GYdqt4Aqu4FUdUXxNE7Syi76cPeLh8O9filVn1feMInR545WaDUOdDh/ISa/hDqBsOoHQhD
+        dTcg387DslrhqYVHnxx55lJX0DvQak3ghGUFDWKOD63gWH8YNv8PWaDqC6He/E56HHLkmZMFRXondOMx
+        NI5EcOZxBKeGI1CLwEzwpyyoHliG5tGq9DjkyDMnC3boHVva0SiaJ+LQPY1BOxbDyeEonOFfskA9tIqz
+        o++lxyFHnrnUFU4/ma7s9qLFmsT55wkYnsXRKAKu5VRBvSX1RuNkXPrkyDMnC8Qp4X0M4x/QNvMZLbaP
+        2XDmizQwKHT65MgzlylQ5Fdeays2unHxRQJX3WsSvDCVhPFlUj7bxU6dPjny2R9S+nedR1Gps6Ou149L
+        9i8wzX5Dpxg+uVOnnw7n5RZwp1ih1Iy8KtTZtwqa7MgMd+r005x8b/YKOX/TErEfSMMMcLhT/++w4C9i
+        7DLDmSgLPAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="tbInventory.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAACqUlEQVQ4T6WTW0iUURDHv+yi
+        eUVfTFMoBaGC0qJSSCIjfEvC1DCDKFJCUZF2zbu2pXkNzQuE9pAvJYXY3V0vJWrZkrkKBrZqrVbrWmma
+        iAX9Op8fuRY+BA38YThn5secmTMSIP2PFpNlK6+7/jC9sIiMkjIySq+sLHEnx4jYB4tJsv0GFN9ulEm7
+        /kUlSqwV8MRWamgXrDYbidY1Qmv/VJs4a18t0SFiOoW6hbokaWCpglZbiQ/VFQyrE4WSGU5NZuR8CiNp
+        ikbVSQyfS6SuqoaM8mqyKmqoSIhXqpCfIAMmqsvpcVtNj5PECxcJvbsdek9H9B72vHS1oTY8jJbnemYX
+        vjM2YeHpsx40RaU/FYC9hFawHi/yoLGvH53wtauU86FTUaTkF2P6YKbx7n0uXi4hU1NAXn6hMsIWO4nx
+        szGYU+MZkwG9BizpiZhzVUxkp/BFFYe6oIjBISNPOrpRZ+VgOXJQaboM0K2TmLpWzpCPM62edrR52WP0
+        c2PEzxWTjwPv3SVu3n/EkHGE3lcGklVpqDJzycjVKBUsAvLPM7p9A+8CvDDt9OK9vwfT25w5GnsJTVoZ
+        psF++gz9DAy+5tPXGcyfp0jNzFZ6oBVNnFKdZmyPN+OBmzDv9WYuwJXjcRewrTTSNQcJj0y03KglTp1O
+        bFoOeVGR1idoRQ+mz4Qxsc+HyWBf5gI3EpNQwPrKN/R+g9314xy6N8OJMzn82OHCQvQBjKejrWNsEVOY
+        PxbMbOhW5kK3wP6N2FwdxDAPQfUmDjdNEnTnIyfPlfEzZDMLEUHoxOda+gc6J2lGhmiFWkU1ejE6p6oB
+        9jdYCG+yEHLrLZERSbwU5+3iuXKszlGaWb4L/n/vgMNFbbNvWSfbKrpxzWpsXmFH5BzrMi0th9XxWZYk
+        +yvaL2IEEayKdaDLAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="grdLocations.StyleInfo" xml:space="preserve">
@@ -232,6 +215,23 @@
         IIj9LYE8ZlErYK6SwVguhbX0IBRWP2raA1Dq7eicWsXdkSXcGRaSsMz6+c10D+jJokhTOd7ajwsdAfGD
         ztAGOsZX0J4Cy6xfYHSAWGvkIi01MtJWnUWUN0aIStflprvOVhUFdGWZKJ++NwnN7HKRyRFjE+x2Duyc
         6j856y+qHYda/i1PLQAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="grdMisc.StyleInfo" xml:space="preserve">
+    <value>Normal{Font:Segoe UI, 8.25pt;}	Alternate{}	Fixed{BackColor:Control;ForeColor:ControlText;Border:Flat,1,ControlDark,Both;BackgroundImageLayout:Hide;}	Highlight{BackColor:Highlight;ForeColor:HighlightText;}	Focus{}	Editor{}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	NewRow{ForeColor:GrayText;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	SelectedColumnHeader{}	SelectedRowHeader{}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	FilterEditor{}	FirstCustomStyle{}	</value>
+  </data>
+  <data name="tbMiscellaneous.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABq0lEQVQ4T42TSS9DYRSGv5BQ
+        tKohhgUSafgBfoWE/2ImRWtI2AtRw8IGTSR0Ug1iWImFuWnFRhOVSFRvibAgeZ3z3V4dXNKTPrnJd27f
+        +5zTW1FuD3hrxoOoHt/+l9qJIPjexqldkYngLy9dJLBwnsAiXfVYulSwfJ1EHYXUT+5kB1SNBeC5fYNl
+        4hDGYZ8uJjo327dQNRpAromwOAI4fviEweaF8+xZMk82bJQLm+aaCBMlcxUOeLBypaBibP9PEzY0j/hR
+        SSY8Ou9ElA2rAaLfg9mTR5TYfJg7jRNPcP5JXO6KQ9IBPW4ZVEAm6+EXNE2H0DwTQksOfMa9jZtXaZIO
+        6N5UTXrd2Lt7R9tqFO1rUXS4suEz7h1EP+RihXEkNYIW0LUhg/KpUhpf/gryyX3qCKJTDYiEwwhHIrpw
+        j8sw5Icw9bqOLI5tFNHyZEDKIBaL4T72oAv3fgKEEFai1ayZpJaZVBJIKIou3JMBNjLg97qB0EwKB1UT
+        fH3Sh+BrJnTGPa4SHkH7Y2gmJru6k3yKXqR0QKYJNzi9mBT14B7fw9b04F8ld5In1m9ZkKbqNrwXPQAA
+        AABJRU5ErkJggg==
 </value>
   </data>
 </root>

@@ -110,10 +110,7 @@ namespace SupplyChainManagementSystem
                 if (_cacheddataset.Tables.Contains(tablename)) _table = _cacheddataset.Tables[tablename];
                 else
                 {
-                    if (tablename == "locations") SyncTable(SCMS.Connection, tablename, "LocationCode");
-                    else if (tablename == "models") SyncTable(SCMS.Connection, tablename, "ModelCode");
-                    else SyncTable(SCMS.Connection, tablename);
-
+                    SyncTable(SCMS.Connection, tablename);
                     if (_cacheddataset.Tables.Contains(tablename)) _table = _cacheddataset.Tables[tablename];
                 }
             }
@@ -163,7 +160,15 @@ namespace SupplyChainManagementSystem
         /// <param name="connection"></param>
         /// <param name="tablename"></param>
         public static void SyncTable(IDbConnection connection, string tablename)
-        { SyncTable(connection, tablename, ""); }
+        {
+            string _pk = "";
+
+            if (tablename == "models") _pk = "ModelCode";
+            else if (tablename == "locations") _pk = "LocationCode";
+            else { }
+
+            SyncTable(connection, tablename, _pk); 
+        }
 
         /// <summary>
         /// Synchronizes the specified database table using the supplied database connection.
