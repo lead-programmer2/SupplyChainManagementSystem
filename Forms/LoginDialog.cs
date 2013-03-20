@@ -144,7 +144,7 @@ namespace SupplyChainManagementSystem
                                       "('" + _rows[0]["Position"].ToString().ToSqlValidString() + "', NOW());\n";
 
                             object[] _values = new object[_postntable.Columns.Count];
-                            DataColumnCollection _cols = _depttable.Columns;
+                            DataColumnCollection _cols = _postntable.Columns;
                             _values[_cols["Position"].Ordinal] = _rows[0]["Position"];
                             _values[_cols["DateCreated"].Ordinal] = DateTime.Now;
                             _values[_cols["LastModified"].Ordinal] = DateTime.Now;

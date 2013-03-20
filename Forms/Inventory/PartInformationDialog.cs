@@ -147,6 +147,27 @@ namespace SupplyChainManagementSystem
             }
         }
 
+        private void _searchdialog_AfterDataSourceLoaded(object sender, EventArgs e)
+        {
+            if (sender == null) return;
+            if (!(sender is SearchDialog)) return;
+            SearchDialog _searchdialog = (SearchDialog)sender;
+
+            _searchdialog.Cols["PartCode"].Visible = false;
+            _searchdialog.Cols["PartNo"].Caption = "Part No.";
+            _searchdialog.Cols["PartName"].Caption = "Part Name";
+            _searchdialog.Cols["Select"].Visible = false;
+            _searchdialog.Cols[_searchdialog.Cols.Fixed - 1].Visible = false;
+        }
+
+        private void _searchdialog_Shown(object sender, EventArgs e)
+        {
+            if (sender == null) return;
+            if (!(sender is SearchDialog)) return;
+            SearchDialog _searchdialog = (SearchDialog)sender;
+            _searchdialog.Search(txtSearch.Text);
+        }
+
         private void AttachEditorHandler()
         {
             txtDescription.TextChanged += new EventHandler(Field_Edited);
@@ -880,9 +901,11 @@ namespace SupplyChainManagementSystem
                                     txtSupersededPartNo.Text = _result.SuperPartNo; txtSupersededPartNo.Show();
                                     tbAlternative.Visible = false; btnAddAlternative.Enabled = false;
                                     btnDeleteSupersession.Enabled = false; btnViewSupersession.Enabled = false;
+                                    cboPartName.Enabled = false; lblAddPartName.Hide();
                                 }
                                 else
-                                { 
+                                {
+                                    cboPartName.Enabled = true; lblAddPartName.Show();
                                     lblSupersededPartNo.Hide(); txtSupersededPartNo.Hide();
                                     tbAlternative.Visible = true;
                                 }
@@ -1811,5 +1834,93 @@ namespace SupplyChainManagementSystem
             grdAlternative.Row = _row; grdAlternative.RowSel = _row;
             btnViewSupersession_Click(btnViewSupersession, new EventArgs());
         }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!txtSearch.Enabled) return;
+            if (!_isshown) return;
+
+            if (e.KeyData == Keys.Enter)
+            {
+                DataTable _parts = Cache.GetCachedTable("parts");
+                if (_parts != null)
+                {
+                    DataRow[] _rows = _parts.Select("[PartCode] LIKE '" + txtSearch.Text.ToSqlValidString(true) + "' OR\n" +
+                                                    "[PartNo] LIKE '" + txtSearch.Text.ToSqlValidString(true) + "' OR\n" +
+                                                    "[PartName] LIKE '" + txtSearch.Text.ToSqlValidString(true) + "' OR\n" +
+                                                    "[Description] LIKE '" + txtSearch.Text.ToSqlValidString(true) + "'");
+
+                    if (_rows.Length == 1)
+                    {
+                        DataRow _row = _rows[0]; _withupdates = false;
+                        LoadPartInformation(_row["PartCode"].ToString());
+                    }
+                    else 
+                    {
+                        SearchDialog _searchdialog = new SearchDialog();
+                        _searchdialog.Text = "Search Parts";
+                        _searchdialog.AfterDataSourceFilter += new EventHandler(_searchdialog_AfterDataSourceLoaded);
+                        _searchdialog.AfterDataSourceLoaded += new EventHandler(_searchdialog_AfterDataSourceLoaded);
+                        _searchdialog.Shown += new EventHandler(_searchdialog_Shown);
+
+                        DataTable _models = Cache.GetCachedTable("models");
+
+                        var _query = from _part in _parts.AsEnumerable()
+                                     join _model in _models.AsEnumerable() on _part.Field<string>("ModelCode") equals _model.Field<string>("ModelCode") into _m
+                                     where _part.Field<string>("Company") == SCMS.CurrentCompany.Company
+                                     from _model in _m.DefaultIfEmpty(_models.NewRow())
+                                     select new
+                                     {
+                                         PartCode = _part.Field<string>("PartCode"),
+                                         PartNo = _part.Field<string>("PartNo"),
+                                         PartName = _part.Field<string>("PartName"),
+                                         Description = _part.Field<string>("Description"),
+                                         Brand = _part.Field<string>("Brand"),
+                                         Model = _model.Field<string>("Model")
+                                     };
+
+
+                        DataTable _datasource = new DataTable();
+                        _datasource.TableName = "parts";
+
+                        DataColumnCollection _cols = _datasource.Columns;
+                        DataColumn _pk = _cols.Add("PartCode", typeof(string));
+                        _cols.Add("PartNo", typeof(string));
+                        _cols.Add("PartName", typeof(string));
+                        _cols.Add("Description", typeof(string));
+                        _cols.Add("Brand", typeof(string));
+                        _cols.Add("Model", typeof(string));
+
+                        try
+                        {
+                            foreach (var _row in _query) _datasource.Rows.Add(new object[] {
+                                                                              _row.PartCode, _row.PartNo, _row.PartName,
+                                                                              _row.Description, _row.Brand, _row.Model });
+
+                            _datasource.AcceptChanges();
+                        }
+                        catch { }
+
+                        _searchdialog.DataSource = _datasource;
+                        if (_searchdialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        {
+                            if (_searchdialog.SelectedRows != null)
+                            {
+                                if (_searchdialog.SelectedRows.Length > 0)
+                                {
+                                    string _code = _searchdialog.SelectedRows[0]["PartCode"].ToString();
+                                    LoadPartInformation(_code);
+                                }
+                            }
+                        }
+                        _searchdialog.Dispose(); _searchdialog = null;
+                        Materia.RefreshAndManageCurrentProcess();
+                    }
+                }
+            }
+        }
+
+    
     }
 }
+ 

@@ -68,6 +68,7 @@
             // btnInfo
             // 
             this.btnInfo.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnInfo.HotTrackingStyle = DevComponents.DotNetBar.eHotTrackingStyle.None;
             this.btnInfo.Image = ((System.Drawing.Image)(resources.GetObject("btnInfo.Image")));
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.Text = " Ready";

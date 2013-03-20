@@ -39,29 +39,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tbctrl = new DevComponents.DotNetBar.SuperTabControl();
-            this.superTabControlPanel3 = new DevComponents.DotNetBar.SuperTabControlPanel();
-            this.btnDeleteSupersession = new System.Windows.Forms.Button();
-            this.btnViewSupersession = new System.Windows.Forms.Button();
-            this.btnAddAlternative = new System.Windows.Forms.Button();
-            this.grdAlternative = new C1.Win.C1FlexGrid.C1FlexGrid();
-            this.tbAlternative = new DevComponents.DotNetBar.SuperTabItem();
-            this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
-            this.txtReorderQty = new DevComponents.Editors.IntegerInput();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtReorderPoint = new DevComponents.Editors.IntegerInput();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtEnding = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.label14 = new System.Windows.Forms.Label();
-            this.lblViewOutgoing = new System.Windows.Forms.LinkLabel();
-            this.txtOutgoing = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.label13 = new System.Windows.Forms.Label();
-            this.lblViewIncoming = new System.Windows.Forms.LinkLabel();
-            this.txtIncoming = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lblAdjustment = new System.Windows.Forms.LinkLabel();
-            this.txtQty = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbInventory = new DevComponents.DotNetBar.SuperTabItem();
             this.superTabControlPanel1 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.txtSupersededPartNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblSupersededPartNo = new System.Windows.Forms.Label();
@@ -90,6 +67,29 @@
             this.txtPartNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.label1 = new System.Windows.Forms.Label();
             this.tbGeneral = new DevComponents.DotNetBar.SuperTabItem();
+            this.superTabControlPanel3 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.btnDeleteSupersession = new System.Windows.Forms.Button();
+            this.btnViewSupersession = new System.Windows.Forms.Button();
+            this.btnAddAlternative = new System.Windows.Forms.Button();
+            this.grdAlternative = new C1.Win.C1FlexGrid.C1FlexGrid();
+            this.tbAlternative = new DevComponents.DotNetBar.SuperTabItem();
+            this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.txtReorderQty = new DevComponents.Editors.IntegerInput();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtReorderPoint = new DevComponents.Editors.IntegerInput();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtEnding = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblViewOutgoing = new System.Windows.Forms.LinkLabel();
+            this.txtOutgoing = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lblViewIncoming = new System.Windows.Forms.LinkLabel();
+            this.txtIncoming = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lblAdjustment = new System.Windows.Forms.LinkLabel();
+            this.txtQty = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbInventory = new DevComponents.DotNetBar.SuperTabItem();
             this.superTabControlPanel4 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.grdLocations = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.tbLocations = new DevComponents.DotNetBar.SuperTabItem();
@@ -105,12 +105,12 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbctrl)).BeginInit();
             this.tbctrl.SuspendLayout();
+            this.superTabControlPanel1.SuspendLayout();
             this.superTabControlPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdAlternative)).BeginInit();
             this.superTabControlPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtReorderQty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReorderPoint)).BeginInit();
-            this.superTabControlPanel1.SuspendLayout();
             this.superTabControlPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdLocations)).BeginInit();
             this.superTabControlPanel5.SuspendLayout();
@@ -151,6 +151,7 @@
             this.txtSearch.TabIndex = 33;
             this.txtSearch.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty;
             this.txtSearch.WatermarkText = "<i>Search</i>";
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
             // btnSaveShortcut
             // 
@@ -253,8 +254,8 @@
             this.tbctrl.ControlBox.MenuBox,
             this.tbctrl.ControlBox.CloseBox});
             this.tbctrl.ControlBox.Visible = false;
-            this.tbctrl.Controls.Add(this.superTabControlPanel3);
             this.tbctrl.Controls.Add(this.superTabControlPanel1);
+            this.tbctrl.Controls.Add(this.superTabControlPanel3);
             this.tbctrl.Controls.Add(this.superTabControlPanel2);
             this.tbctrl.Controls.Add(this.superTabControlPanel4);
             this.tbctrl.Controls.Add(this.superTabControlPanel5);
@@ -280,303 +281,6 @@
             this.tbctrl.TabStyle = DevComponents.DotNetBar.eSuperTabStyle.Office2010BackstageBlue;
             this.tbctrl.Text = "superTabControl1";
             this.tbctrl.SelectedTabChanged += new System.EventHandler<DevComponents.DotNetBar.SuperTabStripSelectedTabChangedEventArgs>(this.tbctrl_SelectedTabChanged);
-            // 
-            // superTabControlPanel3
-            // 
-            this.superTabControlPanel3.Controls.Add(this.btnDeleteSupersession);
-            this.superTabControlPanel3.Controls.Add(this.btnViewSupersession);
-            this.superTabControlPanel3.Controls.Add(this.btnAddAlternative);
-            this.superTabControlPanel3.Controls.Add(this.grdAlternative);
-            this.superTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.superTabControlPanel3.Location = new System.Drawing.Point(152, 0);
-            this.superTabControlPanel3.Name = "superTabControlPanel3";
-            this.superTabControlPanel3.Size = new System.Drawing.Size(519, 357);
-            this.superTabControlPanel3.TabIndex = 0;
-            this.superTabControlPanel3.TabItem = this.tbAlternative;
-            // 
-            // btnDeleteSupersession
-            // 
-            this.btnDeleteSupersession.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeleteSupersession.BackColor = System.Drawing.Color.Brown;
-            this.btnDeleteSupersession.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDeleteSupersession.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.btnDeleteSupersession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteSupersession.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteSupersession.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnDeleteSupersession.Location = new System.Drawing.Point(253, 323);
-            this.btnDeleteSupersession.Name = "btnDeleteSupersession";
-            this.btnDeleteSupersession.Size = new System.Drawing.Size(140, 22);
-            this.btnDeleteSupersession.TabIndex = 30;
-            this.btnDeleteSupersession.Text = "&Remove Supersession";
-            this.btnDeleteSupersession.UseVisualStyleBackColor = false;
-            this.btnDeleteSupersession.Click += new System.EventHandler(this.btnDeleteSupersession_Click);
-            // 
-            // btnViewSupersession
-            // 
-            this.btnViewSupersession.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnViewSupersession.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnViewSupersession.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnViewSupersession.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.btnViewSupersession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewSupersession.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewSupersession.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnViewSupersession.Location = new System.Drawing.Point(147, 323);
-            this.btnViewSupersession.Name = "btnViewSupersession";
-            this.btnViewSupersession.Size = new System.Drawing.Size(98, 22);
-            this.btnViewSupersession.TabIndex = 29;
-            this.btnViewSupersession.Text = "&View Details";
-            this.btnViewSupersession.UseVisualStyleBackColor = false;
-            this.btnViewSupersession.Click += new System.EventHandler(this.btnViewSupersession_Click);
-            // 
-            // btnAddAlternative
-            // 
-            this.btnAddAlternative.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddAlternative.BackColor = System.Drawing.Color.SeaGreen;
-            this.btnAddAlternative.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddAlternative.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
-            this.btnAddAlternative.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddAlternative.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddAlternative.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAddAlternative.Location = new System.Drawing.Point(11, 323);
-            this.btnAddAlternative.Name = "btnAddAlternative";
-            this.btnAddAlternative.Size = new System.Drawing.Size(127, 22);
-            this.btnAddAlternative.TabIndex = 28;
-            this.btnAddAlternative.Text = "&Add Supersession";
-            this.btnAddAlternative.UseVisualStyleBackColor = false;
-            this.btnAddAlternative.Click += new System.EventHandler(this.btnAddAlternative_Click);
-            // 
-            // grdAlternative
-            // 
-            this.grdAlternative.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdAlternative.ColumnInfo = "10,1,0,0,0,105,Columns:";
-            this.grdAlternative.Location = new System.Drawing.Point(3, 3);
-            this.grdAlternative.Name = "grdAlternative";
-            this.grdAlternative.Rows.DefaultSize = 21;
-            this.grdAlternative.Size = new System.Drawing.Size(513, 307);
-            this.grdAlternative.StyleInfo = resources.GetString("grdAlternative.StyleInfo");
-            this.grdAlternative.TabIndex = 27;
-            this.grdAlternative.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.grdAlternative_MouseDoubleClick);
-            // 
-            // tbAlternative
-            // 
-            this.tbAlternative.AttachedControl = this.superTabControlPanel3;
-            this.tbAlternative.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tbAlternative.GlobalItem = false;
-            this.tbAlternative.Image = ((System.Drawing.Image)(resources.GetObject("tbAlternative.Image")));
-            this.tbAlternative.Name = "tbAlternative";
-            this.tbAlternative.Text = "Parts Supersession";
-            // 
-            // superTabControlPanel2
-            // 
-            this.superTabControlPanel2.AutoScroll = true;
-            this.superTabControlPanel2.Controls.Add(this.txtReorderQty);
-            this.superTabControlPanel2.Controls.Add(this.label16);
-            this.superTabControlPanel2.Controls.Add(this.txtReorderPoint);
-            this.superTabControlPanel2.Controls.Add(this.label15);
-            this.superTabControlPanel2.Controls.Add(this.txtEnding);
-            this.superTabControlPanel2.Controls.Add(this.label14);
-            this.superTabControlPanel2.Controls.Add(this.lblViewOutgoing);
-            this.superTabControlPanel2.Controls.Add(this.txtOutgoing);
-            this.superTabControlPanel2.Controls.Add(this.label13);
-            this.superTabControlPanel2.Controls.Add(this.lblViewIncoming);
-            this.superTabControlPanel2.Controls.Add(this.txtIncoming);
-            this.superTabControlPanel2.Controls.Add(this.label12);
-            this.superTabControlPanel2.Controls.Add(this.lblAdjustment);
-            this.superTabControlPanel2.Controls.Add(this.txtQty);
-            this.superTabControlPanel2.Controls.Add(this.label11);
-            this.superTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.superTabControlPanel2.Location = new System.Drawing.Point(152, 0);
-            this.superTabControlPanel2.Name = "superTabControlPanel2";
-            this.superTabControlPanel2.Size = new System.Drawing.Size(519, 357);
-            this.superTabControlPanel2.TabIndex = 0;
-            this.superTabControlPanel2.TabItem = this.tbInventory;
-            // 
-            // txtReorderQty
-            // 
-            // 
-            // 
-            // 
-            this.txtReorderQty.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.txtReorderQty.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtReorderQty.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtReorderQty.Location = new System.Drawing.Point(168, 294);
-            this.txtReorderQty.Name = "txtReorderQty";
-            this.txtReorderQty.ShowUpDown = true;
-            this.txtReorderQty.Size = new System.Drawing.Size(104, 22);
-            this.txtReorderQty.TabIndex = 26;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.ForeColor = System.Drawing.Color.DimGray;
-            this.label16.Location = new System.Drawing.Point(165, 278);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(96, 13);
-            this.label16.TabIndex = 40;
-            this.label16.Text = "Reorder Quantity";
-            // 
-            // txtReorderPoint
-            // 
-            // 
-            // 
-            // 
-            this.txtReorderPoint.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.txtReorderPoint.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtReorderPoint.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtReorderPoint.Location = new System.Drawing.Point(34, 294);
-            this.txtReorderPoint.Name = "txtReorderPoint";
-            this.txtReorderPoint.ShowUpDown = true;
-            this.txtReorderPoint.Size = new System.Drawing.Size(104, 22);
-            this.txtReorderPoint.TabIndex = 25;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.ForeColor = System.Drawing.Color.DimGray;
-            this.label15.Location = new System.Drawing.Point(31, 278);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(78, 13);
-            this.label15.TabIndex = 38;
-            this.label15.Text = "Reorder Point";
-            // 
-            // txtEnding
-            // 
-            // 
-            // 
-            // 
-            this.txtEnding.Border.Class = "TextBoxBorder";
-            this.txtEnding.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtEnding.Location = new System.Drawing.Point(34, 216);
-            this.txtEnding.Name = "txtEnding";
-            this.txtEnding.Size = new System.Drawing.Size(104, 22);
-            this.txtEnding.TabIndex = 24;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.ForeColor = System.Drawing.Color.DimGray;
-            this.label14.Location = new System.Drawing.Point(31, 200);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(87, 13);
-            this.label14.TabIndex = 36;
-            this.label14.Text = "Ending Balance";
-            // 
-            // lblViewOutgoing
-            // 
-            this.lblViewOutgoing.AutoSize = true;
-            this.lblViewOutgoing.BackColor = System.Drawing.Color.Transparent;
-            this.lblViewOutgoing.LinkColor = System.Drawing.Color.SteelBlue;
-            this.lblViewOutgoing.Location = new System.Drawing.Point(156, 164);
-            this.lblViewOutgoing.Name = "lblViewOutgoing";
-            this.lblViewOutgoing.Size = new System.Drawing.Size(116, 13);
-            this.lblViewOutgoing.TabIndex = 23;
-            this.lblViewOutgoing.TabStop = true;
-            this.lblViewOutgoing.Text = "View Outgoing Items";
-            this.lblViewOutgoing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtOutgoing
-            // 
-            // 
-            // 
-            // 
-            this.txtOutgoing.Border.Class = "TextBoxBorder";
-            this.txtOutgoing.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtOutgoing.Location = new System.Drawing.Point(34, 159);
-            this.txtOutgoing.Name = "txtOutgoing";
-            this.txtOutgoing.Size = new System.Drawing.Size(104, 22);
-            this.txtOutgoing.TabIndex = 22;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.ForeColor = System.Drawing.Color.DimGray;
-            this.label13.Location = new System.Drawing.Point(31, 143);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(58, 13);
-            this.label13.TabIndex = 33;
-            this.label13.Text = "Outgoing";
-            // 
-            // lblViewIncoming
-            // 
-            this.lblViewIncoming.AutoSize = true;
-            this.lblViewIncoming.BackColor = System.Drawing.Color.Transparent;
-            this.lblViewIncoming.LinkColor = System.Drawing.Color.SteelBlue;
-            this.lblViewIncoming.Location = new System.Drawing.Point(156, 107);
-            this.lblViewIncoming.Name = "lblViewIncoming";
-            this.lblViewIncoming.Size = new System.Drawing.Size(113, 13);
-            this.lblViewIncoming.TabIndex = 21;
-            this.lblViewIncoming.TabStop = true;
-            this.lblViewIncoming.Text = "View Incoming Items";
-            this.lblViewIncoming.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtIncoming
-            // 
-            // 
-            // 
-            // 
-            this.txtIncoming.Border.Class = "TextBoxBorder";
-            this.txtIncoming.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtIncoming.Location = new System.Drawing.Point(34, 102);
-            this.txtIncoming.Name = "txtIncoming";
-            this.txtIncoming.Size = new System.Drawing.Size(104, 22);
-            this.txtIncoming.TabIndex = 20;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.Color.DimGray;
-            this.label12.Location = new System.Drawing.Point(31, 86);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(55, 13);
-            this.label12.TabIndex = 30;
-            this.label12.Text = "Incoming";
-            // 
-            // lblAdjustment
-            // 
-            this.lblAdjustment.AutoSize = true;
-            this.lblAdjustment.BackColor = System.Drawing.Color.Transparent;
-            this.lblAdjustment.LinkColor = System.Drawing.Color.SteelBlue;
-            this.lblAdjustment.Location = new System.Drawing.Point(157, 53);
-            this.lblAdjustment.Name = "lblAdjustment";
-            this.lblAdjustment.Size = new System.Drawing.Size(88, 13);
-            this.lblAdjustment.TabIndex = 19;
-            this.lblAdjustment.TabStop = true;
-            this.lblAdjustment.Text = "Adjust Quantity";
-            this.lblAdjustment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblAdjustment.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAdjustment_LinkClicked);
-            // 
-            // txtQty
-            // 
-            // 
-            // 
-            // 
-            this.txtQty.Border.Class = "TextBoxBorder";
-            this.txtQty.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtQty.Location = new System.Drawing.Point(34, 48);
-            this.txtQty.Name = "txtQty";
-            this.txtQty.Size = new System.Drawing.Size(104, 22);
-            this.txtQty.TabIndex = 18;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.DimGray;
-            this.label11.Location = new System.Drawing.Point(31, 32);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(52, 13);
-            this.label11.TabIndex = 25;
-            this.label11.Text = "Quantity";
-            // 
-            // tbInventory
-            // 
-            this.tbInventory.AttachedControl = this.superTabControlPanel2;
-            this.tbInventory.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tbInventory.GlobalItem = false;
-            this.tbInventory.Image = ((System.Drawing.Image)(resources.GetObject("tbInventory.Image")));
-            this.tbInventory.Name = "tbInventory";
-            this.tbInventory.Text = "Inventory";
             // 
             // superTabControlPanel1
             // 
@@ -923,6 +627,303 @@
             this.tbGeneral.Name = "tbGeneral";
             this.tbGeneral.Text = "General Information";
             // 
+            // superTabControlPanel3
+            // 
+            this.superTabControlPanel3.Controls.Add(this.btnDeleteSupersession);
+            this.superTabControlPanel3.Controls.Add(this.btnViewSupersession);
+            this.superTabControlPanel3.Controls.Add(this.btnAddAlternative);
+            this.superTabControlPanel3.Controls.Add(this.grdAlternative);
+            this.superTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.superTabControlPanel3.Location = new System.Drawing.Point(152, 0);
+            this.superTabControlPanel3.Name = "superTabControlPanel3";
+            this.superTabControlPanel3.Size = new System.Drawing.Size(519, 357);
+            this.superTabControlPanel3.TabIndex = 0;
+            this.superTabControlPanel3.TabItem = this.tbAlternative;
+            // 
+            // btnDeleteSupersession
+            // 
+            this.btnDeleteSupersession.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeleteSupersession.BackColor = System.Drawing.Color.Brown;
+            this.btnDeleteSupersession.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeleteSupersession.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnDeleteSupersession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteSupersession.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteSupersession.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnDeleteSupersession.Location = new System.Drawing.Point(253, 323);
+            this.btnDeleteSupersession.Name = "btnDeleteSupersession";
+            this.btnDeleteSupersession.Size = new System.Drawing.Size(140, 22);
+            this.btnDeleteSupersession.TabIndex = 30;
+            this.btnDeleteSupersession.Text = "&Remove Supersession";
+            this.btnDeleteSupersession.UseVisualStyleBackColor = false;
+            this.btnDeleteSupersession.Click += new System.EventHandler(this.btnDeleteSupersession_Click);
+            // 
+            // btnViewSupersession
+            // 
+            this.btnViewSupersession.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnViewSupersession.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnViewSupersession.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnViewSupersession.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.btnViewSupersession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewSupersession.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewSupersession.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnViewSupersession.Location = new System.Drawing.Point(147, 323);
+            this.btnViewSupersession.Name = "btnViewSupersession";
+            this.btnViewSupersession.Size = new System.Drawing.Size(98, 22);
+            this.btnViewSupersession.TabIndex = 29;
+            this.btnViewSupersession.Text = "&View Details";
+            this.btnViewSupersession.UseVisualStyleBackColor = false;
+            this.btnViewSupersession.Click += new System.EventHandler(this.btnViewSupersession_Click);
+            // 
+            // btnAddAlternative
+            // 
+            this.btnAddAlternative.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddAlternative.BackColor = System.Drawing.Color.SeaGreen;
+            this.btnAddAlternative.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddAlternative.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.btnAddAlternative.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddAlternative.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddAlternative.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAddAlternative.Location = new System.Drawing.Point(11, 323);
+            this.btnAddAlternative.Name = "btnAddAlternative";
+            this.btnAddAlternative.Size = new System.Drawing.Size(127, 22);
+            this.btnAddAlternative.TabIndex = 28;
+            this.btnAddAlternative.Text = "&Add Supersession";
+            this.btnAddAlternative.UseVisualStyleBackColor = false;
+            this.btnAddAlternative.Click += new System.EventHandler(this.btnAddAlternative_Click);
+            // 
+            // grdAlternative
+            // 
+            this.grdAlternative.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdAlternative.ColumnInfo = "10,1,0,0,0,105,Columns:";
+            this.grdAlternative.Location = new System.Drawing.Point(3, 3);
+            this.grdAlternative.Name = "grdAlternative";
+            this.grdAlternative.Rows.DefaultSize = 21;
+            this.grdAlternative.Size = new System.Drawing.Size(513, 307);
+            this.grdAlternative.StyleInfo = resources.GetString("grdAlternative.StyleInfo");
+            this.grdAlternative.TabIndex = 27;
+            this.grdAlternative.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.grdAlternative_MouseDoubleClick);
+            // 
+            // tbAlternative
+            // 
+            this.tbAlternative.AttachedControl = this.superTabControlPanel3;
+            this.tbAlternative.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tbAlternative.GlobalItem = false;
+            this.tbAlternative.Image = ((System.Drawing.Image)(resources.GetObject("tbAlternative.Image")));
+            this.tbAlternative.Name = "tbAlternative";
+            this.tbAlternative.Text = "Parts Supersession";
+            // 
+            // superTabControlPanel2
+            // 
+            this.superTabControlPanel2.AutoScroll = true;
+            this.superTabControlPanel2.Controls.Add(this.txtReorderQty);
+            this.superTabControlPanel2.Controls.Add(this.label16);
+            this.superTabControlPanel2.Controls.Add(this.txtReorderPoint);
+            this.superTabControlPanel2.Controls.Add(this.label15);
+            this.superTabControlPanel2.Controls.Add(this.txtEnding);
+            this.superTabControlPanel2.Controls.Add(this.label14);
+            this.superTabControlPanel2.Controls.Add(this.lblViewOutgoing);
+            this.superTabControlPanel2.Controls.Add(this.txtOutgoing);
+            this.superTabControlPanel2.Controls.Add(this.label13);
+            this.superTabControlPanel2.Controls.Add(this.lblViewIncoming);
+            this.superTabControlPanel2.Controls.Add(this.txtIncoming);
+            this.superTabControlPanel2.Controls.Add(this.label12);
+            this.superTabControlPanel2.Controls.Add(this.lblAdjustment);
+            this.superTabControlPanel2.Controls.Add(this.txtQty);
+            this.superTabControlPanel2.Controls.Add(this.label11);
+            this.superTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.superTabControlPanel2.Location = new System.Drawing.Point(152, 0);
+            this.superTabControlPanel2.Name = "superTabControlPanel2";
+            this.superTabControlPanel2.Size = new System.Drawing.Size(519, 357);
+            this.superTabControlPanel2.TabIndex = 0;
+            this.superTabControlPanel2.TabItem = this.tbInventory;
+            // 
+            // txtReorderQty
+            // 
+            // 
+            // 
+            // 
+            this.txtReorderQty.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtReorderQty.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtReorderQty.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtReorderQty.Location = new System.Drawing.Point(168, 294);
+            this.txtReorderQty.Name = "txtReorderQty";
+            this.txtReorderQty.ShowUpDown = true;
+            this.txtReorderQty.Size = new System.Drawing.Size(104, 22);
+            this.txtReorderQty.TabIndex = 26;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.ForeColor = System.Drawing.Color.DimGray;
+            this.label16.Location = new System.Drawing.Point(165, 278);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(96, 13);
+            this.label16.TabIndex = 40;
+            this.label16.Text = "Reorder Quantity";
+            // 
+            // txtReorderPoint
+            // 
+            // 
+            // 
+            // 
+            this.txtReorderPoint.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtReorderPoint.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtReorderPoint.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtReorderPoint.Location = new System.Drawing.Point(34, 294);
+            this.txtReorderPoint.Name = "txtReorderPoint";
+            this.txtReorderPoint.ShowUpDown = true;
+            this.txtReorderPoint.Size = new System.Drawing.Size(104, 22);
+            this.txtReorderPoint.TabIndex = 25;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.DimGray;
+            this.label15.Location = new System.Drawing.Point(31, 278);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(78, 13);
+            this.label15.TabIndex = 38;
+            this.label15.Text = "Reorder Point";
+            // 
+            // txtEnding
+            // 
+            // 
+            // 
+            // 
+            this.txtEnding.Border.Class = "TextBoxBorder";
+            this.txtEnding.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtEnding.Location = new System.Drawing.Point(34, 216);
+            this.txtEnding.Name = "txtEnding";
+            this.txtEnding.Size = new System.Drawing.Size(104, 22);
+            this.txtEnding.TabIndex = 24;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.DimGray;
+            this.label14.Location = new System.Drawing.Point(31, 200);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(87, 13);
+            this.label14.TabIndex = 36;
+            this.label14.Text = "Ending Balance";
+            // 
+            // lblViewOutgoing
+            // 
+            this.lblViewOutgoing.AutoSize = true;
+            this.lblViewOutgoing.BackColor = System.Drawing.Color.Transparent;
+            this.lblViewOutgoing.LinkColor = System.Drawing.Color.SteelBlue;
+            this.lblViewOutgoing.Location = new System.Drawing.Point(156, 164);
+            this.lblViewOutgoing.Name = "lblViewOutgoing";
+            this.lblViewOutgoing.Size = new System.Drawing.Size(116, 13);
+            this.lblViewOutgoing.TabIndex = 23;
+            this.lblViewOutgoing.TabStop = true;
+            this.lblViewOutgoing.Text = "View Outgoing Items";
+            this.lblViewOutgoing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtOutgoing
+            // 
+            // 
+            // 
+            // 
+            this.txtOutgoing.Border.Class = "TextBoxBorder";
+            this.txtOutgoing.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtOutgoing.Location = new System.Drawing.Point(34, 159);
+            this.txtOutgoing.Name = "txtOutgoing";
+            this.txtOutgoing.Size = new System.Drawing.Size(104, 22);
+            this.txtOutgoing.TabIndex = 22;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.DimGray;
+            this.label13.Location = new System.Drawing.Point(31, 143);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(58, 13);
+            this.label13.TabIndex = 33;
+            this.label13.Text = "Outgoing";
+            // 
+            // lblViewIncoming
+            // 
+            this.lblViewIncoming.AutoSize = true;
+            this.lblViewIncoming.BackColor = System.Drawing.Color.Transparent;
+            this.lblViewIncoming.LinkColor = System.Drawing.Color.SteelBlue;
+            this.lblViewIncoming.Location = new System.Drawing.Point(156, 107);
+            this.lblViewIncoming.Name = "lblViewIncoming";
+            this.lblViewIncoming.Size = new System.Drawing.Size(113, 13);
+            this.lblViewIncoming.TabIndex = 21;
+            this.lblViewIncoming.TabStop = true;
+            this.lblViewIncoming.Text = "View Incoming Items";
+            this.lblViewIncoming.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtIncoming
+            // 
+            // 
+            // 
+            // 
+            this.txtIncoming.Border.Class = "TextBoxBorder";
+            this.txtIncoming.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtIncoming.Location = new System.Drawing.Point(34, 102);
+            this.txtIncoming.Name = "txtIncoming";
+            this.txtIncoming.Size = new System.Drawing.Size(104, 22);
+            this.txtIncoming.TabIndex = 20;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.DimGray;
+            this.label12.Location = new System.Drawing.Point(31, 86);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(55, 13);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "Incoming";
+            // 
+            // lblAdjustment
+            // 
+            this.lblAdjustment.AutoSize = true;
+            this.lblAdjustment.BackColor = System.Drawing.Color.Transparent;
+            this.lblAdjustment.LinkColor = System.Drawing.Color.SteelBlue;
+            this.lblAdjustment.Location = new System.Drawing.Point(157, 53);
+            this.lblAdjustment.Name = "lblAdjustment";
+            this.lblAdjustment.Size = new System.Drawing.Size(88, 13);
+            this.lblAdjustment.TabIndex = 19;
+            this.lblAdjustment.TabStop = true;
+            this.lblAdjustment.Text = "Adjust Quantity";
+            this.lblAdjustment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAdjustment.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAdjustment_LinkClicked);
+            // 
+            // txtQty
+            // 
+            // 
+            // 
+            // 
+            this.txtQty.Border.Class = "TextBoxBorder";
+            this.txtQty.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtQty.Location = new System.Drawing.Point(34, 48);
+            this.txtQty.Name = "txtQty";
+            this.txtQty.Size = new System.Drawing.Size(104, 22);
+            this.txtQty.TabIndex = 18;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.DimGray;
+            this.label11.Location = new System.Drawing.Point(31, 32);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(52, 13);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "Quantity";
+            // 
+            // tbInventory
+            // 
+            this.tbInventory.AttachedControl = this.superTabControlPanel2;
+            this.tbInventory.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tbInventory.GlobalItem = false;
+            this.tbInventory.Image = ((System.Drawing.Image)(resources.GetObject("tbInventory.Image")));
+            this.tbInventory.Name = "tbInventory";
+            this.tbInventory.Text = "Inventory";
+            // 
             // superTabControlPanel4
             // 
             this.superTabControlPanel4.Controls.Add(this.grdLocations);
@@ -1060,14 +1061,14 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tbctrl)).EndInit();
             this.tbctrl.ResumeLayout(false);
+            this.superTabControlPanel1.ResumeLayout(false);
+            this.superTabControlPanel1.PerformLayout();
             this.superTabControlPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdAlternative)).EndInit();
             this.superTabControlPanel2.ResumeLayout(false);
             this.superTabControlPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtReorderQty)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReorderPoint)).EndInit();
-            this.superTabControlPanel1.ResumeLayout(false);
-            this.superTabControlPanel1.PerformLayout();
             this.superTabControlPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdLocations)).EndInit();
             this.superTabControlPanel5.ResumeLayout(false);
