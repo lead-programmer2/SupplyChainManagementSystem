@@ -1353,7 +1353,7 @@ namespace SupplyChainManagementSystem
                             if (_isnew) 
                             { 
                                 _referenceno = _refno; _isnew = false;
-
+                                txtReferenceNo.Text = _referenceno;
                                 _stockadjdetails.RejectChanges();
                                 if (_partinfo != null)
                                 {

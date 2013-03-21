@@ -87,6 +87,18 @@
     <Compile Include="Controls\PopUp.Designer.cs">
       <DependentUpon>PopUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Banks\BankInformationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Banks\BankInformationDialog.Designer.cs">
+      <DependentUpon>BankInformationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Customers\CustomersInformationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Customers\CustomersInformationDialog.Designer.cs">
+      <DependentUpon>CustomersInformationDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\PartInformationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -331,6 +343,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ListViewGrid.resx">
       <DependentUpon>ListViewGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Banks\BankInformationDialog.resx">
+      <DependentUpon>BankInformationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Customers\CustomersInformationDialog.resx">
+      <DependentUpon>CustomersInformationDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\PartInformationDialog.resx">
       <DependentUpon>PartInformationDialog.cs</DependentUpon>

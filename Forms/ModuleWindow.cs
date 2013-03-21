@@ -100,11 +100,30 @@ namespace SupplyChainManagementSystem
         {
             if (grdRecords.DataSource == null) return;
             ColumnCollection _cols = grdRecords.Cols;
+            grdRecords.FormatColumns();
 
             switch (_selectedsubmodule)
             {
+                case SubModule.BankAccounts:
+                    _cols["BankAccountCode"].Visible = false;
+                    _cols["BankAccountNo"].Caption = "Bank Account No.";
+                    _cols["BankAccountName"].Caption = "Bank Account Name";
+                    _cols["AccountCode"].Caption = "Account Code";
+                    _cols["AccountName"].Caption = "Account Name";
+                    _cols["Current"].Caption = "Current Balance";
+                    _cols["Outstanding"].Caption = "Outstanding Balance";
+                    _cols["Ending"].Caption = "Ending Balance";
+                    break;
+                case SubModule.Customers:
+                    _cols["CustomerCode"].Visible = false;
+                    _cols["CustomerNo"].Caption = "Customer No.";
+                    _cols["CustomerName"].Caption = "Customer";
+                    _cols["CustomerGroup"].Caption = "Group";
+                    _cols["Active"].DataType = typeof(bool);
+                    _cols["Balance"].Caption = "Balance (USD)";
+                    _cols["ContactPerson"].Caption = "Contact Person";
+                    break;
                 case SubModule.PartsInventory:
-                    grdRecords.FormatColumns();
                     _cols["PartCode"].Visible = false;
                     _cols["PartNo"].Caption = "Part No.";
                     _cols["PartName"].Caption = "Part Name";
@@ -115,6 +134,181 @@ namespace SupplyChainManagementSystem
                     break;
                 default: break;
             }
+        }
+
+        private DataTable GetBankAccounts()
+        {
+            DataTable _datasource = null;
+
+            Cache.SyncTable(SCMS.Connection, "bankaccounts");
+            Cache.SyncTable(SCMS.Connection, "banks");
+            Cache.SyncTable(SCMS.Connection, "bankledger");
+            Cache.SyncTable(SCMS.Connection, "accounts");
+            Cache.SyncTable(SCMS.Connection, "currencies");
+
+            DataTable _bankaccounts = Cache.GetCachedTable("bankaccounts");
+            DataTable _bankledger = Cache.GetCachedTable("bankledger");
+            DataTable _accounts = Cache.GetCachedTable("accounts");
+
+            if (_bankaccounts != null &&
+                _bankledger != null &&
+                _accounts != null)
+            {
+                var _query = from _bankaccount in _bankaccounts.AsEnumerable()
+                             join _account in _accounts.AsEnumerable() on _bankaccount.Field<long>("AccountCode") equals _account.Field<long>("AccountCode")
+                             join _ledger in _bankledger.AsEnumerable() on _bankaccount.Field<string>("BankAccountCode") equals _ledger.Field<string>("BankAccountCode") into _bl
+                             where _bankaccount.Field<string>("Company") == SCMS.CurrentCompany.Company
+                             from _ledger in _bl.DefaultIfEmpty(_bankledger.NewRow())
+                             group _ledger by new
+                             {
+                                 BankAccountCode = _bankaccount.Field<string>("BankAccountCode"),
+                                 BankAccountNo = _bankaccount.Field<string>("AccountNo"),
+                                 BankAccountName = _bankaccount.Field<string>("AccountName"),
+                                 Currency = _bankaccount.Field<string>("Currency"),
+                                 AccountCode = _bankaccount.Field<long>("AccountCode"),
+                                 AccountName = _account.Field<string>("AccountName"),
+                                 Bank = _bankaccount.Field<string>("Bank"),
+                                 Notes = _bankaccount.Field<string>("Notes")
+                             } into _group
+                             select new
+                             {
+                                 BankAccountCode = _group.Key.BankAccountCode,
+                                 BankAccountNo = _group.Key.BankAccountNo,
+                                 BankAccountName = _group.Key.BankAccountName,
+                                 Bank = _group.Key.Bank,
+                                 Currency = _group.Key.Currency,
+                                 AccountCode = _group.Key.AccountCode,
+                                 AccountName = _group.Key.AccountName,
+                                 CurrentBalance = _group.Sum(_ledger => (_ledger.Field<decimal>("In") - _ledger.Field<decimal>("Out"))),
+                                 OutstandingBalance = _group.Sum(_ledger => (_ledger.Field<decimal>("Incoming") - _ledger.Field<decimal>("Outgoing"))),
+                                 EndingBalance = _group.Sum(_ledger => (_ledger.Field<decimal>("In") - _ledger.Field<decimal>("Out") + _ledger.Field<decimal>("Incoming") - _ledger.Field<decimal>("Outgoing"))),
+                                 Notes = _group.Key.Notes
+                             };
+
+                _datasource = new DataTable();
+                _datasource.TableName = "bankaccounts";
+
+                DataColumnCollection _cols = _datasource.Columns;
+                DataColumn _pk = _cols.Add("BankAccountCode", typeof(string));
+                _cols.Add("BankAccountNo", typeof(string));
+                _cols.Add("BankAccountName", typeof(string));
+                _cols.Add("Bank", typeof(string));
+                _cols.Add("Currency", typeof(string));
+                _cols.Add("AccountCode", typeof(long));
+                _cols.Add("AccountName", typeof(string));
+                _cols.Add("Current", typeof(decimal));
+                _cols.Add("Outstanding", typeof(decimal));
+                _cols.Add("Ending", typeof(decimal));
+                _cols.Add("Notes", typeof(string));
+
+                _datasource.Constraints.Add("PK", _pk, true);
+
+
+                try
+                {
+                    foreach (var _row in _query) _datasource.Rows.Add(new object[] {
+                                                                      _row.BankAccountCode, _row.BankAccountNo, _row.BankAccountName,
+                                                                      _row.Bank, _row.Currency, _row.AccountCode,
+                                                                      _row.AccountName, _row.CurrentBalance, _row.OutstandingBalance,
+                                                                      _row.EndingBalance, _row.Notes });
+
+                    _datasource.AcceptChanges();
+                }
+                catch { }
+            }
+
+            return _datasource;
+        }
+
+        private DataTable GetCustomers()
+        {
+            DataTable _datasource = null;
+
+            Cache.SyncTable(SCMS.Connection, "customers");
+            Cache.SyncTable(SCMS.Connection, "customergroups");
+            Cache.SyncTable(SCMS.Connection, "locations");
+            Cache.SyncTable(SCMS.Connection, "bankaccounts");
+            Cache.SyncTable(SCMS.Connection, "accounts");
+            Cache.SyncTable(SCMS.Connection, "receivableledger");
+
+            DataTable _customers = Cache.GetCachedTable("customers");
+            DataTable _arledger = Cache.GetCachedTable("receivableledger");
+
+            if (_customers != null &&
+                _arledger != null)
+            {
+                var _query = from _cus in _customers.AsEnumerable()
+                             join _ledger in _arledger.AsEnumerable() on _cus.Field<string>("CustomerCode") equals _ledger.Field<string>("CustomerCode") into _cl
+                             where _cus.Field<string>("Company") == SCMS.CurrentCompany.Company
+                             from _ledger in _cl.DefaultIfEmpty(_arledger.NewRow())
+                             group _ledger by new
+                             {
+                                 CustomerCode = _cus.Field<string>("CustomerCode"),
+                                 CustomerNo = _cus.Field<string>("CustomerNo"),
+                                 CustomerName = _cus.Field<string>("CustomerName"),
+                                 CustomerGroup = _cus.Field<string>("CustomerGroup"),
+                                 Active = _cus.Field<Int16>("Active"),
+                                 Address = _cus.Field<string>("Address") + ", " + _cus.Field<string>("Country"),
+                                 Phone = _cus.Field<string>("Phone"),
+                                 Mobile = _cus.Field<string>("Mobile"),
+                                 Fax = _cus.Field<string>("Fax"),
+                                 Email = _cus.Field<string>("Email"),
+                                 ContactPerson = _cus.Field<string>("POC"),
+                                 Notes = _cus.Field<string>("Notes")
+                             } into _group
+                             orderby _group.Key.CustomerNo
+                             select new
+                             {
+                                 CustomerCode = _group.Key.CustomerCode,
+                                 CustomerNo = _group.Key.CustomerNo,
+                                 CustomerName = _group.Key.CustomerName,
+                                 CustomerGroup = _group.Key.CustomerGroup,
+                                 Active = _group.Key.Active,
+                                 Address = _group.Key.Address,
+                                 Phone = _group.Key.Phone,
+                                 Mobile = _group.Key.Mobile,
+                                 Fax = _group.Key.Fax,
+                                 Email = _group.Key.Email,
+                                 ContactPerson = _group.Key.ContactPerson,
+                                 OutstandingBalance = _group.Sum(_ledger => (_ledger.Field<decimal>("Receivable") - _ledger.Field<decimal>("Credited") - _ledger.Field<decimal>("Paid") - _ledger.Field<decimal>("Prepayment"))),
+                                 Notes = _group.Key.Notes
+                             };
+
+                _datasource = new DataTable();
+                _datasource.TableName = "customers";
+
+                DataColumnCollection _cols = _datasource.Columns;
+                DataColumn _pk = _cols.Add("CustomerCode", typeof(string));
+                _cols.Add("CustomerNo", typeof(string));
+                _cols.Add("CustomerName", typeof(string));
+                _cols.Add("CustomerGroup", typeof(string));
+                _cols.Add("Active", typeof(Int16));
+                _cols.Add("Address", typeof(string));
+                _cols.Add("Phone", typeof(string));
+                _cols.Add("Mobile", typeof(string));
+                _cols.Add("Fax", typeof(string));
+                _cols.Add("Email", typeof(string));
+                _cols.Add("ContactPerson", typeof(string));
+                _cols.Add("Balance", typeof(decimal));
+                _cols.Add("Notes", typeof(string));
+
+                _datasource.Constraints.Add("PK", _pk, true);
+
+                try
+                {
+                    foreach (var _row in _query) _datasource.Rows.Add(new object[] {
+                                                                      _row.CustomerCode, _row.CustomerNo, _row.CustomerName,
+                                                                      _row.CustomerGroup, _row.Active, _row.Address,
+                                                                      _row.Phone, _row.Mobile, _row.Fax,
+                                                                      _row.Email, _row.ContactPerson, _row.OutstandingBalance,
+                                                                      _row.Notes });
+
+                    _datasource.AcceptChanges();
+                }
+                catch { }
+            }
+
+            return _datasource;
         }
 
         private string GetModuleName()
@@ -133,7 +327,7 @@ namespace SupplyChainManagementSystem
 
             return _modulename;
         }
-
+       
         private DataTable GetPartInventory()
         {
             DataTable _datasource = null;
@@ -285,6 +479,10 @@ namespace SupplyChainManagementSystem
 
             switch (_selectedsubmodule)
             {
+                case SubModule.BankAccounts:
+                    _delegate = new Func<DataTable>(GetBankAccounts); break;
+                case SubModule.Customers:
+                    _delegate = new Func<DataTable>(GetCustomers); break;
                 case SubModule.PartsInventory:
                     _delegate = new Func<DataTable>(GetPartInventory); break;
                 default: break;
@@ -439,6 +637,8 @@ namespace SupplyChainManagementSystem
 
             switch (_selectedsubmodule)
             {
+                case SubModule.BankAccounts:
+                case SubModule.Customers:
                 case SubModule.PartsInventory:
                     for (int i = _cols.Fixed; i <= (_cols.Count - 1); i++)
                     {
@@ -475,11 +675,25 @@ namespace SupplyChainManagementSystem
         private void _dialog_FormClosed(object sender, FormClosedEventArgs e)
         {
             Module _module = ((MainWindow)MdiParent).SelectedModule;
+            if (((MainWindow)MdiParent).IsClosing) return;
+            if (sender != null)
+            {
+                if (Materia.PropertyExists(sender, "IsInBackground"))
+                {
+                    bool _isinbackground = Materia.GetPropertyValue<bool>(sender, "IsInBackground");
+                    if (_isinbackground) return;
+                }
+            }
+
             ((MainWindow)MdiParent).SelectModule(_module);
 
             if (sender != null)
             {
-                if (sender is PartInformationDialog)
+                if (sender is BankInformationDialog)
+                {
+                    if (((BankInformationDialog)sender).WithUpdates) btnRefresh_Click(btnRefresh, new EventArgs());
+                }
+                else if (sender is PartInformationDialog)
                 {
                     if (((PartInformationDialog)sender).WithUpdates) btnRefresh_Click(btnRefresh, new EventArgs());
                 }
@@ -560,8 +774,39 @@ namespace SupplyChainManagementSystem
 
             Form _dialog = null;
 
+            foreach (Form _form in MdiParent.MdiChildren)
+            {
+                if (Materia.MethodExists(_form, "StayInBackground") )
+                {
+                    try { Materia.InvokeMethod(_form, "StayInBackground"); }
+                    catch { }
+                }
+            }
+
             switch (_selectedsubmodule)
             {
+                case SubModule.BankAccounts:
+                    foreach (Form _form in MdiParent.MdiChildren)
+                    {
+                        if (_form is BankInformationDialog)
+                        { _dialog = _form; break; }
+                    }
+
+                    if (_dialog == null) _dialog = new BankInformationDialog();
+                    else ((BankInformationDialog)_dialog).ClearInformation();
+
+                    break;
+                case SubModule.Customers:
+                    foreach (Form _form in MdiParent.MdiChildren)
+                    {
+                        if (_form is CustomersInformationDialog)
+                        { _dialog = _form; break; }
+                    }
+
+                    if (_dialog == null) _dialog = new CustomersInformationDialog();
+                    else ((CustomersInformationDialog)_dialog).ClearInformation();
+
+                    break;
                 case SubModule.PartsInventory:
                     foreach (Form _form in MdiParent.MdiChildren)
                     {
@@ -604,8 +849,47 @@ namespace SupplyChainManagementSystem
 
             Form _dialog = null; object _reference = null;
 
+            foreach (Form _form in MdiParent.MdiChildren)
+            {
+                if (Materia.MethodExists(_form, "StayInBackground"))
+                {
+                    try { Materia.InvokeMethod(_form, "StayInBackground"); }
+                    catch { }
+                }
+            }
+
             switch (_selectedsubmodule)
             {
+                case SubModule.BankAccounts:
+                    _reference = grdRecords[grdRecords.RowSel, "BankAccountCode"].ToString();
+
+                    foreach (Form _form in MdiParent.MdiChildren)
+                    {
+                        if (_form is BankInformationDialog)
+                        {
+                            _dialog = _form; break;
+                        }
+                    }
+
+                    if (_dialog == null) _dialog = new BankInformationDialog(_reference.ToString());
+                    else ((BankInformationDialog)_dialog).LoadBankAccountInformation(_reference.ToString());
+
+                    break;
+                case SubModule.Customers:
+                    _reference = grdRecords[grdRecords.RowSel, "CustomerCode"].ToString();
+
+                    foreach (Form _form in MdiParent.MdiChildren)
+                    {
+                        if (_form is CustomersInformationDialog)
+                        {
+                            _dialog = _form; break;
+                        }
+                    }
+
+                    if (_dialog == null) _dialog = new CustomersInformationDialog(_reference.ToString());
+                    else ((CustomersInformationDialog)_dialog).LoadCustomerInformation(_reference.ToString());
+
+                    break;
                 case SubModule.PartsInventory:
                     _reference = grdRecords[grdRecords.RowSel, "PartCode"].ToString();
 

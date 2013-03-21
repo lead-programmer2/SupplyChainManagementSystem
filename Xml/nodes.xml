@@ -350,7 +350,7 @@
     <ParentKey>900</ParentKey>
     <Module>3</Module>
     <Ordering>2</Ordering>
-    <SubModuleEnum>0</SubModuleEnum>
+    <SubModuleEnum>3</SubModuleEnum>
   </nodes>
   <nodes>
     <NodeKey>9100</NodeKey>
@@ -550,7 +550,7 @@
     <ParentKey>12000</ParentKey>
     <Module>1</Module>
     <Ordering>2</Ordering>
-    <SubModuleEnum>0</SubModuleEnum>
+    <SubModuleEnum>2</SubModuleEnum>
   </nodes>
   <nodes>
     <NodeKey>12200</NodeKey>

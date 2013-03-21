@@ -29,6 +29,17 @@ namespace SupplyChainManagementSystem
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private bool _isclosing = false;
+
+        /// <summary>
+        /// Gets whether the current form is closing or not.
+        /// </summary>
+        public bool IsClosing
+        {
+            get { return _isclosing; }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private Module _selectedmodule = Module.None;
 
         /// <summary>
@@ -236,6 +247,7 @@ namespace SupplyChainManagementSystem
             InitializeBackground(); InitializeStatusBarDisplays();
             InitializeHeading(); InitializeModules(ModuleGroup.Operations);
             InitializeTimeAndKeyboardInfo();
+            if (_isclosing) _isclosing = false;
 
             _clocktimer.Tick += new EventHandler(_clocktimer_Tick);
             _clocktimer.Interval = 1000; _clocktimer.Enabled = true;
@@ -331,13 +343,14 @@ namespace SupplyChainManagementSystem
                         SCMS.CurrentSystemUser = null; SCMS.Connection = null;
                         Application.Exit();
                     }
+                    else _isclosing = false;
                 }
                 else Program.StartUpForm.Show();
             }
             else
             {
                 if (!e.Cancel)
-                { SCMS.CleanUp(); SCMS.Connection = null; Application.Exit(); } 
+                {  SCMS.CleanUp();   SCMS.Connection = null; Application.Exit(); } 
             }            
         }
 

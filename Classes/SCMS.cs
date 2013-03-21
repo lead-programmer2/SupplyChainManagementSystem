@@ -127,6 +127,8 @@ namespace SupplyChainManagementSystem
     /// </summary>
     public enum SubModule
     {
+        BankAccounts = 2,
+        Customers = 3,
         None = 0,
         PartsInventory = 1
     }
@@ -646,6 +648,134 @@ namespace SupplyChainManagementSystem
         }
 
         /// <summary>
+        /// Loads bank accounts into the specified data sourced combo box control.
+        /// </summary>
+        /// <param name="combobox"></param>
+        public static void LoadBankAccounts(this DataSourcedComboBox combobox)
+        {
+            if (combobox == null) return;
+
+            DataTable _bankaccounts = Cache.GetCachedTable("bankaccounts");
+
+            if (_bankaccounts != null)
+            {
+                DataTable _datasource = new DataTable();
+
+                var _query = from _bankac in _bankaccounts.AsEnumerable()
+                             where _bankac.Field<string>("Company") == SCMS.CurrentCompany.Company
+                             select new
+                             {
+                                 BankAccountCode = _bankac.Field<string>("BankAccountCode"),
+                                 BankAccountNo = _bankac.Field<string>("AccountNo"),
+                                 BankAccountName = _bankac.Field<string>("AccountName"),
+                                 BankAccount = _bankac.Field<string>("AccountNo") + " - " + _bankac.Field<string>("AccountName"),
+                                 AccountCode = _bankac.Field<long>("AccountCode"),
+                                 Bank = _bankac.Field<string>("Bank"),
+                                 Currency = _bankac.Field<string>("Currency")
+                             };
+
+                DataColumnCollection _cols = _datasource.Columns;
+                DataColumn _pk = _cols.Add("BankAccountCode", typeof(string));
+                _cols.Add("BankAccountNo", typeof(string));
+                _cols.Add("BankAccountName", typeof(string));
+                _cols.Add("BankAccount", typeof(string));
+                _cols.Add("AccountCode", typeof(long));
+                _cols.Add("Bank", typeof(string));
+                _cols.Add("Currency", typeof(string));
+
+                _datasource.Constraints.Add("PK", _pk, true);
+
+                try
+                {
+                    foreach (var _row in _query)
+                    {
+                        _datasource.Rows.Add(new object[] {
+                                             _row.BankAccountCode, _row.BankAccountNo, _row.BankAccountName,
+                                             _row.BankAccount, _row.AccountCode, _row.Bank, 
+                                             _row.Currency });
+                    }
+                }
+                catch { }
+
+                combobox.Enabled = false;
+
+                if (combobox.DataSource != null)
+                {
+                    try { ((DataTable)combobox.DataSource).Dispose(); }
+                    catch { }
+                    finally { combobox.DataSource = null; }
+                    Materia.RefreshAndManageCurrentProcess();
+                }
+
+                combobox.DisplayMember = "BankAccount"; combobox.ValueMember = "BankAccountCode";
+                combobox.DataSource = _datasource;
+
+                ColumnCollection _gridcols = combobox.Cols;
+                _gridcols["BankAccountCode"].Visible = false;
+                _gridcols["BankAccountNo"].Visible  =false;
+                _gridcols["BankAccountName"].Visible = false;
+                _gridcols["AccountCode"].Visible = false;
+                _gridcols["BankAccount"].Caption = "Bank Account";
+
+                try { combobox.SelectedIndex = -1; }
+                catch { }
+
+                combobox.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Loads list of banking comapnies into the specified control as a data source.
+        /// </summary>
+        /// <param name="control"></param>
+        public static void LoadBanks(this Control control)
+        {
+            if (control == null) return;
+            if (!(Materia.PropertyExists(control, "DataSource") &&
+                  Materia.PropertyExists(control, "DisplayMember") &&
+                  Materia.PropertyExists(control, "ValueMember"))) return;
+
+            DataTable _banks = Cache.GetCachedTable("banks");
+            if (_banks != null)
+            {
+                control.Enabled = false;
+                object _datasource = Materia.GetPropertyValue<object>(control, "DataSource");
+                if (_datasource != null)
+                {
+                    try { ((DataTable)_datasource).Dispose(); }
+                    catch { }
+                    finally
+                    {
+                        Materia.SetPropertyValue(control, "DataSource", null);
+                        Materia.RefreshAndManageCurrentProcess();
+                    }
+                }
+
+                DataTable _newdatasource = _banks.Replicate();
+                _newdatasource.DefaultView.Sort = "[Bank]";
+
+                Materia.SetPropertyValue(control, "DataSource", _newdatasource);
+                Materia.SetPropertyValue(control, "DisplayMember", "Bank");
+                Materia.SetPropertyValue(control, "ValueMember", "Bank");
+
+                if (Materia.PropertyExists(control, "AutoCompleteMode") &&
+                    Materia.PropertyExists(control, "AutoCompleteSource"))
+                {
+                    Materia.SetPropertyValue(control, "AutoCompleteMode", AutoCompleteMode.SuggestAppend);
+                    Materia.SetPropertyValue(control, "AutoCompleteSource", AutoCompleteSource.ListItems);
+                }
+
+                if (Materia.PropertyExists(control, "SelectedIndex"))
+                {
+                    try { Materia.SetPropertyValue(control, "SelectedIndex", -1); }
+                    catch { }
+                }
+
+                control.Enabled = true;
+            }
+        }
+
+        /// <summary>
         /// Loads list of brands into the specified control as a data source.
         /// </summary>
         /// <param name="control"></param>
@@ -697,10 +827,72 @@ namespace SupplyChainManagementSystem
         }
 
         /// <summary>
+        /// Loads the list of currencies into the specified control as a data source.
+        /// </summary>
+        /// <param name="control"></param>
+        public static void LoadCurrencies(this Control control)
+        {
+            if (control == null) return;
+            if (control is DataSourcedComboBox) ((DataSourcedComboBox)control).LoadCurrenciesInDataSourcedComboBox();
+            else control.LoadCurrenciesInControl();
+        }
+
+        /// <summary>
+        /// Loads the list of currencies into the specified control as a data source.
+        /// </summary>
+        /// <param name="control"></param>
+        private static void LoadCurrenciesInControl(this Control control)
+        {
+            if (control == null) return;
+            if (!(Materia.PropertyExists(control, "DataSource") &&
+                  Materia.PropertyExists(control, "DisplayMember") &&
+                  Materia.PropertyExists(control, "ValueMember"))) return;
+
+            DataTable _currencies = Cache.GetCachedTable("currencies");
+            if (_currencies != null)
+            {
+                control.Enabled = false;
+                object _datasource = Materia.GetPropertyValue<object>(control, "DataSource");
+                if (_datasource != null)
+                {
+                    try { ((DataTable)_datasource).Dispose(); }
+                    catch { }
+                    finally
+                    {
+                        Materia.SetPropertyValue(control, "DataSource", null);
+                        Materia.RefreshAndManageCurrentProcess();
+                    }
+                }
+
+                DataTable _newdatasource = _currencies.Replicate();
+                _newdatasource.DefaultView.Sort = "[Currency]";
+
+                Materia.SetPropertyValue(control, "DataSource", _newdatasource);
+                Materia.SetPropertyValue(control, "DisplayMember", "Currency");
+                Materia.SetPropertyValue(control, "ValueMember", "Currency");
+
+                if (Materia.PropertyExists(control, "AutoCompleteMode") &&
+                    Materia.PropertyExists(control, "AutoCompleteSource"))
+                {
+                    Materia.SetPropertyValue(control, "AutoCompleteMode", AutoCompleteMode.SuggestAppend);
+                    Materia.SetPropertyValue(control, "AutoCompleteSource", AutoCompleteSource.ListItems);
+                }
+
+                if (Materia.PropertyExists(control, "SelectedIndex"))
+                {
+                    try { Materia.SetPropertyValue(control, "SelectedIndex", -1); }
+                    catch { }
+                }
+
+                control.Enabled = true;
+            }
+        }
+
+        /// <summary>
         /// Loads the currency list into the specified combo box as it's data source.
         /// </summary>
         /// <param name="combobox"></param>
-        public static void LoadCurrencies(this DataSourcedComboBox combobox)
+        private static void LoadCurrenciesInDataSourcedComboBox(this DataSourcedComboBox combobox)
         {
             if (combobox == null) return;
             DataTable _currencies = Cache.GetCachedTable("currencies");
@@ -734,6 +926,57 @@ namespace SupplyChainManagementSystem
                 catch { }
 
                 combobox.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Loads the list of customer groups into the specified control as a data source.
+        /// </summary>
+        /// <param name="control"></param>
+        public static void LoadCustomerGroups(this Control control)
+        {
+            if (control == null) return;
+            if (!(Materia.PropertyExists(control, "DataSource") &&
+                  Materia.PropertyExists(control, "DisplayMember") &&
+                  Materia.PropertyExists(control, "ValueMember"))) return;
+
+            DataTable _customergroups = Cache.GetCachedTable("customergroups");
+            if (_customergroups != null)
+            {
+                control.Enabled = false;
+                object _datasource = Materia.GetPropertyValue<object>(control, "DataSource");
+                if (_datasource != null)
+                {
+                    try { ((DataTable)_datasource).Dispose(); }
+                    catch { }
+                    finally
+                    {
+                        Materia.SetPropertyValue(control, "DataSource", null);
+                        Materia.RefreshAndManageCurrentProcess();
+                    }
+                }
+
+                DataTable _newdatasource = _customergroups.Replicate();
+                _newdatasource.DefaultView.Sort = "[CustomerGroup]";
+
+                Materia.SetPropertyValue(control, "DataSource", _newdatasource);
+                Materia.SetPropertyValue(control, "DisplayMember", "CustomerGroup");
+                Materia.SetPropertyValue(control, "ValueMember", "CustomerGroup");
+
+                if (Materia.PropertyExists(control, "AutoCompleteMode") &&
+                    Materia.PropertyExists(control, "AutoCompleteSource"))
+                {
+                    Materia.SetPropertyValue(control, "AutoCompleteMode", AutoCompleteMode.SuggestAppend);
+                    Materia.SetPropertyValue(control, "AutoCompleteSource", AutoCompleteSource.ListItems);
+                }
+
+                if (Materia.PropertyExists(control, "SelectedIndex"))
+                {
+                    try { Materia.SetPropertyValue(control, "SelectedIndex", -1); }
+                    catch { }
+                }
+
+                control.Enabled = true;
             }
         }
 
@@ -963,6 +1206,54 @@ namespace SupplyChainManagementSystem
                 Materia.SetPropertyValue(control, "DataSource", _newdatasource);
                 Materia.SetPropertyValue(control, "DisplayMember", "PartNo");
                 Materia.SetPropertyValue(control, "ValueMember", "PartCode");
+
+                if (Materia.PropertyExists(control, "AutoCompleteMode") &&
+                    Materia.PropertyExists(control, "AutoCompleteSource"))
+                {
+                    Materia.SetPropertyValue(control, "AutoCompleteMode", AutoCompleteMode.SuggestAppend);
+                    Materia.SetPropertyValue(control, "AutoCompleteSource", AutoCompleteSource.ListItems);
+                }
+
+                if (Materia.PropertyExists(control, "SelectedIndex"))
+                {
+                    try { Materia.SetPropertyValue(control, "SelectedIndex", -1); }
+                    catch { }
+                }
+
+                control.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Loads the list of payment terms into the specified control as a data source.
+        /// </summary>
+        /// <param name="control"></param>
+        public static void LoadPaymentTerms(this Control control)
+        {
+            if (control == null) return;
+            DataTable _paymentterms = Cache.GetCachedTable("paymentterms");
+
+            if (_paymentterms != null)
+            {
+                control.Enabled = false;
+                object _datasource = Materia.GetPropertyValue<object>(control, "DataSource");
+                if (_datasource != null)
+                {
+                    try { ((DataTable)_datasource).Dispose(); }
+                    catch { }
+                    finally
+                    {
+                        Materia.SetPropertyValue(control, "DataSource", null);
+                        Materia.RefreshAndManageCurrentProcess();
+                    }
+                }
+
+                DataTable _newdatasource = _paymentterms.Replicate();
+                _newdatasource.DefaultView.Sort = "[PaymentTerm]";
+              
+                Materia.SetPropertyValue(control, "DataSource", _newdatasource);
+                Materia.SetPropertyValue(control, "DisplayMember", "PaymentTerm");
+                Materia.SetPropertyValue(control, "ValueMember", "PaymentTerm");
 
                 if (Materia.PropertyExists(control, "AutoCompleteMode") &&
                     Materia.PropertyExists(control, "AutoCompleteSource"))

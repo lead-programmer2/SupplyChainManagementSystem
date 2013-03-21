@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2013-03-19 16:53:48
+Date: 2013-03-21 16:27:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,6 +49,8 @@ INSERT INTO `accounts` VALUES ('52005', 'Trade debtors', 'Balance Sheet', '1', '
 INSERT INTO `accounts` VALUES ('52010', 'Prepayments from customer', 'Balance Sheet', '1', '0', '0', '0', '0', '0', '2013-02-11 10:57:14', '2013-02-11 10:57:14', '0', '1900-01-01 00:00:00');
 INSERT INTO `accounts` VALUES ('52035', 'Cash advances', 'Balance Sheet', '1', '0', '0', '0', '0', '0', '2013-02-11 10:57:14', '2013-02-11 10:57:14', '0', '1900-01-01 00:00:00');
 INSERT INTO `accounts` VALUES ('54005', 'Cash at hand', 'Balance Sheet', '1', '0', '0', '0', '0', '0', '2013-02-11 10:57:14', '2013-02-11 10:57:14', '0', '1900-01-01 00:00:00');
+INSERT INTO `accounts` VALUES ('54022', 'Nordea - JPY', 'Balance Sheet', '1', '0', '0', '0', '0', '0', '2013-03-21 00:00:00', '2013-03-21 10:36:41', '0', '1900-01-01 00:00:00');
+INSERT INTO `accounts` VALUES ('54024', 'Nordea - USD', 'Balance Sheet', '1', '0', '0', '0', '0', '0', '1900-01-01 00:00:00', '2013-03-21 08:25:31', '0', '1900-01-01 00:00:00');
 INSERT INTO `accounts` VALUES ('54050', 'Unallocated payments / cheques', 'Balance Sheet', '1', '0', '0', '0', '0', '0', '2013-02-11 10:57:14', '2013-02-11 10:57:14', '0', '1900-01-01 00:00:00');
 INSERT INTO `accounts` VALUES ('55005', 'Trade creditors', 'Balance Sheet', '1', '0', '0', '0', '0', '0', '2013-02-11 10:57:14', '2013-02-11 10:57:14', '0', '1900-01-01 00:00:00');
 INSERT INTO `accounts` VALUES ('55010', 'Prepayments to supplier', 'Balance Sheet', '1', '0', '0', '0', '0', '0', '2013-02-11 10:57:14', '2013-02-11 10:57:14', '0', '1900-01-01 00:00:00');
@@ -82,6 +84,73 @@ INSERT INTO `additionalcharges` VALUES ('Destination Customs Duty', '3', '55045'
 INSERT INTO `additionalcharges` VALUES ('Document & Handling', '1', '55040', '2013-03-04 11:52:39', '2013-03-04 11:52:39');
 INSERT INTO `additionalcharges` VALUES ('Freight Cost', '2', '55040', '2013-03-04 11:45:33', '2013-03-04 11:45:33');
 INSERT INTO `additionalcharges` VALUES ('Insurance Cost', '4', '55050', '2013-03-04 11:45:53', '2013-03-04 11:45:53');
+
+-- ----------------------------
+-- Table structure for `bankaccounts`
+-- ----------------------------
+DROP TABLE IF EXISTS `bankaccounts`;
+CREATE TABLE `bankaccounts` (
+  `BankAccountCode` varchar(30) NOT NULL,
+  `AccountNo` varchar(50) default '',
+  `AccountName` varchar(180) default '',
+  `Currency` varchar(10) default '',
+  `AccountCode` bigint(20) default '0',
+  `Swift` varchar(30) default '',
+  `IBAN` varchar(30) default '',
+  `Bank` varchar(175) default '',
+  `Branch` varchar(175) default '',
+  `Notes` varchar(255) default '',
+  `Company` varchar(10) default '',
+  `DateCreated` datetime default '1900-01-01 00:00:00',
+  `LastModified` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`BankAccountCode`),
+  KEY `bankaccurrency` (`Currency`),
+  KEY `bankacbank` (`Bank`),
+  KEY `bankacaccountcode` (`AccountCode`),
+  KEY `bankaccompany` (`Company`),
+  CONSTRAINT `bankaccurrency` FOREIGN KEY (`Currency`) REFERENCES `currencies` (`Currency`) ON UPDATE CASCADE,
+  CONSTRAINT `bankacbank` FOREIGN KEY (`Bank`) REFERENCES `banks` (`Bank`) ON UPDATE CASCADE,
+  CONSTRAINT `bankacaccountcode` FOREIGN KEY (`AccountCode`) REFERENCES `accounts` (`AccountCode`) ON UPDATE CASCADE,
+  CONSTRAINT `bankaccompany` FOREIGN KEY (`Company`) REFERENCES `companies` (`Company`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of bankaccounts
+-- ----------------------------
+INSERT INTO `bankaccounts` VALUES ('BANK-CSPT-FZE-00001', '5036328179', 'USD Nordea', 'USD', '54024', 'NDEADKKK', 'DK1620005036328179', 'Nordea', 'Denmark', '', 'CSPT-FZE', '2013-03-21 08:29:30', '2013-03-21 08:29:30');
+INSERT INTO `bankaccounts` VALUES ('BANK-CSPT-FZE-00002', '5036328217', 'JPY Nordea', 'JPY', '54022', 'NDEADKKK', 'DK5720005036328217', 'Nordea', 'Denmark', '', 'CSPT-FZE', '2013-03-21 10:37:35', '2013-03-21 10:37:35');
+
+-- ----------------------------
+-- Table structure for `bankledger`
+-- ----------------------------
+DROP TABLE IF EXISTS `bankledger`;
+CREATE TABLE `bankledger` (
+  `DetailId` bigint(20) NOT NULL auto_increment,
+  `BankAccountCode` varchar(30) default '',
+  `ReferenceNo` varchar(30) default '',
+  `TransactionType` int(11) default '0',
+  `Dated` date default '1900-01-01',
+  `SupplierCode` varchar(30) default '',
+  `CustomerCode` varchar(30) default '',
+  `ReferenceName` varchar(180) default '',
+  `Amount` decimal(20,2) default '0.00',
+  `Rate` double(20,4) default '100.0000',
+  `In` decimal(20,2) default '0.00',
+  `Incoming` decimal(20,2) default NULL,
+  `Outgoing` decimal(20,2) default '0.00',
+  `Out` decimal(20,2) default NULL,
+  `LastModified` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`DetailId`),
+  KEY `blbankaccode` (`BankAccountCode`),
+  KEY `blsuppliercode` USING BTREE (`SupplierCode`),
+  KEY `blcustomercode` USING BTREE (`CustomerCode`),
+  KEY `blreferenceno` USING BTREE (`ReferenceNo`),
+  CONSTRAINT `blbankaccode` FOREIGN KEY (`BankAccountCode`) REFERENCES `bankaccounts` (`BankAccountCode`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of bankledger
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `bankmiscellaneous`
@@ -118,6 +187,7 @@ CREATE TABLE `banks` (
 -- ----------------------------
 -- Records of banks
 -- ----------------------------
+INSERT INTO `banks` VALUES ('Barclays', '2013-03-21 08:46:40', '2013-03-21 08:46:40');
 INSERT INTO `banks` VALUES ('BDO', '2013-03-03 13:09:32', '2013-03-03 13:09:32');
 INSERT INTO `banks` VALUES ('BPI', '2013-03-03 12:51:20', '2013-03-03 13:05:29');
 INSERT INTO `banks` VALUES ('East West Bank', '2013-03-03 13:05:44', '2013-03-03 13:05:44');
@@ -469,6 +539,7 @@ CREATE TABLE `customers` (
   `MarginPercentage` decimal(20,2) default '0.00',
   `PaymentTerm` varchar(175) default '',
   `LocationCode` varchar(30) default '',
+  `BankAccountCode` varchar(30) default '',
   `UDF1` varchar(175) default '',
   `UDFValue1` varchar(255) default '',
   `UDF2` varchar(175) default '',
@@ -492,6 +563,8 @@ CREATE TABLE `customers` (
   KEY `cuslocationcode` USING BTREE (`LocationCode`),
   KEY `cusaccountcode` (`AccountCode`),
   KEY `cusprepayaccountcode` (`PrepaymentAccountCode`),
+  KEY `cusbankaccountcode` (`BankAccountCode`),
+  CONSTRAINT `cusbankaccountcode` FOREIGN KEY (`BankAccountCode`) REFERENCES `bankaccounts` (`BankAccountCode`) ON UPDATE CASCADE,
   CONSTRAINT `cusaccountcode` FOREIGN KEY (`AccountCode`) REFERENCES `accounts` (`AccountCode`) ON UPDATE CASCADE,
   CONSTRAINT `cuscompany` FOREIGN KEY (`Company`) REFERENCES `companies` (`Company`) ON UPDATE CASCADE,
   CONSTRAINT `cuscustomergrp` FOREIGN KEY (`CustomerGroup`) REFERENCES `customergroups` (`CustomerGroup`) ON UPDATE CASCADE,
@@ -561,6 +634,7 @@ CREATE TABLE `keysettings` (
 -- ----------------------------
 -- Records of keysettings
 -- ----------------------------
+INSERT INTO `keysettings` VALUES ('bankaccounts', '2', '2013-03-21 10:37:35');
 INSERT INTO `keysettings` VALUES ('locations', '5', '2013-03-03 17:01:39');
 INSERT INTO `keysettings` VALUES ('models', '8', '2013-03-16 10:08:07');
 INSERT INTO `keysettings` VALUES ('parts', '6', '2013-03-19 16:45:48');
@@ -761,7 +835,7 @@ INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00002', '235-85-R16', 'Tires', 'Pirel
 INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00003', '7W7Z7052A', 'Seal', 'Seal', '', 'FORD', 'MODEL-00008', 'Pc(s)', '0', '0', '2', 'United States', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '2013-03-16 10:08:23', '2013-03-16 10:08:23');
 INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00004', '7W7Z7052B', 'Seal', 'Seal', 'PART-CSPT-FZE-00003', 'ALL', '', 'Pc(s)', '0', '0', '2', 'Brazil', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '2013-03-19 11:57:27', '2013-03-19 16:27:08');
 INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00005', '7W7Z7052C', 'Seal', 'Seal', 'PART-CSPT-FZE-00003', 'FORD', 'MODEL-00008', 'Pc(s)', '0', '0', '2', 'Japan', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '2013-03-19 12:34:05', '2013-03-19 15:54:35');
-INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00006', '7W7Z7052D', 'Seal', 'Seal', 'PART-CSPT-FZE-00003', 'FORD', 'MODEL-00008', 'Pc(s)', '0', '0', '2', 'Brazil', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '2013-03-19 16:45:48', '2013-03-19 16:45:48');
+INSERT INTO `parts` VALUES ('PART-CSPT-FZE-00006', '7W7Z7052D', 'Seal', 'Seal', 'PART-CSPT-FZE-00003', 'FORD', 'MODEL-00008', 'Pc(s)', '0', '0', '2', 'Brazil', '1', 'User-defined Field 1', '', 'User-defined Field 2', '', 'User-defined Field 3', '', 'User-defined Field 4', '', 'User-defined Field 5', '', 'User-defined Field 6', '', '', 'CSPT-FZE', '2013-03-19 16:45:48', '2013-03-19 17:03:10');
 
 -- ----------------------------
 -- Table structure for `paymentterms`
@@ -807,6 +881,40 @@ INSERT INTO `positions` VALUES ('IT Manager', '2013-03-03 11:37:51', '2013-03-03
 INSERT INTO `positions` VALUES ('Project Team Leader', '2013-02-09 12:21:36', '2013-02-09 12:21:36');
 INSERT INTO `positions` VALUES ('Systems Administrator', '2013-03-03 11:31:09', '2013-03-03 11:31:09');
 INSERT INTO `positions` VALUES ('Vice President', '2013-03-03 11:45:42', '2013-03-03 11:45:42');
+
+-- ----------------------------
+-- Table structure for `receivableledger`
+-- ----------------------------
+DROP TABLE IF EXISTS `receivableledger`;
+CREATE TABLE `receivableledger` (
+  `DetailId` bigint(20) NOT NULL auto_increment,
+  `CustomerCode` varchar(30) default '',
+  `ReferenceNo` varchar(30) default '',
+  `InvoiceRefNo` varchar(30) default '',
+  `InvoiceNo` varchar(30) default '',
+  `Dated` date default '1900-01-01',
+  `TransactionType` int(11) default '0',
+  `Amount` decimal(20,2) default '0.00',
+  `Currency` varchar(10) default 'USD',
+  `Rate` decimal(20,4) default '100.0000',
+  `Receivable` decimal(20,2) default '0.00',
+  `Credited` decimal(20,2) default '0.00',
+  `Paid` decimal(20,2) default '0.00',
+  `Prepayment` decimal(20,2) default '0.00',
+  `LastModified` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`DetailId`),
+  KEY `clcustomercode` (`CustomerCode`),
+  KEY `clcurrency` (`Currency`),
+  KEY `clreferenceno` USING BTREE (`ReferenceNo`),
+  KEY `clinvrefno` USING BTREE (`InvoiceRefNo`),
+  KEY `clinvno` USING BTREE (`InvoiceNo`),
+  CONSTRAINT `clcurrency` FOREIGN KEY (`Currency`) REFERENCES `currencies` (`Currency`) ON UPDATE CASCADE,
+  CONSTRAINT `clcustomercode` FOREIGN KEY (`CustomerCode`) REFERENCES `customers` (`CustomerCode`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of receivableledger
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `scripts`
@@ -1202,7 +1310,7 @@ CREATE TABLE `userlogs` (
   KEY `logusername` (`Username`),
   CONSTRAINT `logcurrency` FOREIGN KEY (`Currency`) REFERENCES `currencies` (`Currency`) ON UPDATE CASCADE,
   CONSTRAINT `logusername` FOREIGN KEY (`Username`) REFERENCES `users` (`Username`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1693 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1809 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of userlogs
@@ -2899,6 +3007,122 @@ INSERT INTO `userlogs` VALUES ('1689', 'jsph', '2013-03-19 16:45:49', '0', 'PART
 INSERT INTO `userlogs` VALUES ('1690', 'jsph', '2013-03-19 16:49:04', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
 INSERT INTO `userlogs` VALUES ('1691', 'jsph', '2013-03-19 16:49:10', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
 INSERT INTO `userlogs` VALUES ('1692', 'jsph', '2013-03-19 16:50:53', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1693', 'jsph', '2013-03-19 16:55:16', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1694', 'jsph', '2013-03-19 16:55:36', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1695', 'jsph', '2013-03-19 16:56:36', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1696', 'jsph', '2013-03-19 17:00:23', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1697', 'jsph', '2013-03-19 17:01:10', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1698', 'jsph', '2013-03-19 17:01:50', '1', 'PART-CSPT-FZE-00003', 'Un-set 7W7Z7052D - Seal as supersession of 7W7Z7052A - Seal.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1699', 'jsph', '2013-03-19 17:02:14', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1700', 'jsph', '2013-03-19 17:02:44', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1701', 'jsph', '2013-03-19 17:03:10', '1', 'PART-CSPT-FZE-00003', 'Added 7W7Z7052D - Seal as supersession of 7W7Z7052A - Seal.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1702', 'jsph', '2013-03-19 17:07:27', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1703', 'jsph', '2013-03-19 17:21:05', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1704', 'jsph', '2013-03-19 17:21:08', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1705', 'jsph', '2013-03-19 17:22:26', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1706', 'jsph', '2013-03-19 17:24:08', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1707', 'jsph', '2013-03-19 17:25:24', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1708', 'jsph', '2013-03-19 17:26:24', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1709', 'jsph', '2013-03-19 17:29:40', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1710', 'jsph', '2013-03-19 17:30:37', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1711', 'jsph', '2013-03-19 17:31:43', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1712', 'jsph', '2013-03-19 17:32:16', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1713', 'jsph', '2013-03-20 11:26:13', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1714', 'jsph', '2013-03-20 11:26:19', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1715', 'jsph', '2013-03-20 11:26:40', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1716', 'jsph', '2013-03-20 11:35:08', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1717', 'jsph', '2013-03-20 11:35:11', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1718', 'jsph', '2013-03-20 11:35:29', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1719', 'jsph', '2013-03-20 11:42:17', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1720', 'jsph', '2013-03-20 11:45:16', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1721', 'jsph', '2013-03-20 11:45:38', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1722', 'jsph', '2013-03-20 11:46:15', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1723', 'jsph', '2013-03-20 11:49:52', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1724', 'jsph', '2013-03-20 11:54:53', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1725', 'jsph', '2013-03-20 11:57:01', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1726', 'jsph', '2013-03-20 11:59:28', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1727', 'jsph', '2013-03-20 12:55:17', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1728', 'jsph', '2013-03-20 16:38:16', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1729', 'jsph', '2013-03-20 16:43:21', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1730', 'jsph', '2013-03-20 16:43:54', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1731', 'jsph', '2013-03-20 16:44:10', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1732', 'jsph', '2013-03-20 16:46:27', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1733', 'jsph', '2013-03-20 16:47:14', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1734', 'jsph', '2013-03-20 16:49:31', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1735', 'jsph', '2013-03-20 16:51:12', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1736', 'jsph', '2013-03-20 16:53:58', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1737', 'jsph', '2013-03-20 16:55:10', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1738', 'jsph', '2013-03-20 17:37:22', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1739', 'jsph', '2013-03-20 18:16:26', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1740', 'jsph', '2013-03-21 08:22:22', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1741', 'jsph', '2013-03-21 08:26:06', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1742', 'jsph', '2013-03-21 08:26:37', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1743', 'jsph', '2013-03-21 08:27:00', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1744', 'jsph', '2013-03-21 08:27:28', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1745', 'jsph', '2013-03-21 08:28:17', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1746', 'jsph', '2013-03-21 08:29:30', '0', '', 'Added a new bank account : 5036328179 - USD Nordea.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1747', 'jsph', '2013-03-21 08:35:36', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1748', 'jsph', '2013-03-21 08:37:37', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1749', 'jsph', '2013-03-21 08:38:20', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1750', 'jsph', '2013-03-21 08:46:03', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1751', 'jsph', '2013-03-21 08:46:40', '0', '', 'Added a new banking company : Barclays.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1752', 'jsph', '2013-03-21 08:49:34', '1', '', 'Updated bank account : 5036328179 - USD Nordea.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1753', 'jsph', '2013-03-21 08:49:37', '1', '', 'Updated bank account : 5036328179 - USD Nordea.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1754', 'jsph', '2013-03-21 08:49:47', '1', '', 'Updated bank account : 5036328179 - USD Nordea.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1755', 'jsph', '2013-03-21 08:55:03', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1756', 'jsph', '2013-03-21 09:00:11', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1757', 'jsph', '2013-03-21 09:00:38', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1758', 'jsph', '2013-03-21 09:54:09', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1759', 'jsph', '2013-03-21 09:54:42', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1760', 'jsph', '2013-03-21 10:34:40', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1761', 'jsph', '2013-03-21 10:37:35', '0', '', 'Added a new bank account : 5036328217 - JPY Nordea.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1762', 'jsph', '2013-03-21 10:42:19', '1', '', 'Updated bank account : 5036328179 - USD Nordea.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1763', 'jsph', '2013-03-21 10:42:29', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1764', 'jsph', '2013-03-21 11:01:44', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1765', 'jsph', '2013-03-21 11:02:22', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1766', 'jsph', '2013-03-21 11:08:51', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1767', 'jsph', '2013-03-21 11:09:23', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1768', 'jsph', '2013-03-21 11:12:39', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1769', 'jsph', '2013-03-21 11:13:12', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1770', 'jsph', '2013-03-21 11:13:16', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1771', 'jsph', '2013-03-21 11:14:33', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1772', 'jsph', '2013-03-21 11:28:16', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1773', 'jsph', '2013-03-21 11:30:16', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1774', 'jsph', '2013-03-21 11:31:00', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1775', 'jsph', '2013-03-21 11:32:34', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1776', 'jsph', '2013-03-21 11:33:44', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1777', 'jsph', '2013-03-21 11:34:54', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1778', 'jsph', '2013-03-21 11:36:26', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1779', 'jsph', '2013-03-21 11:39:39', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1780', 'jsph', '2013-03-21 11:41:03', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1781', 'jsph', '2013-03-21 11:53:36', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1782', 'jsph', '2013-03-21 11:58:26', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1783', 'jsph', '2013-03-21 11:59:19', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1784', 'jsph', '2013-03-21 11:59:48', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1785', 'jsph', '2013-03-21 12:49:58', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1786', 'jsph', '2013-03-21 12:50:38', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1787', 'jsph', '2013-03-21 12:53:02', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1788', 'jsph', '2013-03-21 12:54:44', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1789', 'jsph', '2013-03-21 13:14:08', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1790', 'jsph', '2013-03-21 13:14:48', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1791', 'jsph', '2013-03-21 13:15:03', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1792', 'jsph', '2013-03-21 13:15:46', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1793', 'jsph', '2013-03-21 13:16:33', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1794', 'jsph', '2013-03-21 13:16:56', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1795', 'jsph', '2013-03-21 13:46:46', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1796', 'jsph', '2013-03-21 13:48:48', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1797', 'jsph', '2013-03-21 16:14:17', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1798', 'jsph', '2013-03-21 16:16:05', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1799', 'jsph', '2013-03-21 16:17:37', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1800', 'jsph', '2013-03-21 16:17:58', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1801', 'jsph', '2013-03-21 16:18:41', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1802', 'jsph', '2013-03-21 16:18:59', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1803', 'jsph', '2013-03-21 16:19:32', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1804', 'jsph', '2013-03-21 16:20:19', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1805', 'jsph', '2013-03-21 16:22:55', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1806', 'jsph', '2013-03-21 16:24:49', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1807', 'jsph', '2013-03-21 16:26:12', '15', '', 'Logs into the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
+INSERT INTO `userlogs` VALUES ('1808', 'jsph', '2013-03-21 16:27:02', '16', '', 'Logs off from the application.', '0.00', 'USD', '0.00', 'JLREYES', '127.0.0.1');
 
 -- ----------------------------
 -- Table structure for `users`
@@ -3243,6 +3467,68 @@ CREATE TRIGGER `additionalchargesdeleteitems` AFTER DELETE ON `additionalcharges
 																				 (`TableName`, `Value`)
 																				 VALUES
 																				 ('additionalcharges', CAST(OLD.`AdditionalCharge` AS char(255)));
+																			 END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `bankaccountsremovedeleteitems`;
+DELIMITER ;;
+CREATE TRIGGER `bankaccountsremovedeleteitems` AFTER INSERT ON `bankaccounts` FOR EACH ROW BEGIN
+																				 DELETE FROM `deleteditems` WHERE (`TableName` LIKE 'bankaccounts') AND (`Value` LIKE CAST(NEW.`BankAccountCode` AS char(255)));
+																			 END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `bankaccountsupdateitems`;
+DELIMITER ;;
+CREATE TRIGGER `bankaccountsupdateitems` AFTER UPDATE ON `bankaccounts` FOR EACH ROW BEGIN
+																				 IF (OLD.`BankAccountCode` <> NEW.`BankAccountCode`) THEN
+																					 INSERT INTO `updateditems`
+																					 (`TableName`, `OldValue`, `NewValue`)
+																					 VALUES
+																					 ('bankaccounts', OLD.`BankAccountCode`, NEW.`BankAccountCode`);
+																					 DELETE FROM `deleteditems` WHERE (`TableName` LIKE 'bankaccounts') AND (`Value` LIKE CAST(NEW.`BankAccountCode` AS char(255))); 
+																				   
+																				 END IF;
+																			 END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `bankaccountsdeleteitems`;
+DELIMITER ;;
+CREATE TRIGGER `bankaccountsdeleteitems` AFTER DELETE ON `bankaccounts` FOR EACH ROW BEGIN
+																				 INSERT INTO `deleteditems`
+																				 (`TableName`, `Value`)
+																				 VALUES
+																				 ('bankaccounts', CAST(OLD.`BankAccountCode` AS char(255)));
+																			 END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `bankledgerremovedeleteitems`;
+DELIMITER ;;
+CREATE TRIGGER `bankledgerremovedeleteitems` AFTER INSERT ON `bankledger` FOR EACH ROW BEGIN
+																				 DELETE FROM `deleteditems` WHERE (`TableName` LIKE 'bankledger') AND (`Value` LIKE CAST(NEW.`DetailId` AS char(255)));
+																			 END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `bankledgerupdateitems`;
+DELIMITER ;;
+CREATE TRIGGER `bankledgerupdateitems` AFTER UPDATE ON `bankledger` FOR EACH ROW BEGIN
+																				 IF (OLD.`DetailId` <> NEW.`DetailId`) THEN
+																					 INSERT INTO `updateditems`
+																					 (`TableName`, `OldValue`, `NewValue`)
+																					 VALUES
+																					 ('bankledger', OLD.`DetailId`, NEW.`DetailId`);
+																					 DELETE FROM `deleteditems` WHERE (`TableName` LIKE 'bankledger') AND (`Value` LIKE CAST(NEW.`DetailId` AS char(255))); 
+																				   
+																				 END IF;
+																			 END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `bankledgerdeleteitems`;
+DELIMITER ;;
+CREATE TRIGGER `bankledgerdeleteitems` AFTER DELETE ON `bankledger` FOR EACH ROW BEGIN
+																				 INSERT INTO `deleteditems`
+																				 (`TableName`, `Value`)
+																				 VALUES
+																				 ('bankledger', CAST(OLD.`DetailId` AS char(255)));
 																			 END
 ;;
 DELIMITER ;
@@ -3832,6 +4118,37 @@ CREATE TRIGGER `positionsdeleteitems` AFTER DELETE ON `positions` FOR EACH ROW B
 																				 (`TableName`, `Value`)
 																				 VALUES
 																				 ('positions', CAST(OLD.`Position` AS char(255)));
+																			 END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `receivableledgerremovedeleteitems`;
+DELIMITER ;;
+CREATE TRIGGER `receivableledgerremovedeleteitems` AFTER INSERT ON `receivableledger` FOR EACH ROW BEGIN
+																				 DELETE FROM `deleteditems` WHERE (`TableName` LIKE 'receivableledger') AND (`Value` LIKE CAST(NEW.`DetailId` AS char(255)));
+																			 END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `receivableledgerupdateitems`;
+DELIMITER ;;
+CREATE TRIGGER `receivableledgerupdateitems` AFTER UPDATE ON `receivableledger` FOR EACH ROW BEGIN
+																				 IF (OLD.`DetailId` <> NEW.`DetailId`) THEN
+																					 INSERT INTO `updateditems`
+																					 (`TableName`, `OldValue`, `NewValue`)
+																					 VALUES
+																					 ('receivableledger', OLD.`DetailId`, NEW.`DetailId`);
+																					 DELETE FROM `deleteditems` WHERE (`TableName` LIKE 'receivableledger') AND (`Value` LIKE CAST(NEW.`DetailId` AS char(255))); 
+																				   
+																				 END IF;
+																			 END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `receivableledgerdeleteitems`;
+DELIMITER ;;
+CREATE TRIGGER `receivableledgerdeleteitems` AFTER DELETE ON `receivableledger` FOR EACH ROW BEGIN
+																				 INSERT INTO `deleteditems`
+																				 (`TableName`, `Value`)
+																				 VALUES
+																				 ('receivableledger', CAST(OLD.`DetailId` AS char(255)));
 																			 END
 ;;
 DELIMITER ;

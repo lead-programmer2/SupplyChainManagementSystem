@@ -72,6 +72,17 @@ namespace SupplyChainManagementSystem
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private bool _isinbackground = false;
+
+        /// <summary>
+        /// Gets whether the current form is active but resides in the backgound only or not.
+        /// </summary>
+        public bool IsInBackground
+        {
+            get { return _isinbackground; }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string _partcode = "";
 
         /// <summary>
@@ -192,6 +203,7 @@ namespace SupplyChainManagementSystem
         {
             _partcode = ""; _isnew = true;
             _isshown = false; _updated = false;
+            _isinbackground = false;
 
             txtCategory.Text = ""; txtDescription.Text = "";
             txtEnding.Text = "0"; txtIncoming.Text = "0";
@@ -829,6 +841,7 @@ namespace SupplyChainManagementSystem
                 {
                     _partcode = code; _isnew = false;
                     _updated = false; _isshown = false;
+                    _isinbackground = false;
 
                     DataTable _superpart = _parts.Replicate();
 
@@ -1001,8 +1014,28 @@ namespace SupplyChainManagementSystem
             }
         }
 
+        /// <summary>
+        /// Forces the dialog to stay silently in the background.
+        /// </summary>
+        public void StayInBackground()
+        { 
+            _withupdates = false; _updated = false;
+            if (!_isinbackground) _isinbackground = true; 
+        }
+
         private void PartInformationDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (SCMS.CurrentSystemUser == null) return;
+            if (!SCMS.CurrentSystemUser.IsSignedIn) return;
+            if (!TopMost) return;
+            if (MdiParent != null)
+            {
+                if (MdiParent is MainWindow)
+                {
+                    if (((MainWindow)MdiParent).IsClosing) return;
+                }
+            }
+
             if (_updated)
             {
                 System.Windows.Forms.DialogResult _result = MsgBoxEx.Shout("You have made some updates in the current part information. Do you<br/>want to save the changes applied before closing?", "Save Changes", MessageBoxButtons.YesNoCancel, MessageBoxDefaultButton.Button3);
